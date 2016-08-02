@@ -1,0 +1,7 @@
+{
+  "main": "canvg.js",
+  "map": {
+    "rgbcolor": "./rgbcolor.js",
+    "stackblur": "./StackBlur.js"
+  }
+}
