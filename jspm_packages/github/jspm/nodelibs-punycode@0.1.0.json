@@ -1,9 +1,0 @@
-{
-  "main": "index",
-  "format": "cjs",
-  "meta": {
-    "*.json": {
-      "format": "json"
-    }
-  }
-}
