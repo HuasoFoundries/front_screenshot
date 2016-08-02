@@ -3,6 +3,10 @@
     "deps": {},
     "peerDeps": {}
   },
+  "github:gabelerner/canvg@v1.4": {
+    "deps": {},
+    "peerDeps": {}
+  },
   "github:jspm/nodelibs-punycode@0.1.0": {
     "deps": {
       "punycode": "npm:punycode@^1.3.2"
@@ -14,10 +18,6 @@
     "peerDeps": {}
   },
   "npm:punycode@1.4.1": {
-    "deps": {},
-    "peerDeps": {}
-  },
-  "github:gabelerner/canvg@v1.4": {
     "deps": {},
     "peerDeps": {}
   }
