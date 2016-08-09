@@ -66,15 +66,15 @@ function hiddenClone(jqContenedor) {
 	return clone;
 };
 
-var infoScreenShot = function (jqContenedor, callback) {
+var infoScreenShot = function (jqContenedor) {
 
 	jqContenedor.find('.canvg').each(function () {
-		screenShooter.svgAImg(jQuery(this));
+		svgAImg(jQuery(this));
 	});
 
-	var clone = screenShooter.hiddenClone(jqContenedor);
+	var clone = hiddenClone(jqContenedor);
 
-	html2canvas(clone, {
+	return html2canvas(clone, {
 		useCORS: true,
 		allowTaint: false,
 		logging: false
@@ -84,22 +84,17 @@ var infoScreenShot = function (jqContenedor, callback) {
 		jQuery('#supercontenedor').css({
 			'opacity': '1'
 		});
-		if (callback) {
-			callback(canvas.toDataURL("image/png"));
-		}
+		return (canvas.toDataURL("image/png"));
 
 	});
 
 };
 
-
 export {
-	canvg,
 	html2canvas,
 	infoScreenShot
 };
 export default {
 	html2canvas: html2canvas,
-	canvg: canvg,
 	infoScreenShot: infoScreenShot
 };
