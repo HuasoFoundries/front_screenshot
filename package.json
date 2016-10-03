@@ -1,6 +1,6 @@
 {
     "name": "screenshooter-lib-js",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
     "scripts": {
         "test": "grunt karma"
@@ -40,10 +40,8 @@
     },
     "jspm": {
         "name": "screenshooter-lib-js",
-        "main": "index.js",
-        "directories": {
-            "lib": "dist"
-        },
+        "main": "dist/index.js",
+        "files": ["src", "dist"],
         "format": "amd",
         "dependencies": {},
         "devDependencies": {
