@@ -1,68 +1,65 @@
 {
+  "name": "screenshooter-lib-js",
+  "version": "1.2.2",
+  "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
+  "scripts": {
+    "test": "grunt karma"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InstaGIS/screenshooter-lib-js.git"
+  },
+  "keywords": [
+    "turf",
+    "google",
+    "maps",
+    "wicket"
+  ],
+  "author": "amenadiel@gmail.com",
+  "license": "propietary",
+  "bugs": {
+    "url": "https://github.com/InstaGIS/screenshooter-lib-js/issues"
+  },
+  "homepage": "https://github.com/InstaGIS/screenshooter-lib-js#readme",
+  "main": "dist/ig_screenshot.js",
+  "private": true,
+  "dependencies": {
+    "grunt": "^1",
+    "grunt-karma": "^2",
+    "jspm": "^0.17.0-beta.31",
+    "karma": "^1",
+    "karma-phantomjs-launcher": "^1",
+    "karma-qunit": "^1",
+    "phantomjs-prebuilt": "^2",
+    "qunitjs": "^1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6",
+    "eslint": "^3",
+    "lodash": "^4"
+  },
+  "jspm": {
     "name": "screenshooter-lib-js",
-    "version": "1.2.1",
-    "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
-    "scripts": {
-        "test": "grunt karma"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/InstaGIS/screenshooter-lib-js.git"
-    },
-    "keywords": [
-        "turf",
-        "google",
-        "maps",
-        "wicket"
+    "main": "dist/ig_screenshot.js",
+    "files": [
+      "src",
+      "dist"
     ],
-    "author": "amenadiel@gmail.com",
-    "license": "propietary",
-    "bugs": {
-        "url": "https://github.com/InstaGIS/screenshooter-lib-js/issues"
-    },
-    "homepage": "https://github.com/InstaGIS/screenshooter-lib-js#readme",
-    "main": "dist/index.js",
-    "private": true,
-    "dependencies": {
-        "grunt": "^1",
-        "grunt-karma": "^2",
-        "karma": "^1",
-        "karma-phantomjs-launcher": "^1",
-        "karma-qunit": "^1",
-        "jspm": "^0.17.0-beta.25",
-        "phantomjs-prebuilt": "^2",
-        "qunitjs": "^1"
-    },
+    "format": "amd",
+    "dependencies": {},
     "devDependencies": {
-        "babel-eslint": "^6",
-        "eslint": "^3",
-        "lodash": "^4"
+      "canvg": "github:canvg/canvg@v1.4",
+      "html2canvas": "github:niklasvh/html2canvas@^0.5.0-beta4",
+      "punycode": "npm:jspm-nodelibs-punycode@^0.2.0"
     },
-    "jspm": {
-        "name": "screenshooter-lib-js",
-        "main": "dist/index.js",
-        "files": ["src", "dist"],
-        "format": "amd",
-        "dependencies": {},
-        "devDependencies": {
-            "canvg": "github:gabelerner/canvg@v1.4",
-            "html2canvas": "github:niklasvh/html2canvas@^0.5.0-beta4",
-            "punycode": "github:jspm/nodelibs-punycode@^0.1.0"
-        },
-        "peerDependencies": {
-            "plugin-babel": "npm:systemjs-plugin-babel@^0.0.13"
-        },
-        "overrides": {
-            "github:gabelerner/canvg@v1.4": {
-                "map": {
-                    "rgbcolor": "./rgbcolor.js",
-                    "stackblur": "./StackBlur.js"
-                }
-            },
-            "github:niklasvh/html2canvas@0.5.0-beta4": {
-                "main": "src/core.js",
-                "format": "cjs"
-            }
-        }
+    "peerDependencies": {
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.17"
+    },
+    "overrides": {
+      "github:niklasvh/html2canvas@0.5.0-beta4": {
+        "main": "src/core.js",
+        "format": "cjs"
+      }
     }
+  }
 }

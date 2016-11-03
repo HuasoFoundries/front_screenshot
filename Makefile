@@ -19,7 +19,7 @@ test:
 
 	
 build:
-	jspm build src/ig_screenshot dist/index.js -m --global-name screenShooter  
+	jspm build src/ig_screenshot dist/ig_screenshot.js -m --global-name screenShooter  
 
 
 update_version:

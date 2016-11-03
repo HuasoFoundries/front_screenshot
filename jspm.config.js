@@ -9,23 +9,34 @@ SystemJS.config({
     },
     devConfig: {
         "map": {
-            "punycode": "github:jspm/nodelibs-punycode@0.1.0",
+            "punycode": "npm:jspm-nodelibs-punycode@0.2.0",
             "html2canvas": "github:niklasvh/html2canvas@0.5.0-beta4",
-            "canvg": "github:gabelerner/canvg@v1.4"
+            "canvg": "github:canvg/canvg@v1.4"
         },
         "packages": {
-            "github:jspm/nodelibs-punycode@0.1.0": {
+
+            "npm:jspm-nodelibs-punycode@0.2.0": {
                 "map": {
-                    "punycode": "npm:punycode@1.4.1"
+                    "punycode-browserify": "npm:punycode@1.4.1"
                 }
             }
         }
     },
     transpiler: "plugin-babel",
     packages: {
+
+        "src": {
+            "main": "ig_screenshot.js",
+            "map": {
+                "rgbcolor": "canvg/rgbcolor.js"
+            }
+        },
         "screenshooter-lib-js": {
             "main": "dist/index.js",
             "format": "amd",
+            "map": {
+                "rgbcolor": "canvg/rgbcolor.js"
+            },
             "meta": {
                 "*.js": {
                     "loader": "plugin-babel"
@@ -42,7 +53,7 @@ SystemJS.config({
         "github:*/*.json"
     ],
     map: {
-        "plugin-babel": "npm:systemjs-plugin-babel@0.0.13"
+        "plugin-babel": "npm:systemjs-plugin-babel@0.0.17"
     },
     packages: {}
 });
