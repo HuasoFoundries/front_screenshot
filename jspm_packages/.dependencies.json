@@ -13,11 +13,11 @@
     "deps": {},
     "peerDeps": {}
   },
-  "github:canvg/canvg@v1.4": {
+  "npm:systemjs-plugin-babel@0.0.17": {
     "deps": {},
     "peerDeps": {}
   },
-  "npm:systemjs-plugin-babel@0.0.17": {
+  "github:canvg/canvg@v1.4": {
     "deps": {},
     "peerDeps": {}
   }

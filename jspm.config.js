@@ -14,7 +14,6 @@ SystemJS.config({
             "canvg": "github:canvg/canvg@v1.4"
         },
         "packages": {
-
             "npm:jspm-nodelibs-punycode@0.2.0": {
                 "map": {
                     "punycode-browserify": "npm:punycode@1.4.1"
@@ -24,13 +23,6 @@ SystemJS.config({
     },
     transpiler: "plugin-babel",
     packages: {
-
-        "src": {
-            "main": "ig_screenshot.js",
-            "map": {
-                "rgbcolor": "canvg/rgbcolor.js"
-            }
-        },
         "screenshooter-lib-js": {
             "main": "dist/index.js",
             "format": "amd",
@@ -41,6 +33,12 @@ SystemJS.config({
                 "*.js": {
                     "loader": "plugin-babel"
                 }
+            }
+        },
+        "src": {
+            "main": "ig_screenshot.js",
+            "map": {
+                "rgbcolor": "canvg/rgbcolor.js"
             }
         }
     }
