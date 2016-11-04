@@ -21,7 +21,7 @@ test:
 build:
 	jspm build src/ig_screenshot dist/ig_screenshot.js  --global-name screenShooter  --skip-source-maps 
 	jspm build src/ig_screenshot dist/ig_screenshot.min.js -m --global-name screenShooter  
-	jspm build src/ig_screenshot dist/ig_screenshot.bundled.js  --global-name screenShooter  
+	jspm build src/ig_screenshot dist/ig_screenshot.bundle.js  --global-name screenShooter  
 
 
 update_version:
