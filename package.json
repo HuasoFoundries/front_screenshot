@@ -25,7 +25,7 @@
     "url": "https://github.com/InstaGIS/screenshooter-lib-js/issues"
   },
   "homepage": "https://github.com/InstaGIS/screenshooter-lib-js#readme",
-  "main": "dist/ig_screenshot.js",
+  "main": "dist/ig_screenshot.min.js",
   "private": true,
   "dependencies": {
     "grunt": "^1",
@@ -44,7 +44,7 @@
   },
   "jspm": {
     "name": "screenshooter-lib-js",
-    "main": "dist/ig_screenshot.js",
+    "main": "dist/ig_screenshot.min.js",
     "files": [
       "src",
       "dist"
