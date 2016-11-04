@@ -43,6 +43,7 @@
     "lodash": "^4"
   },
   "jspm": {
+    "registry": "jspm",
     "name": "screenshooter-lib-js",
     "main": "dist/ig_screenshot.min.js",
     "files": [
