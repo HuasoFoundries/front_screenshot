@@ -1,6 +1,6 @@
 {
   "name": "screenshooter-lib-js",
-  "version": "16.2.4",
+  "version": "17.0.0",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "test": "grunt karma"
@@ -51,15 +51,15 @@
       "dist"
     ],
     "format": "amd",
-    "dependencies": {},
+    "dependencies": {
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.20"
+    },
     "devDependencies": {
       "canvg": "github:canvg/canvg@v1.4",
       "html2canvas": "github:niklasvh/html2canvas@^0.5.0-beta4",
       "punycode": "npm:jspm-nodelibs-punycode@^0.2.0"
     },
-    "peerDependencies": {
-      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.17"
-    },
+    "peerDependencies": {},
     "overrides": {
       "github:canvg/canvg@v1.4": {
         "map": {
