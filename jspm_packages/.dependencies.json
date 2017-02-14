@@ -9,15 +9,15 @@
     },
     "peerDeps": {}
   },
-  "npm:punycode@1.4.1": {
-    "deps": {},
-    "peerDeps": {}
-  },
   "github:canvg/canvg@v1.4": {
     "deps": {},
     "peerDeps": {}
   },
-  "npm:systemjs-plugin-babel@0.0.20": {
+  "npm:punycode@1.4.1": {
+    "deps": {},
+    "peerDeps": {}
+  },
+  "npm:systemjs-plugin-babel@0.0.21": {
     "deps": {},
     "peerDeps": {}
   }
