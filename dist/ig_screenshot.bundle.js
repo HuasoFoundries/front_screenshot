@@ -7101,4 +7101,3 @@ $__System.register('1', ['20', 'd'], function (_export, _context) {
   else
     screenShooter = factory();
 });
-//# sourceMappingURL=ig_screenshot.bundle.js.map

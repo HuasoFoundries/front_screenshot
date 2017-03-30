@@ -1,4 +1,3 @@
-"format esm";
 import html2canvas from 'html2canvas';
 import canvg from 'canvg';
 

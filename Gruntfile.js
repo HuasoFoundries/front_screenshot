@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     grunt.config('karma', {
         options: {
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     'test/vendor/prototype-bind-polyfill.js',
                     'test/vendor/bluebird.js',
                     'test/vendor/jquery.js',
-                    'dist/index.js',
+                    'dist/ig_screenshot.bundle.js',
                     'test/ig_screenshot/setup/*.js',
                     'test/ig_screenshot/*.js'
                 ]

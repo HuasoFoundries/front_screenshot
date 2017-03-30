@@ -24,8 +24,8 @@ SystemJS.config({
     transpiler: "plugin-babel",
     packages: {
         "screenshooter-lib-js": {
-            "main": "dist/index.js",
-            "format": "amd",
+            "main": "ig_screenshot.js",
+            "format": "esm",
             "map": {
                 "rgbcolor": "canvg/rgbcolor.js"
             },
@@ -37,8 +37,14 @@ SystemJS.config({
         },
         "src": {
             "main": "ig_screenshot.js",
+            "format": "esm",
             "map": {
                 "rgbcolor": "canvg/rgbcolor.js"
+            },
+            "meta": {
+                "*.js": {
+                    "loader": "plugin-babel"
+                }
             }
         }
     }
