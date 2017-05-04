@@ -91,9 +91,15 @@ var infoScreenShot = function (jqContenedor) {
 
 export {
 	html2canvas,
-	infoScreenShot
+	infoScreenShot,
+	canvg,
+	hiddenClone,
+	svgAImg
 };
 export default {
 	html2canvas: html2canvas,
-	infoScreenShot: infoScreenShot
+	infoScreenShot: infoScreenShot,
+	canvg: canvg,
+	hiddenClone: hiddenClone,
+	svgAImg: svgAImg
 };

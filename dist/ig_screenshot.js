@@ -7081,12 +7081,21 @@ $__System.register('1', ['20', 'd'], function (_export, _context) {
 
 			ig_screenshot = {
 				html2canvas: html2canvas,
-				infoScreenShot: infoScreenShot
+				infoScreenShot: infoScreenShot,
+				canvg: canvg,
+				hiddenClone: hiddenClone,
+				svgAImg: svgAImg
 			};
 
 			_export('html2canvas', html2canvas);
 
 			_export('infoScreenShot', infoScreenShot);
+
+			_export('canvg', canvg);
+
+			_export('hiddenClone', hiddenClone);
+
+			_export('svgAImg', svgAImg);
 
 			_export('default', ig_screenshot);
 		}
