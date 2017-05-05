@@ -9,14 +9,14 @@ SystemJS.config({
     },
     devConfig: {
         "map": {
-            "punycode": "npm:jspm-nodelibs-punycode@0.2.0",
+            "punycode": "npm:jspm-nodelibs-punycode@0.2.1",
             "html2canvas": "github:niklasvh/html2canvas@0.5.0-beta4",
             "canvg": "github:canvg/canvg@v1.4"
         },
         "packages": {
-            "npm:jspm-nodelibs-punycode@0.2.0": {
+            "npm:jspm-nodelibs-punycode@0.2.1": {
                 "map": {
-                    "punycode-browserify": "npm:punycode@1.4.1"
+                    "punycode": "npm:punycode@1.4.1"
                 }
             }
         }
