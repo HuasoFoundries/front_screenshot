@@ -70,7 +70,7 @@ function svgACanvas(jqContenedor, fncallback) {
 	jqContenedor[0].appendChild(canvas);
 
 	elsvg.hide();
-	screenshootermodule.canvg(canvas, content);
+	canvg(canvas, content);
 
 	if (fncallback) {
 		fncallback(canvas);

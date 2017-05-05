@@ -7547,7 +7547,7 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 		jqContenedor[0].appendChild(canvas);
 
 		elsvg.hide();
-		screenshootermodule.canvg(canvas, content);
+		canvg(canvas, content);
 
 		if (fncallback) {
 			fncallback(canvas);

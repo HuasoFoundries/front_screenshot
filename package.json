@@ -1,6 +1,6 @@
 {
   "name": "screenshooter-lib-js",
-  "version": "17.0.7",
+  "version": "17.0.8",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "test": "grunt karma"
