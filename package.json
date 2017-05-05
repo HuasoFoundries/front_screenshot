@@ -1,6 +1,6 @@
 {
   "name": "screenshooter-lib-js",
-  "version": "17.0.5",
+  "version": "17.0.7",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "test": "grunt karma"
@@ -30,7 +30,7 @@
   "dependencies": {
     "grunt": "^1",
     "grunt-karma": "^2",
-    "jspm": "^0.17.0-beta.31",
+    "jspm": "^0.17.0-beta.41",
     "karma": "^1",
     "karma-phantomjs-launcher": "^1",
     "karma-qunit": "^1",

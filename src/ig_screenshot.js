@@ -46,6 +46,38 @@ function svgAImg(jqContenedor, fncallback) {
 	return;
 }
 
+function svgACanvas(jqContenedor, fncallback) {
+
+	var elsvg = jqContenedor.find('svg');
+
+	jqContenedor
+		.find('svg')
+		.css('font', '10px sans-serif');
+
+	jqContenedor
+		.find('path')
+		.attr('fill', 'none');
+
+	jqContenedor
+		.find('.tick line, path.domain')
+		.attr('stroke', 'black');
+
+	jqContenedor.find('canvas').remove();
+
+	var content = jqContenedor.html().trim();
+
+	var canvas = document.createElement("canvas");
+	jqContenedor[0].appendChild(canvas);
+
+	elsvg.hide();
+	screenshootermodule.canvg(canvas, content);
+
+	if (fncallback) {
+		fncallback(canvas);
+	}
+	return;
+}
+
 function hiddenClone(jqContenedor) {
 	var clone = jqContenedor[0].cloneNode(true);
 
@@ -94,12 +126,14 @@ export {
 	infoScreenShot,
 	canvg,
 	hiddenClone,
-	svgAImg
+	svgAImg,
+	svgACanvas
 };
 export default {
 	html2canvas: html2canvas,
 	infoScreenShot: infoScreenShot,
 	canvg: canvg,
 	hiddenClone: hiddenClone,
-	svgAImg: svgAImg
+	svgAImg: svgAImg,
+	svgACanvas: svgACanvas
 };
