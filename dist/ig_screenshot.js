@@ -7550,7 +7550,7 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 
 		elsvg.hide();
 		jqContenedor.append(tooltip);
-		screenshootermodule.canvg(canvas, content);
+		canvg(canvas, content);
 
 		if (fncallback) {
 			fncallback(canvas);

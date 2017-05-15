@@ -73,7 +73,7 @@ function svgACanvas(jqContenedor, fncallback) {
 
 	elsvg.hide();
 	jqContenedor.append(tooltip);
-	screenshootermodule.canvg(canvas, content);
+	canvg(canvas, content);
 
 	if (fncallback) {
 		fncallback(canvas);
