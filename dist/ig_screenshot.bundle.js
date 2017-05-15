@@ -7541,13 +7541,16 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 
 		jqContenedor.find('canvas').remove();
 
+		var tooltip = jqContenedor.find('.c3-tooltip-container').detach();
+
 		var content = jqContenedor.html().trim();
 
 		var canvas = document.createElement("canvas");
 		jqContenedor[0].appendChild(canvas);
 
 		elsvg.hide();
-		canvg(canvas, content);
+		jqContenedor.append(tooltip);
+		screenshootermodule.canvg(canvas, content);
 
 		if (fncallback) {
 			fncallback(canvas);
