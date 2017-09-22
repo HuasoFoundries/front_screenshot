@@ -28,19 +28,33 @@
   "main": "dist/ig_screenshot.min.js",
   "private": true,
   "dependencies": {
+    "jspm": "^0.17.0-beta.45"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^6",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-latest": "^6.24.1",
+    "babelrc-rollup": "^3.0.0",
+    "canvg": "git+https://git@github.com/canvg/canvg.git",
+    "eslint": "^3",
     "grunt": "^1",
     "grunt-karma": "^2",
-    "jspm": "^0.17.0-beta.41",
     "karma": "^1",
     "karma-phantomjs-launcher": "^1",
     "karma-qunit": "^1",
+    "lodash": "^4",
     "phantomjs-prebuilt": "^2",
-    "qunitjs": "^1"
-  },
-  "devDependencies": {
-    "babel-eslint": "^6",
-    "eslint": "^3",
-    "lodash": "^4"
+    "punycode": "^2.1.0",
+    "qunitjs": "^1",
+    "rollup": "^0.50.0",
+    "rollup-plugin-ascii": "0.0.3",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0"
   },
   "jspm": {
     "registry": "jspm",
@@ -53,11 +67,27 @@
     "dependencies": {},
     "devDependencies": {
       "canvg": "github:canvg/canvg@v1.4",
-      "html2canvas": "github:niklasvh/html2canvas@^0.5.0-beta4",
-      "punycode": "npm:jspm-nodelibs-punycode@^0.2.0"
+      "html2canvas": "github:niklasvh/html2canvas@master",
+      "http": "npm:jspm-nodelibs-http@^0.2.0",
+      "https": "npm:jspm-nodelibs-https@^0.2.0",
+      "punycode": "npm:jspm-nodelibs-punycode@^0.2.0",
+      "url": "npm:jspm-nodelibs-url@^0.2.0"
     },
     "peerDependencies": {
-      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.21"
+      "assert": "npm:jspm-nodelibs-assert@^0.2.0",
+      "buffer": "npm:jspm-nodelibs-buffer@^0.2.0",
+      "constants": "npm:jspm-nodelibs-constants@^0.2.0",
+      "crypto": "npm:jspm-nodelibs-crypto@^0.2.0",
+      "events": "npm:jspm-nodelibs-events@^0.2.0",
+      "fs": "npm:jspm-nodelibs-fs@^0.2.0",
+      "os": "npm:jspm-nodelibs-os@^0.2.0",
+      "path": "npm:jspm-nodelibs-path@^0.2.0",
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.25",
+      "process": "npm:jspm-nodelibs-process@^0.2.0",
+      "stream": "npm:jspm-nodelibs-stream@^0.2.0",
+      "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
+      "util": "npm:jspm-nodelibs-util@^0.2.0",
+      "vm": "npm:jspm-nodelibs-vm@^0.2.0"
     },
     "overrides": {
       "github:canvg/canvg@v1.4": {
@@ -66,9 +96,19 @@
           "stackblur": "./StackBlur.js"
         }
       },
-      "github:niklasvh/html2canvas@0.5.0-beta4": {
-        "main": "src/core.js",
-        "format": "cjs"
+      "github:niklasvh/html2canvas@master": {
+        "registry": "npm"
+      },
+      "npm:inherits@2.0.3": {
+        "ignore": [
+          "test.js"
+        ]
+      },
+      "npm:pbkdf2@3.0.14": {
+        "main": "browser.js"
+      },
+      "npm:safe-buffer@5.1.1": {
+        "browser": "index.js"
       }
     }
   }
