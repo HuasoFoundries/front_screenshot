@@ -1,6 +1,9 @@
 import {
 	html2canvas
-} from './html2canvas.js';
+} from './html2canvas/index.js';
+/*import {
+	canvg
+} from './canvg/index.js';*/
 import canvg from 'canvg';
 
 function svgAImg(jqContenedor, fncallback) {

@@ -2,16 +2,34 @@ import ascii from "rollup-plugin-ascii";
 import resolve from "rollup-plugin-node-resolve";
 import replace from 'rollup-plugin-replace';
 import babel from "rollup-plugin-babel";
+import babelrc from 'babelrc-rollup';
 import commonjs from 'rollup-plugin-commonjs';
+import {
+	rollup
+} from 'rollup';
 
-export default {
+const babelConfig = {
+	//"runtimeHelpers": true,
+	//"externalHelpers": false,
+	"babelrc": false,
+	"plugins": ["external-helpers"],
+	'presets': [
+		['env', {
+			'targets': {
+				'browsers': ['last 2 versions']
+			},
+			'loose': true
+		}]
+	]
+};
+
+const rollup_conf = {
 	//input: "src/html2canvas/index.js",
 	//input: "html2canvas/index.js",
 	input: "src/ig_screenshot.js",
 	extend: true,
 
 	plugins: [
-
 		replace({
 			'__VERSION__': '1.0.0-beta.1',
 			'__DEV__': false,
@@ -23,18 +41,10 @@ export default {
 				'./node_modules/punycode/punycode.js': ['version', 'ucs2', 'decode', 'encode', 'toASCII', 'toUnicode']
 			},
 		}),
-		/*babel(babelrc({
+		babel(babelrc({
 			config: babelConfig
 
-		})),*/
-		babel({
-			"presets": ["es2015-rollup"],
-			plugins: ['external-helpers'],
-			runtimeHelpers: true,
-			"externalHelpers": true,
-			exclude: 'node_modules/babel-runtime/**',
-			"babelrc": false
-		}),
+		})),
 
 		resolve({
 			preferBuiltins: false,
@@ -52,6 +62,10 @@ export default {
 		name: "screenShooter"
 	}]
 };
+
+rollup(rollup_conf).then(function (result) {
+	console.log(result);
+});
 
 /*export default {
 	input: "src/ig_screenshot.es6.js",

@@ -3,7 +3,7 @@ VERSION = $(shell cat package.json | sed -n 's/.*"version": "\([^"]*\)",/\1/p')
 SHELL = /usr/bin/env bash
 
 default: build
-.PHONY: test build rollup babel
+.PHONY: test build rollup babel rollup_min
 
 
 
@@ -18,18 +18,23 @@ test:
 	grunt karma
 
 	
-build:
-	jspm build screenshooter-lib-js dist/ig_screenshot.js --format esm --skip-source-maps 
-	jspm build screenshooter-lib-js dist/ig_screenshot.min.js -m --global-name screenShooter  --format umd
-	jspm build screenshooter-lib-js dist/ig_screenshot.bundle.js  --global-name screenShooter  --format umd --skip-source-maps 
+build: babel rollup rollup_min
+	
 
 
 rollup:
 	$$(npm bin)/rollup -c
+	
+
+rollup_min:
+	$$(npm bin)/rollup -c rollup.config.min.js
 
 babel:
-	$$(npm bin)/babel jspm_packages/github/niklasvh/html2canvas@master/src/ -d html2canvas
-
+	$$(npm bin)/babel jspm_packages/github/niklasvh/html2canvas@master/src/ -d src/html2canvas
+	sed -i s/"__DEV__"/"true"/g src/html2canvas/index.js
+	sed -i s/"__VERSION__"/"'1.0.0-alpha.1'"/g src/html2canvas/index.js
+	sed -i s/"module.exports = html2canvas;"/"export {html2canvas};"/g src/html2canvas/index.js
+	
 
 update_version:
 ifeq ($(shell expr "${VERSION}" \> "$(v)"),1)
@@ -52,6 +57,8 @@ tag_and_push:
 		git push
 		git push --tags
 
-tag: update_version build tag_and_push		
+tag:  build test
+
+release: test update_version tag_and_push
 
 	
