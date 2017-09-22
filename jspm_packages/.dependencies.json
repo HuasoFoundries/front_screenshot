@@ -13,11 +13,11 @@
     },
     "peerDeps": {}
   },
-  "npm:systemjs-plugin-babel@0.0.21": {
+  "npm:punycode@1.4.1": {
     "deps": {},
     "peerDeps": {}
   },
-  "npm:punycode@1.4.1": {
+  "npm:systemjs-plugin-babel@0.0.25": {
     "deps": {},
     "peerDeps": {}
   }

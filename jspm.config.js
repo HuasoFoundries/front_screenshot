@@ -57,7 +57,7 @@ SystemJS.config({
         "github:*/*.json"
     ],
     map: {
-        "plugin-babel": "npm:systemjs-plugin-babel@0.0.21"
+        "plugin-babel": "npm:systemjs-plugin-babel@0.0.25"
     },
     packages: {}
 });
