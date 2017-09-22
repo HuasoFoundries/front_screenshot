@@ -13,6 +13,7 @@ version:
 install: 
 	npm install
 	jspm install --quick
+	rm jspm_packages/github/niklasvh/html2canvas@master/.babelrc
 
 test:
 	grunt karma
