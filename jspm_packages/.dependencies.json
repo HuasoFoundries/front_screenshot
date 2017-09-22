@@ -102,10 +102,6 @@
     "deps": {},
     "peerDeps": {}
   },
-  "npm:systemjs-plugin-babel@0.0.25": {
-    "deps": {},
-    "peerDeps": {}
-  },
   "npm:stream-http@2.7.2": {
     "deps": {
       "builtin-status-codes": "npm:builtin-status-codes@^3.0.0",
@@ -603,5 +599,9 @@
       "buffer": "npm:jspm-nodelibs-buffer@^0.2.0",
       "vm": "npm:jspm-nodelibs-vm@^0.2.0"
     }
+  },
+  "npm:systemjs-plugin-babel@0.0.25": {
+    "deps": {},
+    "peerDeps": {}
   }
 }
