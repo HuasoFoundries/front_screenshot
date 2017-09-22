@@ -1,11 +1,12 @@
 {
-    "plugins": ["syntax-flow", "transform-object-rest-spread", "external-helpers", "transform-runtime"],
+    "plugins": ["transform-object-rest-spread", "external-helpers", "transform-runtime"],
     "presets": [
-        [
-            "es2015",
+        ["latest",
+        {
+            "es2015":
             {
                 "modules": false
             }
-        ], "flow"
+        }], "flow"
     ]
 }
