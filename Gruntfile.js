@@ -31,6 +31,22 @@ module.exports = function (grunt) {
                 ]
 
             }
+        },
+        ig_screenshot_min: {
+            options: {
+
+                // list of files / patterns to load in the browser
+                files: [
+                    'test/vendor/object-assign-polyfill.js',
+                    'test/vendor/prototype-bind-polyfill.js',
+                    'test/vendor/bluebird.js',
+                    'test/vendor/jquery.js',
+                    'dist/ig_screenshot.min.js',
+                    'test/ig_screenshot/setup/*.js',
+                    'test/ig_screenshot/*.js'
+                ]
+
+            }
         }
     });
 
