@@ -1,6 +1,6 @@
 {
   "name": "screenshooter-lib-js",
-  "version": "17.1.0",
+  "version": "17.1.1",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "test": "grunt karma"
@@ -10,14 +10,12 @@
     "url": "git+https://github.com/InstaGIS/screenshooter-lib-js.git"
   },
   "files": [
-    "src",
     "dist"
   ],
   "keywords": [
-    "turf",
-    "google",
-    "maps",
-    "wicket"
+    "screenshot",
+    "html2canvas",
+    "canvg"
   ],
   "author": "amenadiel@gmail.com",
   "license": "propietary",

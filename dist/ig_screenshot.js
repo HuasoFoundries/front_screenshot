@@ -10069,7 +10069,6 @@ function hiddenClone(jqContenedor) {
 
 	// Append clone to body and return the clone
 	document.body.appendChild(clone);
-	console.zdebug('poor clone', clone);
 	return clone;
 }
 
@@ -10087,10 +10086,7 @@ var infoScreenShot = function infoScreenShot(jqContenedor) {
 		logging: false
 	}).then(function (canvas) {
 		document.body.removeChild(clone);
-		console.log('html2canvas done', canvas);
-		jQuery('#supercontenedor').css({
-			'opacity': '1'
-		});
+
 		return canvas.toDataURL("image/png");
 	});
 };
