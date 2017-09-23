@@ -114,10 +114,7 @@ var infoScreenShot = function (jqContenedor) {
 		logging: false
 	}).then(function (canvas) {
 		document.body.removeChild(clone);
-		console.log('html2canvas done', canvas);
-		jQuery('#supercontenedor').css({
-			'opacity': '1'
-		});
+
 		return (canvas.toDataURL("image/png"));
 
 	});
