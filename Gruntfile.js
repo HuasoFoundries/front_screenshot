@@ -5,7 +5,7 @@ module.exports = function (grunt) {
             basePath: '',
             frameworks: ['qunit'],
 
-            reporters: ['progress'],
+            reporters: ['mocha'],
 
             port: 9877,
             colors: true,

@@ -1,4 +1,8 @@
 {
+  "npm:systemjs-plugin-babel@0.0.25": {
+    "deps": {},
+    "peerDeps": {}
+  },
   "github:canvg/canvg@v1.4": {
     "deps": {},
     "peerDeps": {}
@@ -11,10 +15,6 @@
     "deps": {
       "punycode": "npm:punycode@^1.3.0"
     },
-    "peerDeps": {}
-  },
-  "npm:systemjs-plugin-babel@0.0.25": {
-    "deps": {},
     "peerDeps": {}
   },
   "npm:punycode@1.4.1": {

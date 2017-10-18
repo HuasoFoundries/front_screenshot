@@ -39,6 +39,7 @@
   "devDependencies": {
     "babel-eslint": "^6",
     "eslint": "^3",
+    "karma-mocha-reporter": "^2.2.5",
     "lodash": "^4"
   },
   "jspm": {
