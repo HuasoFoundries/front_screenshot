@@ -30,9 +30,9 @@ export default {
 		babel({
 			"presets": ["es2015-rollup"],
 			plugins: ['external-helpers'],
-			runtimeHelpers: true,
-			"externalHelpers": true,
-			exclude: 'node_modules/babel-runtime/**',
+			//runtimeHelpers: true,
+			//"externalHelpers": true,
+			exclude: ['node_modules/babel-runtime/**', 'node_modules/babel-helpers/**'],
 			"babelrc": false
 		}),
 

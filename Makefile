@@ -12,11 +12,11 @@ version:
 
 install: 
 	npm install
-	jspm install --quick
+	$$(npm bin)/jspm install --quick
 	rm jspm_packages/github/niklasvh/html2canvas@master/.babelrc
 
 test:
-	grunt karma
+	$$(npm bin)/grunt karma
 
 	
 build: babel rollup rollup_min

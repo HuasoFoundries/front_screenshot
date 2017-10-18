@@ -5,6 +5,14 @@ import {
 	canvg
 } from './canvg/canvg.js';
 
+/**
+ * Takes a jQuery container, finds its contained SVG, transforms it into an image
+ *
+ * @param      {jQuery}    jqContenedor  container of an SVG element to transform into image
+ * @param      {Function}  [fncallback]    callback function invoked with the canvas element
+ * 
+ * @returns {HTMLElement}  Image element
+ */
 function svgAImg(jqContenedor, fncallback) {
 
 	var elsvg = jqContenedor.find('svg');
@@ -47,9 +55,17 @@ function svgAImg(jqContenedor, fncallback) {
 	if (fncallback) {
 		fncallback(laimg);
 	}
-	return;
+	return laimg;
 }
 
+/**
+ * Takes a jQuery container, finds its contained SVG, transforms it into a canvas
+ *
+ * @param      {jQuery}    jqContenedor  container of an SVG element to transform into canvas
+ * @param      {Function}  [fncallback]    callback function invoked with the canvas element
+ * 
+ * @returns {HTMLElement}  Canvas element
+ */
 function svgACanvas(jqContenedor, fncallback) {
 
 	var elsvg = jqContenedor.find('svg');
@@ -82,9 +98,16 @@ function svgACanvas(jqContenedor, fncallback) {
 	if (fncallback) {
 		fncallback(canvas);
 	}
-	return;
+	return canvas;
 }
 
+/**
+ * Creates a hidden clone of a jQuery Selector and appends it to the screen 
+ * (allows to capture sections that are hidden due to scrolling behavior)
+ *
+ * @param      {jQuery}  jqContenedor  The jQuery selector of the original container
+ * @return     {HTMLElemnt} the DOM node of the clone
+ */
 function hiddenClone(jqContenedor) {
 	var clone = jqContenedor[0].cloneNode(true);
 
@@ -103,6 +126,12 @@ function hiddenClone(jqContenedor) {
 	return clone;
 };
 
+/**
+ * Takes a jQuery container, takes a screenshot of it and returns a dataurl of the image
+ *
+ * @param      {jQuery}  jqContenedor  jQuery selector of the element to transform into canvas
+ * @return     {String}  a base64 encoded dataURL
+ */
 var infoScreenShot = function (jqContenedor) {
 
 	jqContenedor.find('.canvg').each(function () {
