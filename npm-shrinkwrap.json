@@ -1,6 +1,6 @@
 {
-  "name": "front_screenshoot",
-  "version": "1.0.0",
+  "name": "front_screenshot",
+  "version": "1.0.3",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
