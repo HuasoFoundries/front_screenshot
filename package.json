@@ -1,6 +1,6 @@
 {
   "name": "front_screenshot",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "start": "make run",
