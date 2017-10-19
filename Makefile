@@ -15,13 +15,13 @@ install:
 	$$(npm bin)/jspm install --quick
 
 test:
-	$$(npm bin)/grunt karma
+	$$(npm bin)/karma start
 
 	
 build:
-	$$(npm bin)/jspm build screenshooter-lib-js dist/ig_screenshot.js --format esm --skip-source-maps 
-	$$(npm bin)/jspm build screenshooter-lib-js dist/ig_screenshot.min.js -m --global-name screenShooter  --format umd
-	$$(npm bin)/jspm build screenshooter-lib-js dist/ig_screenshot.bundle.js  --global-name screenShooter  --format umd --skip-source-maps 
+	$$(npm bin)/jspm build front_screenshot dist/ig_screenshot.es6.js --format esm --skip-source-maps 
+	$$(npm bin)/jspm build front_screenshot dist/ig_screenshot.min.js -m --global-name screenShooter  --format umd
+	$$(npm bin)/jspm build front_screenshot dist/ig_screenshot.js  --global-name screenShooter  --format umd --skip-source-maps 
 
 
 update_version:

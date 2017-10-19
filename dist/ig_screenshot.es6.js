@@ -7658,10 +7658,7 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 });
 })
 (function(factory) {
-  if (typeof define == 'function' && define.amd)
-    define([], factory);
-  else if (typeof module == 'object' && module.exports && typeof require == 'function')
-    module.exports = factory();
-  else
-    screenShooter = factory();
+  main = factory();
 });
+
+export default main;

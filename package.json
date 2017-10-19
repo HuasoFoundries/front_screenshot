@@ -1,51 +1,58 @@
 {
-  "name": "screenshooter-lib-js",
-  "version": "17.0.14",
+  "name": "front_screenshot",
+  "version": "0.9.0",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
-    "test": "grunt karma"
+    "start": "make run",
+    "test": "karma start && MINIFIED=true karma start"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/InstaGIS/screenshooter-lib-js.git"
+    "url": "git+https://github.com/HuasoFoundries/front_screenshot.git"
   },
   "files": [
-    "src",
     "dist"
   ],
   "keywords": [
     "screenshot",
+    "screenshooter",
+    "browser screenshot",
     "html2canvas",
+    "svg",
     "canvg"
   ],
   "author": "amenadiel@gmail.com",
-  "license": "propietary",
+  "license": "MIT",
+  "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/InstaGIS/screenshooter-lib-js/issues"
+    "url": "https://github.com/HuasoFoundries/front_screenshot/issues"
   },
-  "homepage": "https://github.com/InstaGIS/screenshooter-lib-js#readme",
+  "homepage": "https://github.com/HuasoFoundries/front_screenshot#readme",
+  "engines": {
+    "node": "6.11.2"
+  },
   "main": "dist/ig_screenshot.min.js",
-  "private": true,
+  "module": "dist/ig_screenshot.es6.js",
+  "jsnext:main": "dist/ig_screenshot.es6.js",
   "dependencies": {
-    "grunt": "^1",
-    "grunt-karma": "^2",
-    "jspm": "^0.17.0-beta.41",
-    "karma": "^1",
+    "jspm": "^0.17.0-beta.45",
+    "karma": "~1.7",
     "karma-phantomjs-launcher": "^1",
     "karma-qunit": "^1",
+    "karma-mocha-reporter": "^2.2.5",
     "phantomjs-prebuilt": "^2",
     "qunitjs": "^1"
   },
   "devDependencies": {
     "babel-eslint": "^6",
     "eslint": "^3",
-    "karma-mocha-reporter": "^2.2.5",
     "lodash": "^4"
   },
   "jspm": {
     "registry": "jspm",
-    "name": "screenshooter-lib-js",
+    "name": "front_screenshot",
     "main": "ig_screenshot.min.js",
+    "format": "amd",
     "directories": {
       "lib": "dist"
     },

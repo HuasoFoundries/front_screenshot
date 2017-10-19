@@ -2,7 +2,7 @@ SystemJS.config({
     paths: {
         "npm:": "jspm_packages/npm/",
         "github:": "jspm_packages/github/",
-        "screenshooter-lib-js/": "src/"
+        "front_screenshot/": "src/"
     },
     browserConfig: {
         "baseURL": "/"
@@ -23,7 +23,7 @@ SystemJS.config({
     },
     transpiler: "plugin-babel",
     packages: {
-        "screenshooter-lib-js": {
+        "front_screenshot": {
             "main": "ig_screenshot.js",
             "format": "esm",
             "map": {
