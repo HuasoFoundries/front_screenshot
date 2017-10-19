@@ -1,9 +1,10 @@
 import {
 	html2canvas
 } from './html2canvas/index.js';
-import 
+import {
 	canvg
- from './canvg.js';
+}
+from './canvg/canvg.js';
 
 /**
  * Takes a jQuery container, finds its contained SVG, transforms it into an image
