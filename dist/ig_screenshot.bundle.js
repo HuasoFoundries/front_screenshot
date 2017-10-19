@@ -10400,35 +10400,51 @@ if (typeof CanvasRenderingContext2D != 'undefined') {
 /**
  * Takes a jQuery container, finds its contained SVG, transforms it into an image
  *
- * @param      {jQuery}    jqContenedor  container of an SVG element to transform into image
+ * @param      {jQuery}    jqContainer  container of an SVG element to transform into image
+ * @param      {Number} [quality] compression level of the image. By default 0.5
  * @param      {Function}  [fncallback]    callback function invoked with the canvas element
  * 
  * @returns {HTMLElement}  Image element
  */
-function svgAImg(jqContenedor, fncallback) {
+function svgToImg(jqContainer, quality, fncallback) {
 
-	var elsvg = jqContenedor.find('svg');
+	if (quality === undefined || quality === null) {
+		quality = 0.5;
+	}
 
-	if (elsvg.length === 0) {
+	var the_svg = jqContainer.find('svg');
+
+	/*
+ This should be done by yourself if you are converting a C3.js graph
+ jqContainer.find('g').removeAttr('clip-path');
+ jqContainer.find('g.c3-event-rects').remove();
+ jqContainer.find('g.c3-grid').remove();
+ jqContainer.find('g.c3-regions').remove();
+ jqContainer.find('g.c3-axis-y2').remove();
+ jqContainer.find('path.domain').attr('stroke-width', 0.5).css('stroke-width', '0.2px');
+ */
+
+	if (the_svg.length === 0) {
 		if (fncallback) {
 			fncallback();
 		}
 		return;
 	}
-	jqContenedor.find('g').removeAttr('clip-path');
-	jqContenedor.find('g.c3-event-rects').remove();
-	jqContenedor.find('g.c3-grid').remove();
-	jqContenedor.find('g.c3-regions').remove();
-	jqContenedor.find('g.c3-axis-y2').remove();
-	jqContenedor.find('path.domain').attr('stroke-width', 0.5).css('stroke-width', '0.2px');
 
-	var svgData = new XMLSerializer().serializeToString(elsvg[0]);
+	jqContainer.find('svg').find('text').css('font', '10px sans-serif');
 
-	elsvg.hide();
+	jqContainer.find('path').attr('fill', 'none');
+
+	// this applies to C3.js grapjs
+	jqContainer.find('.tick line, path.domain').attr('stroke', 'black');
+
+	var svgData = new XMLSerializer().serializeToString(the_svg[0]);
+
+	the_svg.hide();
 
 	var canvas = document.createElement("canvas");
 	canvas.setAttribute('id', 'elcanvas');
-	jqContenedor[0].appendChild(canvas);
+	jqContainer[0].appendChild(canvas);
 
 	canvg('elcanvas', svgData, {
 		ignoreMouse: true,
@@ -10436,14 +10452,14 @@ function svgAImg(jqContenedor, fncallback) {
 		log: true
 	});
 
-	jqContenedor.find('.laimg').remove();
+	jqContainer.find('.laimg').remove();
 
 	var laimg = new Image();
 	laimg.className = 'laimg';
-	jqContenedor[0].appendChild(laimg);
-	laimg.src = canvas.toDataURL();
+	jqContainer[0].appendChild(laimg);
+	laimg.src = canvas.toDataURL("image/png", quality);
 
-	jqContenedor.find('#elcanvas').remove();
+	jqContainer.find('#elcanvas').remove();
 	if (fncallback) {
 		fncallback(laimg);
 	}
@@ -10453,32 +10469,40 @@ function svgAImg(jqContenedor, fncallback) {
 /**
  * Takes a jQuery container, finds its contained SVG, transforms it into a canvas
  *
- * @param      {jQuery}    jqContenedor  container of an SVG element to transform into canvas
+ * @param      {jQuery}    jqContainer  container of an SVG element to transform into canvas
  * @param      {Function}  [fncallback]    callback function invoked with the canvas element
  * 
- * @returns {HTMLElement}  Canvas element
+ * @returns {HTMLCanvasElement}  Canvas element
  */
-function svgACanvas(jqContenedor, fncallback) {
+function svgToCanvas(jqContainer, fncallback) {
 
-	var elsvg = jqContenedor.find('svg');
+	var the_svg = jqContainer.find('svg');
 
-	jqContenedor.find('svg').css('font', '10px sans-serif');
+	if (the_svg.length === 0) {
+		if (fncallback) {
+			fncallback();
+		}
+		return;
+	}
 
-	jqContenedor.find('path').attr('fill', 'none');
+	jqContainer.find('svg').find('text').css('font', '10px sans-serif');
 
-	jqContenedor.find('.tick line, path.domain').attr('stroke', 'black');
+	jqContainer.find('path').attr('fill', 'none');
 
-	jqContenedor.find('canvas').remove();
+	// this applies to C3.js grapjs
+	jqContainer.find('.tick line, path.domain').attr('stroke', 'black');
 
-	var tooltip = jqContenedor.find('.c3-tooltip-container').detach();
+	jqContainer.find('canvas').remove();
 
-	var content = jqContenedor.html().trim();
+	var tooltip = jqContainer.find('.c3-tooltip-container').detach();
+
+	var content = jqContainer.html().trim();
 
 	var canvas = document.createElement("canvas");
-	jqContenedor[0].appendChild(canvas);
+	jqContainer[0].appendChild(canvas);
 
-	elsvg.hide();
-	jqContenedor.append(tooltip);
+	the_svg.hide();
+	jqContainer.append(tooltip);
 	canvg(canvas, content);
 
 	if (fncallback) {
@@ -10491,19 +10515,19 @@ function svgACanvas(jqContenedor, fncallback) {
  * Creates a hidden clone of a jQuery Selector and appends it to the screen 
  * (allows to capture sections that are hidden due to scrolling behavior)
  *
- * @param      {jQuery}  jqContenedor  The jQuery selector of the original container
+ * @param      {jQuery}  jqContainer  The jQuery selector of the original container
  * @return     {HTMLElemnt} the DOM node of the clone
  */
-function hiddenClone(jqContenedor) {
-	var clone = jqContenedor[0].cloneNode(true);
+function hiddenClone(jqContainer) {
+	var clone = jqContainer[0].cloneNode(true);
 
 	// Position element relatively within the
 	// body but still out of the viewport
 	var style = clone.style;
 	style.position = 'relative';
 	style['box-sizing'] = 'content-box';
-	style.width = jqContenedor.width() + 'px';
-	style.height = jqContenedor.height() + 'px';
+	style.width = jqContainer.width() + 'px';
+	style.height = jqContainer.height() + 'px';
 	style.top = window.innerHeight + 'px';
 	style.left = 0;
 
@@ -10513,27 +10537,35 @@ function hiddenClone(jqContenedor) {
 }
 
 /**
- * Takes a jQuery container, takes a screenshot of it and returns a dataurl of the image
+ * Given a jQuery container, takes a screenshot of it and returns it as an HTMLCanvasElement
+ * (it can capture the container contents even if they are hidden due to overlay hidden, auto or scroll CSS properties)
  *
- * @param      {jQuery}  jqContenedor  jQuery selector of the element to transform into canvas
- * @return     {String}  a base64 encoded dataURL
+ * @param      {jQuery}  jqContainer  jQuery selector of the element to transform into canvas
+ * @param      {Boolean} [clone] if true, then capture contents hidden due to overlay properties
+ * @return     {HTMLCanvasElement}  a base64 encoded dataURL
  */
-var infoScreenShot = function infoScreenShot(jqContenedor) {
+var infoScreenShot = function infoScreenShot(jqContainer, clone) {
 
-	jqContenedor.find('.canvg').each(function () {
-		svgAImg(jQuery(this));
+	var container;
+	jqContainer.find('.canvg').each(function () {
+		svgToCanvas(jQuery(this));
 	});
 
-	var clone = hiddenClone(jqContenedor);
+	if (clone) {
+		container = hiddenClone(jqContainer);
+	} else {
+		container = jqContainer[0];
+	}
 
-	return html2canvas(clone, {
+	return html2canvas(container, {
 		useCORS: true,
 		allowTaint: false,
 		logging: false
 	}).then(function (canvas) {
-		document.body.removeChild(clone);
-
-		return canvas.toDataURL("image/png");
+		if (clone) {
+			document.body.removeChild(container);
+		}
+		return canvas;
 	});
 };
 
@@ -10542,16 +10574,16 @@ var ig_screenshot = {
 	infoScreenShot: infoScreenShot,
 	canvg: canvg,
 	hiddenClone: hiddenClone,
-	svgAImg: svgAImg,
-	svgACanvas: svgACanvas
+	svgToImg: svgToImg,
+	svgToCanvas: svgToCanvas
 };
 
 exports.html2canvas = html2canvas;
 exports.infoScreenShot = infoScreenShot;
 exports.canvg = canvg;
 exports.hiddenClone = hiddenClone;
-exports.svgAImg = svgAImg;
-exports.svgACanvas = svgACanvas;
+exports.svgToImg = svgToImg;
+exports.svgToCanvas = svgToCanvas;
 exports['default'] = ig_screenshot;
 
 Object.defineProperty(exports, '__esModule', { value: true });

@@ -19,23 +19,28 @@ test:
 	$$(npm bin)/grunt karma
 
 	
-build: babel rollup rollup_min
+build: babel rollup rollup_min remove_html2canvas_temp
 	
 
 
 rollup:
 	$$(npm bin)/rollup -c
-	
+
+run:
+	$$(npm bin)/serve .
 
 rollup_min:
 	$$(npm bin)/rollup -c rollup.config.min.js
 
 babel:
+	rm -f jspm_packages/github/niklasvh/html2canvas@master/.babelrc
 	$$(npm bin)/babel jspm_packages/github/niklasvh/html2canvas@master/src/ -d src/html2canvas
 	sed -i s/"__DEV__"/"true"/g src/html2canvas/index.js
 	sed -i s/"__VERSION__"/"'1.0.0-alpha.1'"/g src/html2canvas/index.js
 	sed -i s/"module.exports = html2canvas;"/"export {html2canvas};"/g src/html2canvas/index.js
 	
+remove_html2canvas_temp:
+	@rm -rf src/html2canvas
 
 update_version:
 ifeq ($(shell expr "${VERSION}" \> "$(v)"),1)

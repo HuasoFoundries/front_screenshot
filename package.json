@@ -1,28 +1,31 @@
 {
-  "name": "screenshooter-lib-js",
-  "version": "17.1.1",
+  "name": "front_screenshoot",
+  "version": "1.0.0",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "test": "grunt karma"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/InstaGIS/screenshooter-lib-js.git"
+    "url": "git+https://github.com/HuasoFoundries/front_screenshoot.git"
   },
   "files": [
     "dist"
   ],
   "keywords": [
     "screenshot",
+    "screenshooter",
+    "browser screenshot",
     "html2canvas",
+    "svg",
     "canvg"
   ],
   "author": "amenadiel@gmail.com",
-  "license": "propietary",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/InstaGIS/screenshooter-lib-js/issues"
+    "url": "https://github.com/HuasoFoundries/front_screenshoot/issues"
   },
-  "homepage": "https://github.com/InstaGIS/screenshooter-lib-js#readme",
+  "homepage": "https://github.com/HuasoFoundries/front_screenshoot#readme",
   "main": "dist/ig_screenshot.min.js",
   "private": true,
   "dependencies": {
@@ -57,11 +60,12 @@
     "rollup-plugin-commonjs": "^8.2.1",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^2.0.1"
+    "rollup-plugin-uglify": "^2.0.1",
+    "serve": "^6.3.1"
   },
   "jspm": {
     "registry": "jspm",
-    "name": "screenshooter-lib-js",
+    "name": "front_screenshoot",
     "main": "ig_screenshot.min.js",
     "directories": {
       "lib": "dist"
