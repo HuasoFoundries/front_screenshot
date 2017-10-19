@@ -35,7 +35,7 @@
   "module": "dist/ig_screenshot.es6.js",
   "jsnext:main": "dist/ig_screenshot.es6.js",
   "dependencies": {
-    "jspm": "^0.17.0-beta.45",
+    "jspm": "0.17.0-beta.45",
     "karma": "~1.7",
     "karma-phantomjs-launcher": "^1",
     "karma-qunit": "^1",
@@ -56,7 +56,6 @@
     "directories": {
       "lib": "dist"
     },
-    "format": "amd",
     "dependencies": {},
     "devDependencies": {
       "canvg": "github:canvg/canvg@v1.4",
