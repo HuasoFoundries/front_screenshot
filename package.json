@@ -4,7 +4,7 @@
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "start": "make run",
-    "test": "make test"
+    "test": "karma start && MINIFIED=true karma start"
   },
   "repository": {
     "type": "git",
