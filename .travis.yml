@@ -3,5 +3,5 @@ cache:
   directories:
     - node_modules
 node_js:
-  - "6.1"
+  - "6.11.2"
  

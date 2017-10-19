@@ -1,6 +1,6 @@
 {
   "name": "front_screenshot",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "start": "make run",
@@ -28,6 +28,9 @@
     "url": "https://github.com/HuasoFoundries/front_screenshot/issues"
   },
   "homepage": "https://github.com/HuasoFoundries/front_screenshot#readme",
+  "engines": {
+    "node": "6.11.2"
+  },
   "main": "dist/ig_screenshot.min.js",
   "module": "dist/ig_screenshot.es6.js",
   "jsnext:main": "dist/ig_screenshot.es6.js",
