@@ -846,8 +846,8 @@ var TO_STRING_TAG = _wks('toStringTag');
 
 var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' + 'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' + 'MediaList,MimeTypeArray,NamedNodeMap,NodeList,PaintRequestList,Plugin,PluginArray,SVGLengthList,SVGNumberList,' + 'SVGPathSegList,SVGPointList,SVGStringList,SVGTransformList,SourceBufferList,StyleSheetList,TextTrackCueList,' + 'TextTrackList,TouchList').split(',');
 
-for (var i$1 = 0; i$1 < DOMIterables.length; i$1++) {
-  var NAME = DOMIterables[i$1];
+for (var i = 0; i < DOMIterables.length; i++) {
+  var NAME = DOMIterables[i];
   var Collection = _global[NAME];
   var proto = Collection && Collection.prototype;
   if (proto && !proto[TO_STRING_TAG]) _hide(proto, TO_STRING_TAG, NAME);
@@ -7854,7 +7854,7 @@ function build(opts) {
 			this.addPoint(p0[0], p0[1]);
 			this.addPoint(p3[0], p3[1]);
 
-			for (i = 0; i <= 1; i++) {
+			for (var i = 0; i <= 1; i++) {
 				var f = function f(t) {
 					return Math.pow(1 - t, 3) * p0[i] + 3 * Math.pow(1 - t, 2) * t * p1[i] + 3 * (1 - t) * Math.pow(t, 2) * p2[i] + Math.pow(t, 3) * p3[i];
 				};
