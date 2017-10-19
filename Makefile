@@ -20,7 +20,7 @@ test:
 	MINIFIED=true $$(npm bin)/karma start
 
 	
-build: babel rollup_canvg rollup rollup_min clean
+build: clean babel rollup_canvg rollup rollup_min
 	
 
 
@@ -37,13 +37,13 @@ rollup_canvg:
 	CANVG=true $$(npm bin)/rollup -c 
 
 babel:
-	rm -f jspm_packages/github/niklasvh/html2canvas@master/.babelrc
 	$$(npm bin)/babel jspm_packages/github/niklasvh/html2canvas@master/src/ -d src/html2canvas
 	sed -i s/"__DEV__"/"false"/g src/html2canvas/index.js
 	sed -i s/"__VERSION__"/"'1.0.0-alpha.1'"/g src/html2canvas/index.js
 	sed -i s/"module.exports = html2canvas;"/"export {html2canvas};"/g src/html2canvas/index.js
 	
 clean:
+	@rm -f jspm_packages/github/niklasvh/html2canvas@master/.babelrc
 	@rm -rf src/html2canvas
 	@rm -rf src/canvg.js
 
