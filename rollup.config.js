@@ -3,20 +3,23 @@ import resolve from "rollup-plugin-node-resolve";
 import replace from 'rollup-plugin-replace';
 import babel from "rollup-plugin-babel";
 import commonjs from 'rollup-plugin-commonjs';
+import uglify from 'rollup-plugin-uglify';
+import alias from 'rollup-plugin-alias';
 
-export default {
-	//input: "src/html2canvas/index.js",
-	//input: "html2canvas/index.js",
-	input: "src/ig_screenshot.js",
-	extend: true,
 
-	plugins: [
+
+var input = "src/ig_screenshot.js",
+	plugins = [
 
 		replace({
 			'__VERSION__': '1.0.0-beta.1',
 			'__DEV__': false,
 			'const': 'var',
 			'let': 'var'
+		}),
+		alias({
+			rgbcolor: "node_modules/canvg/rgbcolor.js",
+			stackblur: "node_modules/canvg/StackBlur.js"
 		}),
 		commonjs({
 			namedExports: {
@@ -41,7 +44,7 @@ export default {
 		}),
 		ascii()
 	],
-	output: [{
+	output = [{
 		file: "dist/ig_screenshot.js",
 		format: "es",
 		name: "screenShooter"
@@ -50,41 +53,34 @@ export default {
 		format: "umd",
 		exports: 'named',
 		name: "screenShooter"
-	}]
-};
+	}];
 
-/*export default {
-	input: "src/ig_screenshot.es6.js",
-	extend: true,
-
-	plugins: [
-		babel(babelrc({
-			config: babelConfig,
-		})),
-		replace({
-			'__VERSION__': '1.0.0-beta.1',
-			'__DEV__': false,
-			'const': 'var',
-			'let': 'var'
-		}),
-		resolve({
-			jsnext: true,
-			preferBuiltins: false,
-		}), ascii()
-	],
-	output: [{
-		file: "dist/ig_screenshot.js",
-		format: "es",
-		name: "screenShooter"
-	}, {
+if (process.env.MINIFY) {
+	input = "dist/ig_screenshot.js";
+	plugins.push(uglify({
+		mangle: false
+	}));
+	output = [{
 		file: "dist/ig_screenshot.min.js",
 		format: "umd",
 		exports: 'named',
-		name: "screenShooter"
-	}, {
-		file: "dist/ig_screenshot.bundle.js",
-		format: "umd",
-		exports: 'named',
-		name: "screenShooter"
+		name: "screenShooter",
+		sourcemap: true
 	}]
-};*/
+} else if (process.env.CANVG) {
+	input= "node_modules/canvg/canvg.js";
+	output= [{
+		file: "src/canvg.js",
+		format: "es"
+	}];
+}
+
+export default {
+	//input: "src/html2canvas/index.js",
+	//input: "html2canvas/index.js",
+	input: input,
+	extend: true,
+
+	plugins: plugins,
+	output: output
+};

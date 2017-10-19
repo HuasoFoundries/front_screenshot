@@ -1,6 +1,6 @@
 {
   "name": "front_screenshoot",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "test": "grunt karma"
@@ -22,15 +22,15 @@
   ],
   "author": "amenadiel@gmail.com",
   "license": "MIT",
+  "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/HuasoFoundries/front_screenshoot/issues"
   },
   "homepage": "https://github.com/HuasoFoundries/front_screenshoot#readme",
   "main": "dist/ig_screenshot.min.js",
+  "module": "dist/ig_screenshot.es6.js",
+  "jsnext:main": "dist/ig_screenshot.es6.js",
   "private": true,
-  "dependencies": {
-    "jspm": "^0.17.0-beta.45"
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^6",
@@ -45,9 +45,9 @@
     "babel-runtime": "^6.26.0",
     "canvg": "git+https://git@github.com/canvg/canvg.git",
     "eslint": "^3",
-    "grunt": "^1",
-    "grunt-karma": "^2",
+    "jspm": "^0.17.0-beta.45",
     "karma": "^1",
+    "karma-mocha-reporter": "^2.2.5",
     "karma-phantomjs-launcher": "^1",
     "karma-qunit": "^1",
     "lodash": "^4",
@@ -55,6 +55,7 @@
     "punycode": "^2.1.0",
     "qunitjs": "^1",
     "rollup": "^0.50.0",
+    "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-ascii": "0.0.3",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.1",
@@ -67,10 +68,10 @@
     "registry": "jspm",
     "name": "front_screenshoot",
     "main": "ig_screenshot.min.js",
+    "format": "amd",
     "directories": {
       "lib": "dist"
     },
-    "format": "amd",
     "dependencies": {},
     "devDependencies": {
       "assert": "npm:jspm-nodelibs-assert@^0.2.0",
