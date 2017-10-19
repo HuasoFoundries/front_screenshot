@@ -3,7 +3,9 @@
   "version": "1.0.3",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
-    "test": "grunt karma"
+    "start": "make run",
+    "install": "npm install",
+    "test": "make test"
   },
   "repository": {
     "type": "git",
