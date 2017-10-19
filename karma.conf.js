@@ -6,7 +6,7 @@ module.exports = function (config) {
 		'test/vendor/string-fromcodepoint-polyfill.js',
 		'test/vendor/bluebird.js',
 		'test/vendor/jquery.js',
-		'dist/ig_screenshot.bundle.js',
+		'dist/ig_screenshot.js',
 		'test/ig_screenshot/setup/*.js',
 		'test/ig_screenshot/*.js'
 	];

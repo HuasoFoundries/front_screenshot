@@ -6,8 +6,6 @@ import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import alias from 'rollup-plugin-alias';
 
-
-
 var input = "src/ig_screenshot.js",
 	plugins = [
 
@@ -45,18 +43,18 @@ var input = "src/ig_screenshot.js",
 		ascii()
 	],
 	output = [{
-		file: "dist/ig_screenshot.js",
+		file: "dist/ig_screenshot.es6.js",
 		format: "es",
 		name: "screenShooter"
 	}, {
-		file: "dist/ig_screenshot.bundle.js",
+		file: "dist/ig_screenshot.js",
 		format: "umd",
 		exports: 'named',
 		name: "screenShooter"
 	}];
 
 if (process.env.MINIFY) {
-	input = "dist/ig_screenshot.js";
+	input = "dist/ig_screenshot.es6.js";
 	plugins.push(uglify({
 		mangle: false
 	}));
@@ -68,8 +66,8 @@ if (process.env.MINIFY) {
 		sourcemap: true
 	}]
 } else if (process.env.CANVG) {
-	input= "node_modules/canvg/canvg.js";
-	output= [{
+	input = "node_modules/canvg/canvg.js";
+	output = [{
 		file: "src/canvg.js",
 		format: "es"
 	}];

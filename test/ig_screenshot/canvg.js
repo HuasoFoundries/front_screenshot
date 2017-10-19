@@ -6,11 +6,11 @@
 		assert.equal(typeof screenShooter.canvg, 'function', 'screenShooter.canvg should be a valid method');
 	});
 
-	QUnit.test('screenShooter.svgAImg should be a valid method', function (assert) {
-		assert.equal(typeof screenShooter.svgToImg, 'function', 'screenShooter.svgAImg should be a valid method');
+	QUnit.test('screenShooter.svgToImg should be a valid method', function (assert) {
+		assert.equal(typeof screenShooter.svgToImg, 'function', 'screenShooter.svgToImg should be a valid method');
 	});
 
-	QUnit.test('screenShooter.svgAImg convert an SVG into an image with the right src', function (assert) {
+	QUnit.test('screenShooter.svgToImg convert an SVG into an image with the right src', function (assert) {
 
 		var done = assert.async();
 		var expected =

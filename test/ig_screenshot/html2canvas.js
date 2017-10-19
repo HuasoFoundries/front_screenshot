@@ -18,7 +18,7 @@
 
 			var dataurl = canvas.toDataURL("image/png", 0);
 			var expected =
-				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAOCAYAAAAbvf3sAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAnUlEQVQoz7XRMWoCYRQE4O+XtFqlS5dCUtosuUuwzjnSBlLYeY7gBXYLD+EdFCwsLIRJsUKCLpu1cODBwDDvzfCQmmTg1FoyFMnIjbgwZEIO5HWgwRu+8d6b6w9fkEeya6/1dkiFNWWLFeZd60t7oRTyhSNOeEJFmXWkSciYfFyIm+vyv5GWeCblLEyxxyd56Sl9/8f9jwc0N8RqfgDCNk06qDb5gAAAAABJRU5ErkJggg==';
+				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAOCAYAAAAbvf3sAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAk0lEQVQoz6XRMQrCUAzG8V/Vyc0DuDm6uzvrAbp6L/cu4gUUWvAYXevkGYyDb3rwaMVASAh8+f4hiJaIidn6NlMjYpYNDmnTtiTJBGo8Ui3bpLokBmJD9FOQjrhR9XgSuzGkGk3qmxJWlZBWGPBCYJ6WraneGX4EcSLOGe+d2JduqHHN3C8FrL8eNx4/CxbofsDqPgU+TM3EcgqEAAAAAElFTkSuQmCC';
 
 			assert.equal(dataurl, expected, 'captured dataurl matches expected');
 			done();
