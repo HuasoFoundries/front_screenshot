@@ -1,6 +1,6 @@
 # Front Screenshot
 
-[![Travis CI](https://travis-ci.org/InstaGIS/screenshooter-lib-js.svg?branch=master)](https://travis-ci.org/InstaGIS/screenshooter-lib-js)
+[![Travis CI](https://travis-ci.org/HuasoFoundries/front_screenshot.svg?branch=master)](https://travis-ci.org/HuasoFoundries/front_screenshot)
 
 This library bundles [HTML2Canvas](https://html2canvas.hertzen.com/) and [Canvg](https://github.com/canvg/canvg)
 to transform SVG into images or Canvas elements, and take screenshots of your page or sections of it, even if
