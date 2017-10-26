@@ -21,5 +21,10 @@ or, if you're using [JSPM](https://jspm.io):
 
 
 ```sh
+jspm install front_screenshot=npm:front_screenshot
+```
+
+
+```sh
 jspm install front_screenshot=github:HuasoFroundries/front_screenshot
 ```
