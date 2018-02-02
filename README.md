@@ -19,7 +19,7 @@ make run
 
 ## API
 
-See [USAGE.md](USAGE.md);
+See [USAGE.md](USAGE.md)
 
 ## Install
 
