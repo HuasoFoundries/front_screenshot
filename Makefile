@@ -74,7 +74,7 @@ tag_and_push:
 		git push
 		git push --tags
 
-tag:  build test release
+tag:  build docs test release
 
 release: test update_version tag_and_push
 

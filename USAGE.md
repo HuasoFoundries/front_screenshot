@@ -5,6 +5,17 @@ ___
 This module exports front_screenshot, which includes the methods detailed below, 
 plus bundled builds of [HTML2Canvas](https://html2canvas.hertzen.com/) and [Canvg](https://github.com/canvg/canvg)
 ___
+## html2canvas
+
+Wrapper around html2canvas to accept either a DOMNode or a jQuery selector
+
+**Parameters**
+
+-   `element` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [jQuery](https://api.jquery.com/jQuery/))** The element
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The options
+
+Returns **[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)** Canvas element
+___
 ## svgToImg
 
 Takes a jQuery container, finds its contained SVG, transforms it into an image
