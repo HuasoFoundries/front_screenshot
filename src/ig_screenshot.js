@@ -1,10 +1,26 @@
-import {
-	html2canvas
-} from './html2canvas/index.js';
-import {
-	canvg
+import h2c from './html2canvas.js';
+import canvg from './canvg.js';
+
+/**
+ * This module exports front_screenshot, which includes the methods detailed below, 
+ * plus bundled builds of {@link HTML2Canvas} and {@link Canvg}
+ * @module front_screenshot 
+ */
+
+/**
+ * Wrapper around html2canvas to accept either a DOMNode or a jQuery selector
+ *
+ * @param  {HTMLElement|jQuery}  element  The element
+ * @param  {Object}  options  The options
+ *
+ * @returns {HTMLCanvasElement}  Canvas element
+ */
+function html2canvas(element, options) {
+	if (!(element instanceof HTMLElement)) {
+		element = element[0];
+	}
+	return h2c(element, options);
 }
-from './canvg/canvg.js';
 
 /**
  * Takes a jQuery container, finds its contained SVG, transforms it into an image
@@ -165,7 +181,7 @@ function hiddenClone(jqContainer) {
  *
  * @param      {jQuery}  jqContainer  jQuery selector of the element to transform into canvas
  * @param      {Boolean} [clone] if true, then capture contents hidden due to overlay properties
- * @return     {HTMLCanvasElement}  a base64 encoded dataURL
+ * @return     {Promise<HTMLCanvasElement>}  a promise that unfolds to a {@link HTMLCanvasElement}
  */
 var infoScreenShot = function (jqContainer, clone) {
 
@@ -202,6 +218,7 @@ export {
 	svgToImg,
 	svgToCanvas
 };
+
 export default {
 	html2canvas: html2canvas,
 	infoScreenShot: infoScreenShot,

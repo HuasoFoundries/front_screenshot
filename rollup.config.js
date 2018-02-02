@@ -10,14 +10,15 @@ var input = "src/ig_screenshot.js",
 	plugins = [
 
 		replace({
+			'process.env.NODE_ENV': JSON.stringify('production'),
 			'__VERSION__': '1.0.0-beta.1',
 			'__DEV__': false,
 			'const': 'var',
 			'let': 'var'
 		}),
 		alias({
-			rgbcolor: "node_modules/canvg/rgbcolor.js",
-			stackblur: "node_modules/canvg/StackBlur.js"
+			rgbcolor: "./rgbcolor.js",
+			stackblur: "./StackBlur.js"
 		}),
 		commonjs({
 			namedExports: {
@@ -69,6 +70,12 @@ if (process.env.MINIFY) {
 	input = "node_modules/canvg/canvg.js";
 	output = [{
 		file: "src/canvg.js",
+		format: "es"
+	}];
+} else if (process.env.HTML2CANVAS) {
+	input = "node_modules/html2canvas/dist/npm/index.js";
+	output = [{
+		file: "src/html2canvas.js",
 		format: "es"
 	}];
 }

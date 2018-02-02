@@ -6,7 +6,20 @@ This library bundles [HTML2Canvas](https://html2canvas.hertzen.com/) and [Canvg]
 to transform SVG into images or Canvas elements, and take screenshots of your page or sections of it, even if
 they are hidden due to CSS properties such as overlay scroll, hidden or auto.
 
-**WIP** no documentation on the API yet, so if you use this package, you'll have to figure yourself how to use the exposed methods.
+## Example
+
+Clone this repo, run `make install`, then run `make run` from its root and navigate to `http://localhost:5000`.
+
+```sh
+git clone https://github.com/HuasoFoundries/front_screenshot.git
+cd front_screenshot
+make install
+make run
+```
+
+## API
+
+See [USAGE.md](USAGE.md);
 
 ## Install
 

@@ -2,23 +2,23 @@
 <html lang="es">
 
   <head>
-    <meta name="description" content="Providers">
-    <meta name="author" content="Felipe Figueroa - Jose Salazar">
+    <meta name="description" content="front_screenshot">
+    <meta name="author" content="Felipe Figueroa">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/test/css/bootstrap.min.css">
+    <style>
+      .transparent {
+        opacity: 0;
+      }
+    </style>
     <script src="test/vendor/bluebird.js"></script>
     <script src="test/vendor/jquery.js"></script>
-    <script src="/jspm_packages/system.js"></script>
+    <script src="dist/ig_screenshot.js"></script>
     <script>
-      window.define = System.amdDefine;
-      window.require = System.amdRequire;
       window.globalvars = {
-        timeStart: Date.now(),
-        transparent_background: true,
-        userData: {
-          Authorization: 'Em8Za6giglEaoEAFks5FTKEu2IhaKEPYWydlC7gkWgfoKD6bciS9YHFjRmHJJAFt'
-        }
+        timeStart: Date.now()
       };
       console.zdebug = console.info.bind(console, '%cDEBUG:', "color:#A39;font-weight:bold;");
       Object.defineProperty(console, "timerInfo", {
@@ -33,42 +33,35 @@
       });
 
     </script>
-    <script src="/jspm.config.js"></script>
     <script>
-      function igload() {
-        console.timerInfo();
-        System.import('dist/ig_screenshot.bundle.js')
-          .then(function (screenShooter) {
+      jQuery(document).ready(function () {
 
-            screenShooter.html2canvas(document.getElementById('text_container'), {
-              useCORS: true,
-              allowTaint: false,
-              logging: false
-            }).then(function (canvas) {
-              canvas.id = 'canvita';
-              document.getElementById('canvas_container1').appendChild(canvas);
-              console.log('ss.html2canvas', canvas.toDataURL("image/png", 0));
+        screenShooter.html2canvas(document.getElementById('text_container'), {
+          useCORS: true,
+          allowTaint: false,
+          logging: false
+        }).then(function (canvas) {
+          jQuery('#text_container').closest('tr').find('.transparent').removeClass('transparent');
+          canvas.id = 'canvita';
+          document.getElementById('canvas_container1').appendChild(canvas);
+          console.log('ss.html2canvas', canvas.toDataURL("image/png", 0));
 
-            });
+        });
 
-            screenShooter.svgToImg(jQuery('#svg_container1'), 0, function (the_img) {
-              jQuery('#svg_container1').find('svg').show();
-              console.log('ss.svgAImg', the_img.src);
-              document.getElementById('canvas_container2').appendChild(the_img);
-            });
+        screenShooter.svgToImg(jQuery('#svg_container1'), 0, function (the_img) {
+          jQuery('#svg_container1').closest('tr').find('.transparent').removeClass('transparent');
+          jQuery('#svg_container1').find('svg').show();
+          console.log('ss.svgAImg', the_img.src);
+          document.getElementById('canvas_container2').appendChild(the_img);
+        });
 
-            screenShooter.svgToCanvas(jQuery('#svg_container2'), function (the_canvas) {
-              jQuery('#svg_container2').find('svg').show();
-              document.getElementById('canvas_container3').appendChild(the_canvas);
-              console.log('ss.svgACanvas', the_canvas.toDataURL("image/png", 0));
-            });
-
-          });
-      }
-
-      window.setTimeout(function () {
-        igload();
-      }, 1500);
+        screenShooter.svgToCanvas(jQuery('#svg_container2'), function (the_canvas) {
+          jQuery('#svg_container2').closest('tr').find('.transparent').removeClass('transparent');
+          jQuery('#svg_container2').find('svg').show();
+          document.getElementById('canvas_container3').appendChild(the_canvas);
+          console.log('ss.svgACanvas', the_canvas.toDataURL("image/png", 0));
+        });
+      });
 
     </script>
   </head>
@@ -76,25 +69,57 @@
   <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <div id="text_container" style="width:10px;height:12px;color:blue;font-size:10px;">A</div>
-    <br>
-    <div id="svg_container1" style="width:10px;height:10px;">
-      <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <rect x="0" y="0" height="10" width="10" style="stroke:#ff0000; fill: #0000ff" />
-      </svg>
+    <div class="container">
+      <div class="row">
+        <h4>Examples of Front Screenshot</h4> Dealing with text and SVG elements
+      </div>
+      <table class="table table-striped">
+        <tr class="row">
+          <td class="">
+            A text character
+          </td>
+          <td class="">
+            <div id="text_container" style="width:10px;height:12px;color:blue;font-size:10px;">A</div>
+          </td>
+          <td class="transparent">Is converted to the canvas to the right</td>
+          <td>
+            <div id="canvas_container1" style="width:30px;height:30px;"></div>
+          </td>
+        </tr>
+        <tr class="row">
+          <td class="">
+            An SVG element
+          </td>
+          <td class="">
+            <div id="svg_container1" style="width:10px;height:10px;">
+              <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <rect x="0" y="0" height="10" width="10" style="stroke:#ff0000; fill: #0000ff" />
+              </svg>
+            </div>
+          </td>
+          <td class="transparent">Is converted to the image to the right</td>
+          <td>
+            <div id="canvas_container2" style="width:10px;height:10px;"></div>
+          </td>
+        </tr>
+        <tr class="row">
+          <td>
+            Another SVG element
+          </td>
+          <td>
+            <div id="svg_container2" style="width:10px;height:10px;">
+              <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <rect x="0" y="0" height="10" width="10" style="stroke:#ff0000; fill: #0000ff" />
+              </svg>
+            </div>
+          </td>
+          <td class="transparent">Is converted to the canvas to the right</td>
+          <td>
+            <div id="canvas_container3" style="width:10px;height:10px;"></div>
+          </td>
+        </tr>
+      </table>
     </div>
-    <br>
-    <div id="svg_container2" style="width:10px;height:10px;">
-      <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <rect x="0" y="0" height="10" width="10" style="stroke:#ff0000; fill: #0000ff" />
-      </svg>
-    </div>
-    <p>Canvas container 1</p>
-    <div id="canvas_container1" style="width:30px;height:30px;"></div>
-    <p>Canvas container 2</p>
-    <div id="canvas_container2" style="width:10px;height:10px;"></div>
-    <p>Canvas container 3</p>
-    <div id="canvas_container3" style="width:10px;height:10px;"></div>
   </body>
 
 </html>

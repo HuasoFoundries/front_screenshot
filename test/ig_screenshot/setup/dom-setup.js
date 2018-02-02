@@ -1,4 +1,4 @@
-$('body').append(
+jQuery('body').append(
 	'<div id="qunit"></div>' +
 	'<div id="qunit-fixture"></div>' +
 	'<div id="text_container" style="width:10px;height:12px;border:1px solid;color:blue;font-size:10px;font-family:sans-serif">A</div>' +

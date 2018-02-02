@@ -12,15 +12,14 @@ version:
 
 install: 
 	npm install
-	$$(npm bin)/jspm install --quick
-	rm jspm_packages/github/niklasvh/html2canvas@master/.babelrc
+	npm i -D canvg
 
 test:
 	$$(npm bin)/karma start
 	MINIFIED=true $$(npm bin)/karma start
 
 	
-build: clean babel rollup_canvg rollup rollup_min
+build: clean rollup_canvg rollup_html2canvas rollup rollup_min
 	
 
 
@@ -30,21 +29,21 @@ rollup:
 run:
 	$$(npm bin)/serve .
 
+docs:
+	node generate_docs.js	
+
 rollup_min:
 	MINIFY=true $$(npm bin)/rollup -c 
 
 rollup_canvg:
 	CANVG=true $$(npm bin)/rollup -c 
 
-babel:
-	$$(npm bin)/babel jspm_packages/github/niklasvh/html2canvas@master/src/ -d src/html2canvas
-	sed -i s/"__DEV__"/"false"/g src/html2canvas/index.js
-	sed -i s/"__VERSION__"/"'1.0.0-alpha.1'"/g src/html2canvas/index.js
-	sed -i s/"module.exports = html2canvas;"/"export {html2canvas};"/g src/html2canvas/index.js
-	
+rollup_html2canvas:
+	HTML2CANVAS=true $$(npm bin)/rollup -c 	
+
+
 clean:
-	@rm -f jspm_packages/github/niklasvh/html2canvas@master/.babelrc
-	@rm -rf src/html2canvas
+	@rm -rf src/html2canvas.js
 	@rm -rf src/canvg.js
 
 remove_tag:
@@ -66,7 +65,7 @@ ifeq (${VERSION},$(v))
 endif
 	@echo "Current version is " ${VERSION}
 	@echo "Next version is " $(v)
-	sed -i s/"$(VERSION)"/"$(v)"/g package.json
+	sed -i s/'"version": "$(VERSION)"'/'"version": "$(v)"'/g package.json
 
 tag_and_push:
 		git add --all
