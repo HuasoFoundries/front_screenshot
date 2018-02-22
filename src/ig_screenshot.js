@@ -34,7 +34,7 @@ function html2canvas(element, options) {
 function svgToImg(jqContainer, quality, fncallback) {
 
 	if (quality === undefined || quality === null) {
-		quality = 0.5;
+		quality = 0.8;
 	}
 
 	var the_svg = jqContainer.find('svg');
@@ -75,10 +75,9 @@ function svgToImg(jqContainer, quality, fncallback) {
 	the_svg.hide();
 
 	var canvas = document.createElement("canvas");
-	canvas.setAttribute('id', 'elcanvas');
 	jqContainer[0].appendChild(canvas);
 
-	canvg('elcanvas', svgData, {
+	canvg(canvas, svgData, {
 		ignoreMouse: true,
 		ignoreAnimation: true,
 		log: true
@@ -88,10 +87,15 @@ function svgToImg(jqContainer, quality, fncallback) {
 
 	var laimg = new Image();
 	laimg.className = 'laimg';
+
+	laimg.onload = function () {
+
+	};
 	jqContainer[0].appendChild(laimg);
 	laimg.src = canvas.toDataURL("image/png", quality);
 
-	jqContainer.find('#elcanvas').remove();
+	jqContainer[0].removeChild(canvas);
+
 	if (fncallback) {
 		fncallback(laimg);
 	}
@@ -131,19 +135,21 @@ function svgToCanvas(jqContainer, fncallback) {
 		.find('.tick line, path.domain')
 		.attr('stroke', 'black');
 
-	jqContainer.find('canvas').remove();
+	jqContainer.find('.temp_canvas').remove();
 
 	var tooltip = jqContainer.find('.c3-tooltip-container').detach();
 
 	var content = jqContainer.html().trim();
 
 	var canvas = document.createElement("canvas");
-	canvas.className = 'thecanvas';
+	canvas.className = '.temp_canvas';
 	jqContainer[0].appendChild(canvas);
 
 	the_svg.hide();
 	jqContainer.append(tooltip);
-	canvg(canvas, content);
+	canvg(canvas, content, {
+		log: true
+	});
 
 	if (fncallback) {
 		fncallback(canvas);

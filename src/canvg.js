@@ -1286,7 +1286,8 @@ var canvg = createCommonjsModule(function (module) {
 
 			// text extensions
 			// get the text baseline
-			var textBaselineMapping = {
+			var i,
+			    textBaselineMapping = {
 				'baseline': 'alphabetic',
 				'before-edge': 'top',
 				'text-before-edge': 'top',
@@ -1301,7 +1302,7 @@ var canvg = createCommonjsModule(function (module) {
 			};
 			svg.Property.prototype.toTextBaseline = function () {
 				if (!this.hasValue()) return null;
-				return textBaselineMapping[this.value];
+				return i, textBaselineMapping[this.value];
 			};
 
 			// fonts
@@ -1892,6 +1893,7 @@ var canvg = createCommonjsModule(function (module) {
 					if (this.style('stroke-linecap').hasValue()) ctx.lineCap = this.style('stroke-linecap').value;
 					if (this.style('stroke-linejoin').hasValue()) ctx.lineJoin = this.style('stroke-linejoin').value;
 					if (this.style('stroke-miterlimit').hasValue()) ctx.miterLimit = this.style('stroke-miterlimit').value;
+					if (this.style('paint-order').hasValue()) ctx.paintOrder = this.style('paint-order').value;
 					if (this.style('stroke-dasharray').hasValue() && this.style('stroke-dasharray').value != 'none') {
 						var gaps = svg.ToNumberArray(this.style('stroke-dasharray').value);
 						if (typeof ctx.setLineDash != 'undefined') {
@@ -3159,9 +3161,13 @@ var canvg = createCommonjsModule(function (module) {
 						}
 						return;
 					}
-
-					if (ctx.fillStyle != '') ctx.fillText(svg.compressSpaces(this.getText()), this.x, this.y);
-					if (ctx.strokeStyle != '') ctx.strokeText(svg.compressSpaces(this.getText()), this.x, this.y);
+					if (ctx.paintOrder == "stroke") {
+						if (ctx.strokeStyle != '') ctx.strokeText(svg.compressSpaces(this.getText()), this.x, this.y);
+						if (ctx.fillStyle != '') ctx.fillText(svg.compressSpaces(this.getText()), this.x, this.y);
+					} else {
+						if (ctx.fillStyle != '') ctx.fillText(svg.compressSpaces(this.getText()), this.x, this.y);
+						if (ctx.strokeStyle != '') ctx.strokeText(svg.compressSpaces(this.getText()), this.x, this.y);
+					}
 				};
 
 				this.getText = function () {

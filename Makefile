@@ -3,7 +3,7 @@ VERSION = $(shell cat package.json | sed -n 's/.*"version": "\([^"]*\)",/\1/p')
 SHELL = /usr/bin/env bash
 
 default: build
-.PHONY: test build rollup babel rollup_min clean 
+.PHONY: test build rollup rollup_min clean 
 
 
 

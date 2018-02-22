@@ -6,6 +6,9 @@ import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import alias from 'rollup-plugin-alias';
 
+var html2canvas_pkg = require('./node_modules/html2canvas/package.json');
+//console.log(html2canvas_pkg.version);
+
 var input = "src/ig_screenshot.js",
 	plugins = [
 
@@ -15,7 +18,9 @@ var input = "src/ig_screenshot.js",
 			'__DEV__': false,
 			'const': 'var',
 			'let': 'var',
-			'simple_colors': 'channels,simple_colors'
+			'simple_colors': 'channels,simple_colors',
+			'textBaselineMapping': 'i,textBaselineMapping',
+			'$npm_package_version': html2canvas_pkg.version
 		}),
 		alias({
 			rgbcolor: "./rgbcolor.js",

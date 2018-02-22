@@ -1,126 +1,3 @@
-var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-
-
-
-
-var asyncGenerator$1 = function () {
-  function AwaitValue(value) {
-    this.value = value;
-  }
-
-  function AsyncGenerator(gen) {
-    var front, back;
-
-    function send(key, arg) {
-      return new Promise(function (resolve, reject) {
-        var request = {
-          key: key,
-          arg: arg,
-          resolve: resolve,
-          reject: reject,
-          next: null
-        };
-
-        if (back) {
-          back = back.next = request;
-        } else {
-          front = back = request;
-          resume(key, arg);
-        }
-      });
-    }
-
-    function resume(key, arg) {
-      try {
-        var result = gen[key](arg);
-        var value = result.value;
-
-        if (value instanceof AwaitValue) {
-          Promise.resolve(value.value).then(function (arg) {
-            resume("next", arg);
-          }, function (arg) {
-            resume("throw", arg);
-          });
-        } else {
-          settle(result.done ? "return" : "normal", result.value);
-        }
-      } catch (err) {
-        settle("throw", err);
-      }
-    }
-
-    function settle(type, value) {
-      switch (type) {
-        case "return":
-          front.resolve({
-            value: value,
-            done: true
-          });
-          break;
-
-        case "throw":
-          front.reject(value);
-          break;
-
-        default:
-          front.resolve({
-            value: value,
-            done: false
-          });
-          break;
-      }
-
-      front = front.next;
-
-      if (front) {
-        resume(front.key, front.arg);
-      } else {
-        back = null;
-      }
-    }
-
-    this._invoke = send;
-
-    if (typeof gen.return !== "function") {
-      this.return = undefined;
-    }
-  }
-
-  if (typeof Symbol === "function" && Symbol.asyncIterator) {
-    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
-      return this;
-    };
-  }
-
-  AsyncGenerator.prototype.next = function (arg) {
-    return this._invoke("next", arg);
-  };
-
-  AsyncGenerator.prototype.throw = function (arg) {
-    return this._invoke("throw", arg);
-  };
-
-  AsyncGenerator.prototype.return = function (arg) {
-    return this._invoke("return", arg);
-  };
-
-  return {
-    wrap: function (fn) {
-      return function () {
-        return new AsyncGenerator(fn.apply(this, arguments));
-      };
-    },
-    await: function (value) {
-      return new AwaitValue(value);
-    }
-  };
-}();
-
 function unwrapExports(x) {
     return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
@@ -726,7 +603,7 @@ var CanvasRenderer_1 = createCommonjsModule(function (module, exports) {
                                     var _options$fontMetrics$ = _this4.options.fontMetrics.getMetrics(font),
                                         baseline = _options$fontMetrics$.baseline;
 
-                                    _this4.rectangle(text.bounds.left, Math.round(text.bounds.top + text.bounds.height - baseline), text.bounds.width, 1, textDecorationColor);
+                                    _this4.rectangle(text.bounds.left, Math.round(text.bounds.top + baseline), text.bounds.width, 1, textDecorationColor);
                                     break;
                                 case textDecoration.TEXT_DECORATION_LINE.OVERLINE:
                                     _this4.rectangle(text.bounds.left, Math.round(text.bounds.top), text.bounds.width, 1, textDecorationColor);
@@ -811,7 +688,7 @@ var Logger_1 = createCommonjsModule(function (module, exports) {
         function Logger(enabled, id, start) {
             _classCallCheck(this, Logger);
 
-            this.enabled = enabled;
+            this.enabled = typeof window !== 'undefined' && enabled;
             this.start = start ? start : Date.now();
             this.id = id;
         }
@@ -3158,7 +3035,7 @@ var Trie_1 = createCommonjsModule(function (module, exports) {
 
         _createClass(Trie, [{
             key: 'get',
-            value: function get$$1(codePoint) {
+            value: function get(codePoint) {
                 var ix = void 0;
                 if (codePoint >= 0) {
                     if (codePoint < 0x0d800 || codePoint > 0x0dbff && codePoint <= 0x0ffff) {
@@ -3874,20 +3751,20 @@ var dist = createCommonjsModule(function (module, exports) {
 
     Object.defineProperty(exports, 'toCodePoints', {
         enumerable: true,
-        get: function get$$1() {
+        get: function get() {
             return Util$2.toCodePoints;
         }
     });
     Object.defineProperty(exports, 'fromCodePoint', {
         enumerable: true,
-        get: function get$$1() {
+        get: function get() {
             return Util$2.fromCodePoint;
         }
     });
 
     Object.defineProperty(exports, 'LineBreaker', {
         enumerable: true,
-        get: function get$$1() {
+        get: function get() {
             return LineBreak.LineBreaker;
         }
     });
@@ -3905,13 +3782,13 @@ var Unicode = createCommonjsModule(function (module, exports) {
 
     Object.defineProperty(exports, 'toCodePoints', {
         enumerable: true,
-        get: function get$$1() {
+        get: function get() {
             return dist.toCodePoints;
         }
     });
     Object.defineProperty(exports, 'fromCodePoint', {
         enumerable: true,
-        get: function get$$1() {
+        get: function get() {
             return dist.fromCodePoint;
         }
     });
@@ -6146,7 +6023,7 @@ var ResourceLoader_1 = createCommonjsModule(function (module, exports) {
 
         _createClass(ResourceStore, [{
             key: 'get',
-            value: function get$$1(key) {
+            value: function get(key) {
                 var index = this._keys.indexOf(key);
                 return index === -1 ? null : this._resources[index];
             }
@@ -6797,9 +6674,11 @@ var Clone = createCommonjsModule(function (module, exports) {
                 var contentBefore = (0, PseudoNodeContent.resolvePseudoContent)(node, styleBefore, this.pseudoContentData);
 
                 for (var child = node.firstChild; child; child = child.nextSibling) {
-                    if (child.nodeType !== Node.ELEMENT_NODE ||
+                    if (child.nodeType !== Node.ELEMENT_NODE || child.nodeName !== 'SCRIPT' &&
                     // $FlowFixMe
-                    child.nodeName !== 'SCRIPT' && !child.hasAttribute(IGNORE_ATTRIBUTE)) {
+                    !child.hasAttribute(IGNORE_ATTRIBUTE) && (typeof this.options.ignoreElements !== 'function' ||
+                    // $FlowFixMe
+                    !this.options.ignoreElements(child))) {
                         if (!this.copyStyles || child.nodeName !== 'STYLE') {
                             clone.appendChild(this.cloneNode(child));
                         }
@@ -7077,7 +6956,16 @@ var Clone = createCommonjsModule(function (module, exports) {
                     documentClone.documentElement.style.left = -bounds.left + 'px';
                     documentClone.documentElement.style.position = 'absolute';
                 }
-                return cloner.clonedReferenceElement instanceof cloneWindow.HTMLElement || cloner.clonedReferenceElement instanceof ownerDocument.defaultView.HTMLElement || cloner.clonedReferenceElement instanceof HTMLElement ? Promise.resolve([cloneIframeContainer, cloner.clonedReferenceElement, cloner.resourceLoader]) : Promise.reject('');
+
+                var result = Promise.resolve([cloneIframeContainer, cloner.clonedReferenceElement, cloner.resourceLoader]);
+
+                var onclone = options.onclone;
+
+                return cloner.clonedReferenceElement instanceof cloneWindow.HTMLElement || cloner.clonedReferenceElement instanceof ownerDocument.defaultView.HTMLElement || cloner.clonedReferenceElement instanceof HTMLElement ? typeof onclone === 'function' ? Promise.resolve().then(function () {
+                    return onclone(documentClone);
+                }).then(function () {
+                    return result;
+                }) : result : Promise.reject('');
             });
 
             documentClone.open();
@@ -7251,129 +7139,10 @@ var Window = createCommonjsModule(function (module, exports) {
 
 unwrapExports(Window);
 
-var _typeof = typeof Symbol === "function" && _typeof$1(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === 'undefined' ? 'undefined' : _typeof$1(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === 'undefined' ? 'undefined' : _typeof$1(obj);
-};
-
-var asyncGenerator = function () {
-    function AwaitValue(value) {
-        this.value = value;
-    }
-
-    function AsyncGenerator(gen) {
-        var front, back;
-
-        function send(key, arg) {
-            return new Promise(function (resolve, reject) {
-                var request = {
-                    key: key,
-                    arg: arg,
-                    resolve: resolve,
-                    reject: reject,
-                    next: null
-                };
-
-                if (back) {
-                    back = back.next = request;
-                } else {
-                    front = back = request;
-                    resume(key, arg);
-                }
-            });
-        }
-
-        function resume(key, arg) {
-            try {
-                var result = gen[key](arg);
-                var value = result.value;
-
-                if (value instanceof AwaitValue) {
-                    Promise.resolve(value.value).then(function (arg) {
-                        resume("next", arg);
-                    }, function (arg) {
-                        resume("throw", arg);
-                    });
-                } else {
-                    settle(result.done ? "return" : "normal", result.value);
-                }
-            } catch (err) {
-                settle("throw", err);
-            }
-        }
-
-        function settle(type, value) {
-            switch (type) {
-                case "return":
-                    front.resolve({
-                        value: value,
-                        done: true
-                    });
-                    break;
-
-                case "throw":
-                    front.reject(value);
-                    break;
-
-                default:
-                    front.resolve({
-                        value: value,
-                        done: false
-                    });
-                    break;
-            }
-
-            front = front.next;
-
-            if (front) {
-                resume(front.key, front.arg);
-            } else {
-                back = null;
-            }
-        }
-
-        this._invoke = send;
-
-        if (typeof gen.return !== "function") {
-            this.return = undefined;
-        }
-    }
-
-    if (typeof Symbol === "function" && Symbol.asyncIterator) {
-        AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
-            return this;
-        };
-    }
-
-    AsyncGenerator.prototype.next = function (arg) {
-        return this._invoke("next", arg);
-    };
-
-    AsyncGenerator.prototype.throw = function (arg) {
-        return this._invoke("throw", arg);
-    };
-
-    AsyncGenerator.prototype.return = function (arg) {
-        return this._invoke("return", arg);
-    };
-
-    return {
-        wrap: function wrap(fn) {
-            return function () {
-                return new AsyncGenerator(fn.apply(this, arguments));
-            };
-        },
-        await: function _await(value) {
-            return new AwaitValue(value);
-        }
-    };
-}();
-
 var npm = createCommonjsModule(function (module) {
     'use strict';
 
-    var _extends$$1 = Object.assign || function (target) {
+    var _extends = Object.assign || function (target) {
         for (var i = 1; i < arguments.length; i++) {
             var source = arguments[i];for (var key in source) {
                 if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -7381,12 +7150,6 @@ var npm = createCommonjsModule(function (module) {
                 }
             }
         }return target;
-    };
-
-    var _typeof$$1 = typeof Symbol === "function" && _typeof(Symbol.iterator) === "symbol" ? function (obj) {
-        return typeof obj === 'undefined' ? 'undefined' : _typeof(obj);
-    } : function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === 'undefined' ? 'undefined' : _typeof(obj);
     };
 
     var _CanvasRenderer2 = _interopRequireDefault(CanvasRenderer_1);
@@ -7398,14 +7161,9 @@ var npm = createCommonjsModule(function (module) {
     }
 
     var html2canvas = function html2canvas(element, conf) {
-        // eslint-disable-next-line no-console
-        if ((typeof console === 'undefined' ? 'undefined' : _typeof$$1(console)) === 'object' && typeof console.log === 'function') {
-            // eslint-disable-next-line no-console
-            console.log('html2canvas ' + "$npm_package_version");
-        }
-
         var config = conf || {};
         var logger = new _Logger2.default(typeof config.logging === 'boolean' ? config.logging : true);
+        logger.log('html2canvas ' + "$npm_package_version");
 
         if ("production" !== 'production' && typeof config.onrendered === 'function') {
             logger.error('onrendered option is deprecated, html2canvas returns a Promise with the canvas as the value');
@@ -7450,7 +7208,7 @@ var npm = createCommonjsModule(function (module) {
             scrollY: defaultView.pageYOffset
         };
 
-        var result = (0, Window.renderElement)(element, _extends$$1({}, defaultOptions, config), logger);
+        var result = (0, Window.renderElement)(element, _extends({}, defaultOptions, config), logger);
 
         return result;
     };
@@ -8747,7 +8505,9 @@ var canvg = createCommonjsModule$1(function (module) {
 
 			// text extensions
 			// get the text baseline
-			var textBaselineMapping = {
+			var i,
+			    i,
+			    textBaselineMapping = {
 				'baseline': 'alphabetic',
 				'before-edge': 'top',
 				'text-before-edge': 'top',
@@ -8762,7 +8522,7 @@ var canvg = createCommonjsModule$1(function (module) {
 			};
 			svg.Property.prototype.toTextBaseline = function () {
 				if (!this.hasValue()) return null;
-				return textBaselineMapping[this.value];
+				return i, i, textBaselineMapping[this.value];
 			};
 
 			// fonts
@@ -9353,6 +9113,7 @@ var canvg = createCommonjsModule$1(function (module) {
 					if (this.style('stroke-linecap').hasValue()) ctx.lineCap = this.style('stroke-linecap').value;
 					if (this.style('stroke-linejoin').hasValue()) ctx.lineJoin = this.style('stroke-linejoin').value;
 					if (this.style('stroke-miterlimit').hasValue()) ctx.miterLimit = this.style('stroke-miterlimit').value;
+					if (this.style('paint-order').hasValue()) ctx.paintOrder = this.style('paint-order').value;
 					if (this.style('stroke-dasharray').hasValue() && this.style('stroke-dasharray').value != 'none') {
 						var gaps = svg.ToNumberArray(this.style('stroke-dasharray').value);
 						if (typeof ctx.setLineDash != 'undefined') {
@@ -10620,9 +10381,13 @@ var canvg = createCommonjsModule$1(function (module) {
 						}
 						return;
 					}
-
-					if (ctx.fillStyle != '') ctx.fillText(svg.compressSpaces(this.getText()), this.x, this.y);
-					if (ctx.strokeStyle != '') ctx.strokeText(svg.compressSpaces(this.getText()), this.x, this.y);
+					if (ctx.paintOrder == "stroke") {
+						if (ctx.strokeStyle != '') ctx.strokeText(svg.compressSpaces(this.getText()), this.x, this.y);
+						if (ctx.fillStyle != '') ctx.fillText(svg.compressSpaces(this.getText()), this.x, this.y);
+					} else {
+						if (ctx.fillStyle != '') ctx.fillText(svg.compressSpaces(this.getText()), this.x, this.y);
+						if (ctx.strokeStyle != '') ctx.strokeText(svg.compressSpaces(this.getText()), this.x, this.y);
+					}
 				};
 
 				this.getText = function () {
@@ -11469,7 +11234,7 @@ function html2canvas(element, options) {
 function svgToImg(jqContainer, quality, fncallback) {
 
 	if (quality === undefined || quality === null) {
-		quality = 0.5;
+		quality = 0.8;
 	}
 
 	var the_svg = jqContainer.find('svg');
@@ -11503,10 +11268,9 @@ function svgToImg(jqContainer, quality, fncallback) {
 	the_svg.hide();
 
 	var canvas = document.createElement("canvas");
-	canvas.setAttribute('id', 'elcanvas');
 	jqContainer[0].appendChild(canvas);
 
-	canvg('elcanvas', svgData, {
+	canvg(canvas, svgData, {
 		ignoreMouse: true,
 		ignoreAnimation: true,
 		log: true
@@ -11516,10 +11280,13 @@ function svgToImg(jqContainer, quality, fncallback) {
 
 	var laimg = new Image();
 	laimg.className = 'laimg';
+
+	laimg.onload = function () {};
 	jqContainer[0].appendChild(laimg);
 	laimg.src = canvas.toDataURL("image/png", quality);
 
-	jqContainer.find('#elcanvas').remove();
+	jqContainer[0].removeChild(canvas);
+
 	if (fncallback) {
 		fncallback(laimg);
 	}
@@ -11552,19 +11319,21 @@ function svgToCanvas(jqContainer, fncallback) {
 	// this applies to C3.js grapjs
 	jqContainer.find('.tick line, path.domain').attr('stroke', 'black');
 
-	jqContainer.find('canvas').remove();
+	jqContainer.find('.temp_canvas').remove();
 
 	var tooltip = jqContainer.find('.c3-tooltip-container').detach();
 
 	var content = jqContainer.html().trim();
 
 	var canvas = document.createElement("canvas");
-	canvas.className = 'thecanvas';
+	canvas.className = '.temp_canvas';
 	jqContainer[0].appendChild(canvas);
 
 	the_svg.hide();
 	jqContainer.append(tooltip);
-	canvg(canvas, content);
+	canvg(canvas, content, {
+		log: true
+	});
 
 	if (fncallback) {
 		fncallback(canvas);

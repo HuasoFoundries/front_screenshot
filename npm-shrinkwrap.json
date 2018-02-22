@@ -1,6 +1,6 @@
 {
   "name": "front_screenshot",
-  "version": "1.0.10",
+  "version": "1.0.14",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -1869,7 +1869,7 @@
       "dev": true
     },
     "canvg": {
-      "version": "git+https://git@github.com/canvg/canvg.git#00855ed8d399a2376958070607fa76e9cea51170",
+      "version": "git+https://git@github.com/canvg/canvg.git#ca6fce35082202c6332ca7ec0a5fcd92d77dfe55",
       "dev": true,
       "requires": {
         "rgbcolor": "0.0.4",
@@ -5303,9 +5303,9 @@
       "dev": true
     },
     "html2canvas": {
-      "version": "1.0.0-alpha.9",
-      "resolved": "https://registry.npmjs.org/html2canvas/-/html2canvas-1.0.0-alpha.9.tgz",
-      "integrity": "sha1-/2A9gINa/rbCdm6GEEdooc7xyAE=",
+      "version": "1.0.0-alpha.10",
+      "resolved": "https://registry.npmjs.org/html2canvas/-/html2canvas-1.0.0-alpha.10.tgz",
+      "integrity": "sha1-CLPQv59pDl4A5srDxf6wg6apSIw=",
       "dev": true,
       "requires": {
         "css-line-break": "1.0.1"
