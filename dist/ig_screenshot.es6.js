@@ -7492,7 +7492,9 @@ var rgbcolor = createCommonjsModule$1(function (module) {
 
 			// before getting into regexps, try simple matches
 			// and overwrite the input
-			var simple_colors = {
+			var channels,
+			    channels,
+			    simple_colors = {
 				aliceblue: 'f0f8ff',
 				antiquewhite: 'faebd7',
 				aqua: '00ffff',
@@ -7637,9 +7639,9 @@ var rgbcolor = createCommonjsModule$1(function (module) {
 				yellow: 'ffff00',
 				yellowgreen: '9acd32'
 			};
-			for (var key in simple_colors) {
+			for (var key in channels, channels, simple_colors) {
 				if (color_string == key) {
-					color_string = simple_colors[key];
+					color_string = channels, channels, simple_colors[key];
 				}
 			}
 			// emd of simple type-in colors
@@ -7710,7 +7712,7 @@ var rgbcolor = createCommonjsModule$1(function (module) {
 					}
 				}
 				// add type-in colors
-				for (var sc in simple_colors) {
+				for (var sc in channels, channels, simple_colors) {
 					examples[examples.length] = sc;
 				}
 
@@ -11557,6 +11559,7 @@ function svgToCanvas(jqContainer, fncallback) {
 	var content = jqContainer.html().trim();
 
 	var canvas = document.createElement("canvas");
+	canvas.className = 'thecanvas';
 	jqContainer[0].appendChild(canvas);
 
 	the_svg.hide();

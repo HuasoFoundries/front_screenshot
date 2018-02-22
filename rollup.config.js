@@ -15,7 +15,7 @@ var input = "src/ig_screenshot.js",
 			'__DEV__': false,
 			'const': 'var',
 			'let': 'var',
-			'channels =': 'var channels ='
+			'simple_colors': 'channels,simple_colors'
 		}),
 		alias({
 			rgbcolor: "./rgbcolor.js",

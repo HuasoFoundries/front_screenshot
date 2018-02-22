@@ -138,6 +138,7 @@ function svgToCanvas(jqContainer, fncallback) {
 	var content = jqContainer.html().trim();
 
 	var canvas = document.createElement("canvas");
+	canvas.className = 'thecanvas';
 	jqContainer[0].appendChild(canvas);
 
 	the_svg.hide();
