@@ -194,7 +194,7 @@ var infoScreenShot = function (jqContainer, clone) {
 
 	var container;
 	jqContainer.find('.canvg').each(function () {
-		svgToCanvas(jQuery(this));
+		svgToImg(jQuery(this));
 	});
 
 	if (clone) {
