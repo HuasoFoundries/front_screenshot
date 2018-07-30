@@ -23,6 +23,88 @@ function html2canvas(element, options) {
 }
 
 /**
+ * Takes a jQuery container, finds its contained SVG, transforms it into a canvas
+ *
+ * @param      {jQuery}    jqContainer  container of an SVG element to transform into canvas
+ * @param      {Function}  [fncallback]    callback function invoked with the canvas element
+ *
+ * @returns {HTMLElement}  Canvas element
+ */
+function svgToCanvas(jqContainer, fncallback) {
+
+	jqContainer.find('.temp_canvas').remove();
+
+	var elsvg = jqContainer.find('svg');
+
+	var clone = elsvg.clone();
+
+	elsvg.hide();
+	elsvg.detach();
+
+	var tooltip = jqContainer.find('.c3-tooltip-container').detach();
+
+	clone.find('g').removeAttr('clip-path');
+	clone.find('g.c3-regions').remove();
+
+	clone
+		.find('path')
+		.not('.keepstyle')
+		.attr('fill', 'none');
+
+	clone
+		.find('.tick line, path.domain')
+		.not('.keepstyle')
+		.attr('stroke', 'black');
+
+	clone
+		.find('.c3-axis')
+		.not('.keepstyle')
+		.find('.tick')
+		.not('.keepstyle')
+		.find('text')
+		.css({
+			'font-size': '10px',
+			'font-weight': '400'
+		});
+
+	clone
+		.find('.c3-chart-arc')
+		.not('.keepstyle')
+		.find('text')
+		.css({
+			'font-size': '13px',
+			'font-weight': '400'
+		});
+
+	clone.find('.c3-legend-item')
+		.not('.keepstyle')
+		.find('text')
+		.css({
+			'font-size': '12px',
+			'font-weight': '400'
+		});
+
+	var content = new XMLSerializer().serializeToString(clone[0]);
+
+	var canvas = document.createElement("canvas");
+	canvas.className = 'temp_canvas';
+	jqContainer[0].appendChild(canvas);
+
+	jqContainer.append(tooltip);
+	jqContainer.append(elsvg);
+	canvg(canvas, content, {
+		ignoreMouse: true,
+		ignoreAnimation: true,
+		log: true
+	});
+
+	if (fncallback) {
+		fncallback(canvas);
+	}
+	return canvas;
+}
+
+/**
  * Takes a jQuery container, finds its contained SVG, transforms it into an image
  *
  * @param      {jQuery}    jqContainer  container of an SVG element to transform into image
@@ -37,124 +119,22 @@ function svgToImg(jqContainer, quality, fncallback) {
 		quality = 0.8;
 	}
 
-	var the_svg = jqContainer.find('svg');
-
-	/*
-	This should be done by yourself if you are converting a C3.js graph
-	jqContainer.find('g').removeAttr('clip-path');
-	jqContainer.find('g.c3-event-rects').remove();
-	jqContainer.find('g.c3-grid').remove();
-	jqContainer.find('g.c3-regions').remove();
-	jqContainer.find('g.c3-axis-y2').remove();
-	jqContainer.find('path.domain').attr('stroke-width', 0.5).css('stroke-width', '0.2px');
-	*/
-
-	if (the_svg.length === 0) {
-		if (fncallback) {
-			fncallback();
-		}
-		return;
-	}
-
-	jqContainer
-		.find('svg')
-		.find('text')
-		.css('font', '10px sans-serif');
-
-	jqContainer
-		.find('path')
-		.attr('fill', 'none');
-
-	// this applies to C3.js grapjs
-	jqContainer
-		.find('.tick line, path.domain')
-		.attr('stroke', 'black');
-
-	var svgData = new XMLSerializer().serializeToString(the_svg[0]);
-
-	the_svg.hide();
-
-	var canvas = document.createElement("canvas");
-	jqContainer[0].appendChild(canvas);
-
-	canvg(canvas, svgData, {
-		ignoreMouse: true,
-		ignoreAnimation: true,
-		log: true
-	});
-
 	jqContainer.find('.laimg').remove();
+
+	var canvas = svgToCanvas(jqContainer);
 
 	var laimg = new Image();
 	laimg.className = 'laimg';
-
-	laimg.onload = function () {
-
-	};
 	jqContainer[0].appendChild(laimg);
+
 	laimg.src = canvas.toDataURL("image/png", quality);
 
-	jqContainer[0].removeChild(canvas);
+	jqContainer.find('.temp_canvas').remove();
 
 	if (fncallback) {
 		fncallback(laimg);
 	}
 	return laimg;
-}
-
-/**
- * Takes a jQuery container, finds its contained SVG, transforms it into a canvas
- *
- * @param      {jQuery}    jqContainer  container of an SVG element to transform into canvas
- * @param      {Function}  [fncallback]    callback function invoked with the canvas element
- *
- * @returns {HTMLCanvasElement}  Canvas element
- */
-function svgToCanvas(jqContainer, fncallback) {
-
-	var the_svg = jqContainer.find('svg');
-
-	if (the_svg.length === 0) {
-		if (fncallback) {
-			fncallback();
-		}
-		return;
-	}
-
-	jqContainer
-		.find('svg')
-		.find('text')
-		.css('font', '10px sans-serif');
-
-	jqContainer
-		.find('path')
-		.attr('fill', 'none');
-
-	// this applies to C3.js grapjs
-	jqContainer
-		.find('.tick line, path.domain')
-		.attr('stroke', 'black');
-
-	jqContainer.find('.temp_canvas').remove();
-
-	var tooltip = jqContainer.find('.c3-tooltip-container').detach();
-
-	var content = jqContainer.html().trim();
-
-	var canvas = document.createElement("canvas");
-	canvas.className = '.temp_canvas';
-	jqContainer[0].appendChild(canvas);
-
-	the_svg.hide();
-	jqContainer.append(tooltip);
-	canvg(canvas, content, {
-		log: true
-	});
-
-	if (fncallback) {
-		fncallback(canvas);
-	}
-	return canvas;
 }
 
 /**

@@ -1335,15 +1335,15 @@ var background = createCommonjsModule(function (module, exports) {
     var calculateBackgroungPaintingArea = exports.calculateBackgroungPaintingArea = function calculateBackgroungPaintingArea(curves, clip) {
         switch (clip) {
             case BACKGROUND_CLIP.BORDER_BOX:
-                return (0, Bounds_1.calculateBorderBoxPath)(curves);
+                return (Bounds_1.calculateBorderBoxPath)(curves);
             case BACKGROUND_CLIP.PADDING_BOX:
             default:
-                return (0, Bounds_1.calculatePaddingBoxPath)(curves);
+                return (Bounds_1.calculatePaddingBoxPath)(curves);
         }
     };
 
     var calculateBackgroungPositioningArea = exports.calculateBackgroungPositioningArea = function calculateBackgroungPositioningArea(backgroundOrigin, bounds, padding$$1, border) {
-        var paddingBox = (0, Bounds_1.calculatePaddingBox)(bounds, border);
+        var paddingBox = (Bounds_1.calculatePaddingBox)(bounds, border);
 
         switch (backgroundOrigin) {
             case BACKGROUND_ORIGIN.BORDER_BOX:
@@ -2095,7 +2095,7 @@ var listStyle = createCommonjsModule(function (module, exports) {
     };
 
     var parseListStyle = exports.parseListStyle = function parseListStyle(style) {
-        var listStyleImage = (0, background.parseBackgroundImage)(style.getPropertyValue('list-style-image'));
+        var listStyleImage = (background.parseBackgroundImage)(style.getPropertyValue('list-style-image'));
         return {
             listStyleType: parseListStyleType(style.getPropertyValue('list-style-type')),
             listStyleImage: listStyleImage.length ? listStyleImage[0] : null,
@@ -2699,11 +2699,11 @@ var Feature = createCommonjsModule(function (module, exports) {
         var img = new Image();
         var greenImageSrc = canvas.toDataURL();
         img.src = greenImageSrc;
-        var svg = (0, ForeignObjectRenderer_1.createForeignObjectSVG)(size, size, 0, 0, img);
+        var svg = (ForeignObjectRenderer_1.createForeignObjectSVG)(size, size, 0, 0, img);
         ctx.fillStyle = 'red';
         ctx.fillRect(0, 0, size, size);
 
-        return (0, ForeignObjectRenderer_1.loadSerializedSVG)(svg).then(function (img) {
+        return (ForeignObjectRenderer_1.loadSerializedSVG)(svg).then(function (img) {
             ctx.drawImage(img, 0, 0);
             var data = ctx.getImageData(0, 0, size, size).data;
             ctx.fillStyle = 'red';
@@ -2713,7 +2713,7 @@ var Feature = createCommonjsModule(function (module, exports) {
             node.style.backgroundImage = 'url(' + greenImageSrc + ')';
             node.style.height = size + 'px';
             // Firefox 55 does not render inline <img /> tags
-            return isGreenPixel(data) ? (0, ForeignObjectRenderer_1.loadSerializedSVG)((0, ForeignObjectRenderer_1.createForeignObjectSVG)(size, size, 0, 0, node)) : Promise.reject(false);
+            return isGreenPixel(data) ? (ForeignObjectRenderer_1.loadSerializedSVG)((ForeignObjectRenderer_1.createForeignObjectSVG)(size, size, 0, 0, node)) : Promise.reject(false);
         }).then(function (img) {
             ctx.drawImage(img, 0, 0);
             // Edge does not render background-images
@@ -3003,9 +3003,9 @@ var Trie_1 = createCommonjsModule(function (module, exports) {
     var UTRIE2_INDEX_2_MASK = exports.UTRIE2_INDEX_2_MASK = UTRIE2_INDEX_2_BLOCK_LENGTH - 1;
 
     var createTrieFromBase64 = exports.createTrieFromBase64 = function createTrieFromBase64(base64) {
-        var buffer = (0, Util$2.decode)(base64);
-        var view32 = Array.isArray(buffer) ? (0, Util$2.polyUint32Array)(buffer) : new Uint32Array(buffer);
-        var view16 = Array.isArray(buffer) ? (0, Util$2.polyUint16Array)(buffer) : new Uint16Array(buffer);
+        var buffer = (Util$2.decode)(base64);
+        var view32 = Array.isArray(buffer) ? (Util$2.polyUint32Array)(buffer) : new Uint32Array(buffer);
+        var view16 = Array.isArray(buffer) ? (Util$2.polyUint16Array)(buffer) : new Uint16Array(buffer);
         var headerLength = 24;
 
         var index = view16.slice(headerLength / 2, view32[4] / 2);
@@ -3254,7 +3254,7 @@ var LineBreak = createCommonjsModule(function (module, exports) {
     var BREAK_MANDATORY = exports.BREAK_MANDATORY = '!';
     var BREAK_NOT_ALLOWED = exports.BREAK_NOT_ALLOWED = '\xD7';
     var BREAK_ALLOWED = exports.BREAK_ALLOWED = '\xF7';
-    var UnicodeTrie = exports.UnicodeTrie = (0, Trie_1.createTrieFromBase64)(_linebreakTrie2.default);
+    var UnicodeTrie = exports.UnicodeTrie = (Trie_1.createTrieFromBase64)(_linebreakTrie2.default);
 
     var ALPHABETICS = [AL, HL];
     var HARD_LINE_BREAKS = [BK, CR, LF, NL];
@@ -3671,7 +3671,7 @@ var LineBreak = createCommonjsModule(function (module, exports) {
     };
 
     var inlineBreakOpportunities = exports.inlineBreakOpportunities = function inlineBreakOpportunities(str, options) {
-        var codePoints = (0, Util$2.toCodePoints)(str);
+        var codePoints = (Util$2.toCodePoints)(str);
         var output = BREAK_NOT_ALLOWED;
 
         var _cssFormattedClasses = cssFormattedClasses(codePoints, options),
@@ -3681,7 +3681,7 @@ var LineBreak = createCommonjsModule(function (module, exports) {
             forbiddenBreakpoints = _cssFormattedClasses2[2];
 
         codePoints.forEach(function (codePoint, i) {
-            output += (0, Util$2.fromCodePoint)(codePoint) + (i >= codePoints.length - 1 ? BREAK_MANDATORY : _lineBreakAtIndex(codePoints, classTypes, indicies, i + 1, forbiddenBreakpoints));
+            output += (Util$2.fromCodePoint)(codePoint) + (i >= codePoints.length - 1 ? BREAK_MANDATORY : _lineBreakAtIndex(codePoints, classTypes, indicies, i + 1, forbiddenBreakpoints));
         });
 
         return output;
@@ -3708,7 +3708,7 @@ var LineBreak = createCommonjsModule(function (module, exports) {
     }();
 
     var LineBreaker = exports.LineBreaker = function LineBreaker(str, options) {
-        var codePoints = (0, Util$2.toCodePoints)(str);
+        var codePoints = (Util$2.toCodePoints)(str);
 
         var _cssFormattedClasses3 = cssFormattedClasses(codePoints, options),
             _cssFormattedClasses4 = _slicedToArray(_cssFormattedClasses3, 3),
@@ -3794,7 +3794,7 @@ var Unicode = createCommonjsModule(function (module, exports) {
     });
 
     var breakWords = exports.breakWords = function breakWords(str, parent) {
-        var breaker = (0, dist.LineBreaker)(str, {
+        var breaker = (dist.LineBreaker)(str, {
             lineBreak: parent.style.lineBreak,
             wordBreak: parent.style.overflowWrap === overflowWrap.OVERFLOW_WRAP.BREAK_WORD ? 'break-word' : parent.style.wordBreak
         });
@@ -3841,9 +3841,9 @@ var TextBounds_1 = createCommonjsModule(function (module, exports) {
 
     var parseTextBounds = exports.parseTextBounds = function parseTextBounds(value, parent, node) {
         var letterRendering = parent.style.letterSpacing !== 0;
-        var textList = letterRendering ? (0, Unicode.toCodePoints)(value).map(function (i) {
-            return (0, Unicode.fromCodePoint)(i);
-        }) : (0, Unicode.breakWords)(value, parent);
+        var textList = letterRendering ? (Unicode.toCodePoints)(value).map(function (i) {
+            return (Unicode.fromCodePoint)(i);
+        }) : (Unicode.breakWords)(value, parent);
         var length = textList.length;
         var defaultView = node.parentNode ? node.parentNode.ownerDocument.defaultView : null;
         var scrollX = defaultView ? defaultView.pageXOffset : 0;
@@ -3874,7 +3874,7 @@ var TextBounds_1 = createCommonjsModule(function (module, exports) {
         var parentNode = node.parentNode;
         if (parentNode) {
             parentNode.replaceChild(wrapper, node);
-            var bounds = (0, Bounds_1.parseBounds)(wrapper, scrollX, scrollY);
+            var bounds = (Bounds_1.parseBounds)(wrapper, scrollX, scrollY);
             if (wrapper.firstChild) {
                 parentNode.replaceChild(wrapper.firstChild, wrapper);
             }
@@ -3929,7 +3929,7 @@ var TextContainer_1 = createCommonjsModule(function (module, exports) {
             key: 'fromTextNode',
             value: function fromTextNode(node, parent) {
                 var text = transform(node.data, parent.style.textTransform);
-                return new TextContainer(text, parent, (0, TextBounds_1.parseTextBounds)(text, parent, node));
+                return new TextContainer(text, parent, (TextBounds_1.parseTextBounds)(text, parent, node));
             }
         }]);
 
@@ -4076,7 +4076,7 @@ var Input = createCommonjsModule(function (module, exports) {
         var body = node.ownerDocument.body;
         if (value.length > 0 && body) {
             var wrapper = node.ownerDocument.createElement('html2canvaswrapper');
-            (0, Util.copyCSSStyles)(node.ownerDocument.defaultView.getComputedStyle(node, null), wrapper);
+            (Util.copyCSSStyles)(node.ownerDocument.defaultView.getComputedStyle(node, null), wrapper);
             wrapper.style.position = 'absolute';
             wrapper.style.left = container.bounds.left + 'px';
             wrapper.style.top = container.bounds.top + 'px';
@@ -4147,7 +4147,7 @@ var ListItem = createCommonjsModule(function (module, exports) {
 
         var style = node.ownerDocument.defaultView.getComputedStyle(node, null);
         var wrapper = node.ownerDocument.createElement('html2canvaswrapper');
-        (0, Util.copyCSSStyles)(style, wrapper);
+        (Util.copyCSSStyles)(style, wrapper);
 
         wrapper.style.position = 'absolute';
         wrapper.style.bottom = 'auto';
@@ -4256,7 +4256,7 @@ var ListItem = createCommonjsModule(function (module, exports) {
         var codePointRangeLength = codePointRangeEnd - codePointRangeStart + 1;
 
         return (value < 0 ? '-' : '') + (createCounterStyleWithSymbolResolver(Math.abs(value), codePointRangeLength, isNumeric, function (codePoint) {
-            return (0, Unicode.fromCodePoint)(Math.floor(codePoint % codePointRangeLength) + codePointRangeStart);
+            return (Unicode.fromCodePoint)(Math.floor(codePoint % codePointRangeLength) + codePointRangeStart);
         }) + suffix);
     };
 
@@ -4288,9 +4288,9 @@ var ListItem = createCommonjsModule(function (module, exports) {
         for (var digit = 0; tmp > 0 && digit <= 4; digit++) {
             var coefficient = tmp % 10;
 
-            if (coefficient === 0 && (0, Util.contains)(flags, CJK_ZEROS) && string !== '') {
+            if (coefficient === 0 && (Util.contains)(flags, CJK_ZEROS) && string !== '') {
                 string = numbers[coefficient] + string;
-            } else if (coefficient > 1 || coefficient === 1 && digit === 0 || coefficient === 1 && digit === 1 && (0, Util.contains)(flags, CJK_TEN_COEFFICIENTS) || coefficient === 1 && digit === 1 && (0, Util.contains)(flags, CJK_TEN_HIGH_COEFFICIENTS) && value > 100 || coefficient === 1 && digit > 1 && (0, Util.contains)(flags, CJK_HUNDRED_COEFFICIENTS)) {
+            } else if (coefficient > 1 || coefficient === 1 && digit === 0 || coefficient === 1 && digit === 1 && (Util.contains)(flags, CJK_TEN_COEFFICIENTS) || coefficient === 1 && digit === 1 && (Util.contains)(flags, CJK_TEN_HIGH_COEFFICIENTS) && value > 100 || coefficient === 1 && digit > 1 && (Util.contains)(flags, CJK_HUNDRED_COEFFICIENTS)) {
                 string = numbers[coefficient] + (digit > 0 ? multipliers[digit - 1] : '') + string;
             } else if (coefficient === 1 && digit > 0) {
                 string = multipliers[digit - 1] + string;
@@ -4463,36 +4463,36 @@ var NodeContainer_1 = createCommonjsModule(function (module, exports) {
             var scrollX = defaultView.pageXOffset;
             var scrollY = defaultView.pageYOffset;
             var style = defaultView.getComputedStyle(node, null);
-            var display$$1 = (0, display.parseDisplay)(style.display);
+            var display$$1 = (display.parseDisplay)(style.display);
 
             var IS_INPUT = node.type === 'radio' || node.type === 'checkbox';
 
-            var position$$1 = (0, position.parsePosition)(style.position);
+            var position$$1 = (position.parsePosition)(style.position);
 
             this.style = {
-                background: IS_INPUT ? Input.INPUT_BACKGROUND : (0, background.parseBackground)(style, resourceLoader),
-                border: IS_INPUT ? Input.INPUT_BORDERS : (0, border.parseBorder)(style),
-                borderRadius: (node instanceof defaultView.HTMLInputElement || node instanceof HTMLInputElement) && IS_INPUT ? (0, Input.getInputBorderRadius)(node) : (0, borderRadius.parseBorderRadius)(style),
+                background: IS_INPUT ? Input.INPUT_BACKGROUND : (background.parseBackground)(style, resourceLoader),
+                border: IS_INPUT ? Input.INPUT_BORDERS : (border.parseBorder)(style),
+                borderRadius: (node instanceof defaultView.HTMLInputElement || node instanceof HTMLInputElement) && IS_INPUT ? (Input.getInputBorderRadius)(node) : (borderRadius.parseBorderRadius)(style),
                 color: IS_INPUT ? Input.INPUT_COLOR : new _Color2.default(style.color),
                 display: display$$1,
-                float: (0, float_1.parseCSSFloat)(style.float),
-                font: (0, font.parseFont)(style),
-                letterSpacing: (0, letterSpacing.parseLetterSpacing)(style.letterSpacing),
-                listStyle: display$$1 === display.DISPLAY.LIST_ITEM ? (0, listStyle.parseListStyle)(style) : null,
-                lineBreak: (0, lineBreak.parseLineBreak)(style.lineBreak),
-                margin: (0, margin.parseMargin)(style),
+                float: (float_1.parseCSSFloat)(style.float),
+                font: (font.parseFont)(style),
+                letterSpacing: (letterSpacing.parseLetterSpacing)(style.letterSpacing),
+                listStyle: display$$1 === display.DISPLAY.LIST_ITEM ? (listStyle.parseListStyle)(style) : null,
+                lineBreak: (lineBreak.parseLineBreak)(style.lineBreak),
+                margin: (margin.parseMargin)(style),
                 opacity: parseFloat(style.opacity),
-                overflow: INPUT_TAGS.indexOf(node.tagName) === -1 ? (0, overflow.parseOverflow)(style.overflow) : overflow.OVERFLOW.HIDDEN,
-                overflowWrap: (0, overflowWrap.parseOverflowWrap)(style.overflowWrap ? style.overflowWrap : style.wordWrap),
-                padding: (0, padding.parsePadding)(style),
+                overflow: INPUT_TAGS.indexOf(node.tagName) === -1 ? (overflow.parseOverflow)(style.overflow) : overflow.OVERFLOW.HIDDEN,
+                overflowWrap: (overflowWrap.parseOverflowWrap)(style.overflowWrap ? style.overflowWrap : style.wordWrap),
+                padding: (padding.parsePadding)(style),
                 position: position$$1,
-                textDecoration: (0, textDecoration.parseTextDecoration)(style),
-                textShadow: (0, textShadow.parseTextShadow)(style.textShadow),
-                textTransform: (0, textTransform.parseTextTransform)(style.textTransform),
-                transform: (0, transform.parseTransform)(style),
-                visibility: (0, visibility.parseVisibility)(style.visibility),
-                wordBreak: (0, wordBreak.parseWordBreak)(style.wordBreak),
-                zIndex: (0, zIndex.parseZIndex)(position$$1 !== position.POSITION.STATIC ? style.zIndex : 'auto')
+                textDecoration: (textDecoration.parseTextDecoration)(style),
+                textShadow: (textShadow.parseTextShadow)(style.textShadow),
+                textTransform: (textTransform.parseTextTransform)(style.textTransform),
+                transform: (transform.parseTransform)(style),
+                visibility: (visibility.parseVisibility)(style.visibility),
+                wordBreak: (wordBreak.parseWordBreak)(style.wordBreak),
+                zIndex: (zIndex.parseZIndex)(position$$1 !== position.POSITION.STATIC ? style.zIndex : 'auto')
             };
 
             if (this.isTransformed()) {
@@ -4501,7 +4501,7 @@ var NodeContainer_1 = createCommonjsModule(function (module, exports) {
             }
 
             if (display$$1 === display.DISPLAY.LIST_ITEM) {
-                var listOwner = (0, ListItem.getListOwner)(this);
+                var listOwner = (ListItem.getListOwner)(this);
                 if (listOwner) {
                     var listIndex = listOwner.listItems.length;
                     listOwner.listItems.push(this);
@@ -4512,13 +4512,13 @@ var NodeContainer_1 = createCommonjsModule(function (module, exports) {
             // TODO move bound retrieval for all nodes to a later stage?
             if (node.tagName === 'IMG') {
                 node.addEventListener('load', function () {
-                    _this.bounds = (0, Bounds_1.parseBounds)(node, scrollX, scrollY);
-                    _this.curvedBounds = (0, Bounds_1.parseBoundCurves)(_this.bounds, _this.style.border, _this.style.borderRadius);
+                    _this.bounds = (Bounds_1.parseBounds)(node, scrollX, scrollY);
+                    _this.curvedBounds = (Bounds_1.parseBoundCurves)(_this.bounds, _this.style.border, _this.style.borderRadius);
                 });
             }
             this.image = getImage(node, resourceLoader);
-            this.bounds = IS_INPUT ? (0, Input.reformatInputBounds)((0, Bounds_1.parseBounds)(node, scrollX, scrollY)) : (0, Bounds_1.parseBounds)(node, scrollX, scrollY);
-            this.curvedBounds = (0, Bounds_1.parseBoundCurves)(this.bounds, this.style.border, this.style.borderRadius);
+            this.bounds = IS_INPUT ? (Input.reformatInputBounds)((Bounds_1.parseBounds)(node, scrollX, scrollY)) : (Bounds_1.parseBounds)(node, scrollX, scrollY);
+            this.curvedBounds = (Bounds_1.parseBoundCurves)(this.bounds, this.style.border, this.style.borderRadius);
         }
 
         _createClass(NodeContainer, [{
@@ -4527,7 +4527,7 @@ var NodeContainer_1 = createCommonjsModule(function (module, exports) {
                 var parentClips = this.parent ? this.parent.getClipPaths() : [];
                 var isClipped = this.style.overflow !== overflow.OVERFLOW.VISIBLE;
 
-                return isClipped ? parentClips.concat([(0, Bounds_1.calculatePaddingBoxPath)(this.curvedBounds)]) : parentClips;
+                return isClipped ? parentClips.concat([(Bounds_1.calculatePaddingBoxPath)(this.curvedBounds)]) : parentClips;
             }
         }, {
             key: 'isInFlow',
@@ -4537,7 +4537,7 @@ var NodeContainer_1 = createCommonjsModule(function (module, exports) {
         }, {
             key: 'isVisible',
             value: function isVisible() {
-                return !(0, Util.contains)(this.style.display, display.DISPLAY.NONE) && this.style.opacity > 0 && this.style.visibility === visibility.VISIBILITY.VISIBLE;
+                return !(Util.contains)(this.style.display, display.DISPLAY.NONE) && this.style.opacity > 0 && this.style.visibility === visibility.VISIBILITY.VISIBLE;
             }
         }, {
             key: 'isAbsolutelyPositioned',
@@ -4572,12 +4572,12 @@ var NodeContainer_1 = createCommonjsModule(function (module, exports) {
         }, {
             key: 'isInlineLevel',
             value: function isInlineLevel() {
-                return (0, Util.contains)(this.style.display, display.DISPLAY.INLINE) || (0, Util.contains)(this.style.display, display.DISPLAY.INLINE_BLOCK) || (0, Util.contains)(this.style.display, display.DISPLAY.INLINE_FLEX) || (0, Util.contains)(this.style.display, display.DISPLAY.INLINE_GRID) || (0, Util.contains)(this.style.display, display.DISPLAY.INLINE_LIST_ITEM) || (0, Util.contains)(this.style.display, display.DISPLAY.INLINE_TABLE);
+                return (Util.contains)(this.style.display, display.DISPLAY.INLINE) || (Util.contains)(this.style.display, display.DISPLAY.INLINE_BLOCK) || (Util.contains)(this.style.display, display.DISPLAY.INLINE_FLEX) || (Util.contains)(this.style.display, display.DISPLAY.INLINE_GRID) || (Util.contains)(this.style.display, display.DISPLAY.INLINE_LIST_ITEM) || (Util.contains)(this.style.display, display.DISPLAY.INLINE_TABLE);
             }
         }, {
             key: 'isInlineBlockOrInlineTable',
             value: function isInlineBlockOrInlineTable() {
-                return (0, Util.contains)(this.style.display, display.DISPLAY.INLINE_BLOCK) || (0, Util.contains)(this.style.display, display.DISPLAY.INLINE_TABLE);
+                return (Util.contains)(this.style.display, display.DISPLAY.INLINE_BLOCK) || (Util.contains)(this.style.display, display.DISPLAY.INLINE_TABLE);
             }
         }]);
 
@@ -4717,15 +4717,15 @@ var NodeParser_1 = createCommonjsModule(function (module, exports) {
                     if (container.isVisible()) {
                         if (childNode.tagName === 'INPUT') {
                             // $FlowFixMe
-                            (0, Input.inlineInputElement)(childNode, container);
+                            (Input.inlineInputElement)(childNode, container);
                         } else if (childNode.tagName === 'TEXTAREA') {
                             // $FlowFixMe
-                            (0, Input.inlineTextAreaElement)(childNode, container);
+                            (Input.inlineTextAreaElement)(childNode, container);
                         } else if (childNode.tagName === 'SELECT') {
                             // $FlowFixMe
-                            (0, Input.inlineSelectElement)(childNode, container);
+                            (Input.inlineSelectElement)(childNode, container);
                         } else if (container.style.listStyle && container.style.listStyle.listStyleType !== listStyle.LIST_STYLE_TYPE.NONE) {
-                            (0, ListItem.inlineListItemElement)(childNode, container, resourceLoader);
+                            (ListItem.inlineListItemElement)(childNode, container, resourceLoader);
                         }
 
                         var SHOULD_TRAVERSE_CHILDREN = childNode.tagName !== 'TEXTAREA';
@@ -5070,7 +5070,7 @@ var Gradient = createCommonjsModule(function (module, exports) {
     };
 
     var parseLinearGradient = function parseLinearGradient(args, bounds, hasPrefix) {
-        var angle = (0, Angle.parseAngle)(args[0]);
+        var angle = (Angle.parseAngle)(args[0]);
         var HAS_SIDE_OR_CORNER = SIDE_OR_CORNER.test(args[0]);
         var HAS_DIRECTION = HAS_SIDE_OR_CORNER || angle !== null || PERCENTAGE_ANGLES.test(args[0]);
         var direction = HAS_DIRECTION ? angle !== null ? calculateGradientDirection(
@@ -5079,7 +5079,7 @@ var Gradient = createCommonjsModule(function (module, exports) {
         var firstColorStopIndex = HAS_DIRECTION ? 1 : 0;
 
         // TODO: Fix some inaccuracy with color stops with px values
-        var lineLength = Math.min((0, Util.distance)(Math.abs(direction.x0) + Math.abs(direction.x1), Math.abs(direction.y0) + Math.abs(direction.y1)), bounds.width * 2, bounds.height * 2);
+        var lineLength = Math.min((Util.distance)(Math.abs(direction.x0) + Math.abs(direction.x1), Math.abs(direction.y0) + Math.abs(direction.y1)), bounds.width * 2, bounds.height * 2);
 
         return new LinearGradient(parseColorStops(args, firstColorStopIndex, lineLength), direction);
     };
@@ -5095,24 +5095,24 @@ var Gradient = createCommonjsModule(function (module, exports) {
         if (m) {
             // Radius
             if (m[3] !== undefined) {
-                radius.x = (0, Length_1.calculateLengthFromValueWithUnit)(container, m[3], m[4]).getAbsoluteValue(bounds.width);
+                radius.x = (Length_1.calculateLengthFromValueWithUnit)(container, m[3], m[4]).getAbsoluteValue(bounds.width);
             }
 
             if (m[5] !== undefined) {
-                radius.y = (0, Length_1.calculateLengthFromValueWithUnit)(container, m[5], m[6]).getAbsoluteValue(bounds.height);
+                radius.y = (Length_1.calculateLengthFromValueWithUnit)(container, m[5], m[6]).getAbsoluteValue(bounds.height);
             }
 
             // Position
             if (m[7]) {
                 center.x = LENGTH_FOR_POSITION[m[7].toLowerCase()];
             } else if (m[8] !== undefined) {
-                center.x = (0, Length_1.calculateLengthFromValueWithUnit)(container, m[8], m[9]);
+                center.x = (Length_1.calculateLengthFromValueWithUnit)(container, m[8], m[9]);
             }
 
             if (m[10]) {
                 center.y = LENGTH_FOR_POSITION[m[10].toLowerCase()];
             } else if (m[11] !== undefined) {
-                center.y = (0, Length_1.calculateLengthFromValueWithUnit)(container, m[11], m[12]);
+                center.y = (Length_1.calculateLengthFromValueWithUnit)(container, m[11], m[12]);
             }
         }
 
@@ -5142,7 +5142,7 @@ var Gradient = createCommonjsModule(function (module, exports) {
     };
 
     var parseTopRight = function parseTopRight(bounds) {
-        return Math.acos(bounds.width / 2 / ((0, Util.distance)(bounds.width, bounds.height) / 2));
+        return Math.acos(bounds.width / 2 / ((Util.distance)(bounds.width, bounds.height) / 2));
     };
 
     var parseSideOrCorner = function parseSideOrCorner(side, bounds) {
@@ -5199,7 +5199,7 @@ var Gradient = createCommonjsModule(function (module, exports) {
 
         // $FlowFixMe
         return corners.reduce(function (stat, corner) {
-            var d = (0, Util.distance)(x - corner.x, y - corner.y);
+            var d = (Util.distance)(x - corner.x, y - corner.y);
             if (closest ? d < stat.optimumDistance : d > stat.optimumDistance) {
                 return {
                     optimumCorner: corner,
@@ -5236,12 +5236,12 @@ var Gradient = createCommonjsModule(function (module, exports) {
                 // The ending shape is sized so that that it passes through the corner of the gradient box closest to the gradient’s center.
                 // If the shape is an ellipse, the ending shape is given the same aspect-ratio it would have if closest-side were specified.
                 if (shape === RADIAL_GRADIENT_SHAPE.CIRCLE) {
-                    rx = ry = Math.min((0, Util.distance)(x, y), (0, Util.distance)(x, y - bounds.height), (0, Util.distance)(x - bounds.width, y), (0, Util.distance)(x - bounds.width, y - bounds.height));
+                    rx = ry = Math.min((Util.distance)(x, y), (Util.distance)(x, y - bounds.height), (Util.distance)(x - bounds.width, y), (Util.distance)(x - bounds.width, y - bounds.height));
                 } else if (shape === RADIAL_GRADIENT_SHAPE.ELLIPSE) {
                     // Compute the ratio ry/rx (which is to be the same as for "closest-side")
                     var c = Math.min(Math.abs(y), Math.abs(y - bounds.height)) / Math.min(Math.abs(x), Math.abs(x - bounds.width));
                     var corner = findCorner(bounds, x, y, true);
-                    rx = (0, Util.distance)(corner.x - x, (corner.y - y) / c);
+                    rx = (Util.distance)(corner.x - x, (corner.y - y) / c);
                     ry = c * rx;
                 }
                 break;
@@ -5260,12 +5260,12 @@ var Gradient = createCommonjsModule(function (module, exports) {
                 // Same as closest-corner, except the ending shape is sized based on the farthest corner.
                 // If the shape is an ellipse, the ending shape is given the same aspect ratio it would have if farthest-side were specified.
                 if (shape === RADIAL_GRADIENT_SHAPE.CIRCLE) {
-                    rx = ry = Math.max((0, Util.distance)(x, y), (0, Util.distance)(x, y - bounds.height), (0, Util.distance)(x - bounds.width, y), (0, Util.distance)(x - bounds.width, y - bounds.height));
+                    rx = ry = Math.max((Util.distance)(x, y), (Util.distance)(x, y - bounds.height), (Util.distance)(x - bounds.width, y), (Util.distance)(x - bounds.width, y - bounds.height));
                 } else if (shape === RADIAL_GRADIENT_SHAPE.ELLIPSE) {
                     // Compute the ratio ry/rx (which is to be the same as for "farthest-side")
                     var _c = Math.max(Math.abs(y), Math.abs(y - bounds.height)) / Math.max(Math.abs(x), Math.abs(x - bounds.width));
                     var _corner = findCorner(bounds, x, y, false);
-                    rx = (0, Util.distance)(_corner.x - x, (_corner.y - y) / _c);
+                    rx = (Util.distance)(_corner.x - x, (_corner.y - y) / _c);
                     ry = _c * rx;
                 }
                 break;
@@ -5475,11 +5475,11 @@ var Renderer_1 = createCommonjsModule(function (module, exports) {
                     if (container.image) {
                         var _image = _this.options.imageStore.get(container.image);
                         if (_image) {
-                            var contentBox = (0, Bounds_1.calculateContentBox)(container.bounds, container.style.padding, container.style.border);
+                            var contentBox = (Bounds_1.calculateContentBox)(container.bounds, container.style.padding, container.style.border);
                             var _width = typeof _image.width === 'number' && _image.width > 0 ? _image.width : contentBox.width;
                             var _height = typeof _image.height === 'number' && _image.height > 0 ? _image.height : contentBox.height;
                             if (_width > 0 && _height > 0) {
-                                _this.target.clip([(0, Bounds_1.calculatePaddingBoxPath)(container.curvedBounds)], function () {
+                                _this.target.clip([(Bounds_1.calculatePaddingBoxPath)(container.curvedBounds)], function () {
                                     _this.target.drawImage(_image, new Bounds_1.Bounds(0, 0, _width, _height), contentBox);
                                 });
                             }
@@ -5505,7 +5505,7 @@ var Renderer_1 = createCommonjsModule(function (module, exports) {
                 });
 
                 var callback = function callback() {
-                    var backgroundPaintingArea = (0, background.calculateBackgroungPaintingArea)(container.curvedBounds, container.style.background.backgroundClip);
+                    var backgroundPaintingArea = (background.calculateBackgroungPaintingArea)(container.curvedBounds, container.style.background.backgroundClip);
 
                     if (HAS_BACKGROUND) {
                         _this2.target.clip([backgroundPaintingArea], function () {
@@ -5551,10 +5551,10 @@ var Renderer_1 = createCommonjsModule(function (module, exports) {
             value: function renderBackgroundRepeat(container, background$$2) {
                 var image = this.options.imageStore.get(background$$2.source.args[0]);
                 if (image) {
-                    var backgroundPositioningArea = (0, background.calculateBackgroungPositioningArea)(container.style.background.backgroundOrigin, container.bounds, container.style.padding, container.style.border);
-                    var backgroundImageSize = (0, background.calculateBackgroundSize)(background$$2, image, backgroundPositioningArea);
-                    var position = (0, background.calculateBackgroundPosition)(background$$2.position, backgroundImageSize, backgroundPositioningArea);
-                    var _path = (0, background.calculateBackgroundRepeatPath)(background$$2, position, backgroundImageSize, backgroundPositioningArea, container.bounds);
+                    var backgroundPositioningArea = (background.calculateBackgroungPositioningArea)(container.style.background.backgroundOrigin, container.bounds, container.style.padding, container.style.border);
+                    var backgroundImageSize = (background.calculateBackgroundSize)(background$$2, image, backgroundPositioningArea);
+                    var position = (background.calculateBackgroundPosition)(background$$2.position, backgroundImageSize, backgroundPositioningArea);
+                    var _path = (background.calculateBackgroundRepeatPath)(background$$2, position, backgroundImageSize, backgroundPositioningArea, container.bounds);
 
                     var _offsetX = Math.round(backgroundPositioningArea.left + position.x);
                     var _offsetY = Math.round(backgroundPositioningArea.top + position.y);
@@ -5564,12 +5564,12 @@ var Renderer_1 = createCommonjsModule(function (module, exports) {
         }, {
             key: 'renderBackgroundGradient',
             value: function renderBackgroundGradient(container, background$$2) {
-                var backgroundPositioningArea = (0, background.calculateBackgroungPositioningArea)(container.style.background.backgroundOrigin, container.bounds, container.style.padding, container.style.border);
-                var backgroundImageSize = (0, background.calculateGradientBackgroundSize)(background$$2, backgroundPositioningArea);
-                var position = (0, background.calculateBackgroundPosition)(background$$2.position, backgroundImageSize, backgroundPositioningArea);
+                var backgroundPositioningArea = (background.calculateBackgroungPositioningArea)(container.style.background.backgroundOrigin, container.bounds, container.style.padding, container.style.border);
+                var backgroundImageSize = (background.calculateGradientBackgroundSize)(background$$2, backgroundPositioningArea);
+                var position = (background.calculateBackgroundPosition)(background$$2.position, backgroundImageSize, backgroundPositioningArea);
                 var gradientBounds = new Bounds_1.Bounds(Math.round(backgroundPositioningArea.left + position.x), Math.round(backgroundPositioningArea.top + position.y), backgroundImageSize.width, backgroundImageSize.height);
 
-                var gradient = (0, Gradient.parseGradient)(container, background$$2.source, gradientBounds);
+                var gradient = (Gradient.parseGradient)(container, background$$2.source, gradientBounds);
                 if (gradient) {
                     switch (gradient.type) {
                         case Gradient.GRADIENT_TYPE.LINEAR_GRADIENT:
@@ -5586,7 +5586,7 @@ var Renderer_1 = createCommonjsModule(function (module, exports) {
         }, {
             key: 'renderBorder',
             value: function renderBorder(border$$2, side, curvePoints) {
-                this.target.drawShape((0, Bounds_1.parsePathForBorder)(curvePoints, side), border$$2.borderColor);
+                this.target.drawShape((Bounds_1.parsePathForBorder)(curvePoints, side), border$$2.borderColor);
             }
         }, {
             key: 'renderStack',
@@ -5859,7 +5859,7 @@ var ResourceLoader_1 = createCommonjsModule(function (module, exports) {
                         return this.addImage(src, src, false);
                     } else if (!this.isSameOrigin(src)) {
                         if (typeof this.options.proxy === 'string') {
-                            this.cache[src] = (0, _Proxy.Proxy)(src, this.options).then(function (src) {
+                            this.cache[src] = (_Proxy.Proxy)(src, this.options).then(function (src) {
                                 return _loadImage(src, _this.options.imageTimeout || 0);
                             });
                             return src;
@@ -5881,7 +5881,7 @@ var ResourceLoader_1 = createCommonjsModule(function (module, exports) {
                     return this.cache[src];
                 }
                 if (!this.isSameOrigin(src) && typeof this.options.proxy === 'string') {
-                    return this.cache[src] = (0, _Proxy.Proxy)(src, this.options).then(function (src) {
+                    return this.cache[src] = (_Proxy.Proxy)(src, this.options).then(function (src) {
                         return _loadImage(src, _this2.options.imageTimeout || 0);
                     });
                 }
@@ -6412,7 +6412,7 @@ var PseudoNodeContent = createCommonjsModule(function (module, exports) {
             if (i > 0) {
                 result += glue || '';
             }
-            result += (0, ListItem.createCounterText)(counter[i], (0, listStyle.parseListStyleType)(format || 'decimal'), false);
+            result += (ListItem.createCounterText)(counter[i], (listStyle.parseListStyleType)(format || 'decimal'), false);
         }
 
         return result;
@@ -6508,7 +6508,7 @@ var Clone = createCommonjsModule(function (module, exports) {
 
                 if (this.inlineImages && node) {
                     var style = node.style;
-                    Promise.all((0, background.parseBackgroundImage)(style.backgroundImage).map(function (backgroundImage) {
+                    Promise.all((background.parseBackgroundImage)(style.backgroundImage).map(function (backgroundImage) {
                         if (backgroundImage.method === 'url') {
                             return _this.resourceLoader.inlineImage(backgroundImage.args[0]).then(function (img) {
                                 return img && typeof img.src === 'string' ? 'url("' + img.src + '")' : 'none';
@@ -6527,7 +6527,7 @@ var Clone = createCommonjsModule(function (module, exports) {
                         this.resourceLoader.inlineImage(node.src).then(function (img) {
                             if (img && node instanceof HTMLImageElement && node.parentNode) {
                                 var parentNode = node.parentNode;
-                                var clonedChild = (0, Util.copyCSSStyles)(node.style, img.cloneNode(false));
+                                var clonedChild = (Util.copyCSSStyles)(node.style, img.cloneNode(false));
                                 parentNode.replaceChild(clonedChild, node);
                             }
                         }).catch(function (e) {});
@@ -6598,7 +6598,7 @@ var Clone = createCommonjsModule(function (module, exports) {
                     var iframeKey = generateIframeKey();
                     tempIframe.setAttribute('data-html2canvas-internal-iframe-key', iframeKey);
 
-                    var _parseBounds = (0, Bounds_1.parseBounds)(node, 0, 0),
+                    var _parseBounds = (Bounds_1.parseBounds)(node, 0, 0),
                         width = _parseBounds.width,
                         height = _parseBounds.height;
 
@@ -6634,7 +6634,7 @@ var Clone = createCommonjsModule(function (module, exports) {
                             iframeCanvas.onerror = reject;
                             iframeCanvas.src = canvas.toDataURL();
                             if (tempIframe.parentNode) {
-                                tempIframe.parentNode.replaceChild((0, Util.copyCSSStyles)(node.ownerDocument.defaultView.getComputedStyle(node), iframeCanvas), tempIframe);
+                                tempIframe.parentNode.replaceChild((Util.copyCSSStyles)(node.ownerDocument.defaultView.getComputedStyle(node), iframeCanvas), tempIframe);
                             }
                         });
                     });
@@ -6670,8 +6670,8 @@ var Clone = createCommonjsModule(function (module, exports) {
                     createPseudoHideStyles(clone);
                 }
 
-                var counters = (0, PseudoNodeContent.parseCounterReset)(style, this.pseudoContentData);
-                var contentBefore = (0, PseudoNodeContent.resolvePseudoContent)(node, styleBefore, this.pseudoContentData);
+                var counters = (PseudoNodeContent.parseCounterReset)(style, this.pseudoContentData);
+                var contentBefore = (PseudoNodeContent.resolvePseudoContent)(node, styleBefore, this.pseudoContentData);
 
                 for (var child = node.firstChild; child; child = child.nextSibling) {
                     if (child.nodeType !== Node.ELEMENT_NODE || child.nodeName !== 'SCRIPT' &&
@@ -6685,8 +6685,8 @@ var Clone = createCommonjsModule(function (module, exports) {
                     }
                 }
 
-                var contentAfter = (0, PseudoNodeContent.resolvePseudoContent)(node, styleAfter, this.pseudoContentData);
-                (0, PseudoNodeContent.popCounters)(counters, this.pseudoContentData);
+                var contentAfter = (PseudoNodeContent.resolvePseudoContent)(node, styleAfter, this.pseudoContentData);
+                (PseudoNodeContent.popCounters)(counters, this.pseudoContentData);
 
                 if (node instanceof window.HTMLElement && clone instanceof window.HTMLElement) {
                     if (styleBefore) {
@@ -6696,7 +6696,7 @@ var Clone = createCommonjsModule(function (module, exports) {
                         this.inlineAllImages(inlinePseudoElement(node, clone, styleAfter, contentAfter, PSEUDO_AFTER));
                     }
                     if (style && this.copyStyles && !(node instanceof HTMLIFrameElement)) {
-                        (0, Util.copyCSSStyles)(style, clone);
+                        (Util.copyCSSStyles)(style, clone);
                     }
                     this.inlineAllImages(clone);
                     if (node.scrollTop !== 0 || node.scrollLeft !== 0) {
@@ -6726,7 +6726,7 @@ var Clone = createCommonjsModule(function (module, exports) {
         return (sheet.cssRules ? Array.from(sheet.cssRules) : []).filter(function (rule) {
             return rule.type === CSSRule.FONT_FACE_RULE;
         }).map(function (rule) {
-            var src = (0, background.parseBackgroundImage)(rule.style.getPropertyValue('src'));
+            var src = (background.parseBackgroundImage)(rule.style.getPropertyValue('src'));
             var formats = [];
             for (var i = 0; i < src.length; i++) {
                 if (src[i].method === 'url' && src[i + 1] && src[i + 1].method === 'format') {
@@ -6804,7 +6804,7 @@ var Clone = createCommonjsModule(function (module, exports) {
         }
 
         var anonymousReplacedElement = clone.ownerDocument.createElement('html2canvaspseudoelement');
-        (0, Util.copyCSSStyles)(style, anonymousReplacedElement);
+        (Util.copyCSSStyles)(style, anonymousReplacedElement);
 
         if (contentItems) {
             var len = contentItems.length;
@@ -6813,7 +6813,7 @@ var Clone = createCommonjsModule(function (module, exports) {
                 switch (item.type) {
                     case PseudoNodeContent.PSEUDO_CONTENT_ITEM_TYPE.IMAGE:
                         var img = clone.ownerDocument.createElement('img');
-                        img.src = (0, background.parseBackgroundImage)('url(' + item.value + ')')[0].args[0];
+                        img.src = (background.parseBackgroundImage)('url(' + item.value + ')')[0].args[0];
                         img.style.opacity = '1';
                         anonymousReplacedElement.appendChild(img);
                         break;
@@ -6872,7 +6872,7 @@ var Clone = createCommonjsModule(function (module, exports) {
         try {
             return Promise.resolve(node.contentWindow.document.documentElement);
         } catch (e) {
-            return options.proxy ? (0, _Proxy.Proxy)(node.src, options).then(function (html) {
+            return options.proxy ? (_Proxy.Proxy)(node.src, options).then(function (html) {
                 var match = html.match(DATA_URI_REGEXP);
                 if (!match) {
                     return Promise.reject();
@@ -6880,7 +6880,7 @@ var Clone = createCommonjsModule(function (module, exports) {
 
                 return match[2] === 'base64' ? window.atob(decodeURIComponent(match[3])) : decodeURIComponent(match[3]);
             }).then(function (html) {
-                return createIframeContainer(node.ownerDocument, (0, Bounds_1.parseBounds)(node, 0, 0)).then(function (cloneIframeContainer) {
+                return createIframeContainer(node.ownerDocument, (Bounds_1.parseBounds)(node, 0, 0)).then(function (cloneIframeContainer) {
                     var cloneWindow = cloneIframeContainer.contentWindow;
                     var documentClone = cloneWindow.document;
 
@@ -7088,13 +7088,13 @@ var Window = createCommonjsModule(function (module, exports) {
                         scrollY: options.scrollY
                     });
                 });
-            }(new Clone.DocumentCloner(element, options, logger, true, renderElement)) : (0, Clone.cloneWindow)(ownerDocument, windowBounds, element, options, logger, renderElement).then(function (_ref) {
+            }(new Clone.DocumentCloner(element, options, logger, true, renderElement)) : (Clone.cloneWindow)(ownerDocument, windowBounds, element, options, logger, renderElement).then(function (_ref) {
                 var _ref2 = _slicedToArray(_ref, 3),
                     container = _ref2[0],
                     clonedElement = _ref2[1],
                     resourceLoader = _ref2[2];
 
-                var stack = (0, NodeParser_1.NodeParser)(clonedElement, resourceLoader, logger);
+                var stack = (NodeParser_1.NodeParser)(clonedElement, resourceLoader, logger);
                 var clonedDocument = clonedElement.ownerDocument;
 
                 if (backgroundColor === stack.container.style.background.backgroundColor) {
@@ -7180,7 +7180,7 @@ var npm = createCommonjsModule(function (module) {
 
         var isDocument = element.tagName === 'HTML' || element.tagName === 'BODY';
 
-        var _ref = isDocument ? (0, Bounds_1.parseDocumentSize)(ownerDocument) : (0, Bounds_1.parseBounds)(element, scrollX, scrollY),
+        var _ref = isDocument ? (Bounds_1.parseDocumentSize)(ownerDocument) : (Bounds_1.parseBounds)(element, scrollX, scrollY),
             width = _ref.width,
             height = _ref.height,
             left = _ref.left,
@@ -7208,7 +7208,7 @@ var npm = createCommonjsModule(function (module) {
             scrollY: defaultView.pageYOffset
         };
 
-        var result = (0, Window.renderElement)(element, _extends({}, defaultOptions, config), logger);
+        var result = (Window.renderElement)(element, _extends({}, defaultOptions, config), logger);
 
         return result;
     };
@@ -7397,9 +7397,9 @@ var rgbcolor = createCommonjsModule$1(function (module) {
 				yellow: 'ffff00',
 				yellowgreen: '9acd32'
 			};
-			for (var key in channels, channels, simple_colors) {
+			for (var key in simple_colors) {
 				if (color_string == key) {
-					color_string = channels, channels, simple_colors[key];
+					color_string = channels, simple_colors[key];
 				}
 			}
 			// emd of simple type-in colors
@@ -7470,7 +7470,7 @@ var rgbcolor = createCommonjsModule$1(function (module) {
 					}
 				}
 				// add type-in colors
-				for (var sc in channels, channels, simple_colors) {
+				for (var sc in simple_colors) {
 					examples[examples.length] = sc;
 				}
 
@@ -8522,7 +8522,7 @@ var canvg = createCommonjsModule$1(function (module) {
 			};
 			svg.Property.prototype.toTextBaseline = function () {
 				if (!this.hasValue()) return null;
-				return i, i, textBaselineMapping[this.value];
+				return textBaselineMapping[this.value];
 			};
 
 			// fonts
@@ -11223,6 +11223,69 @@ function html2canvas(element, options) {
 }
 
 /**
+ * Takes a jQuery container, finds its contained SVG, transforms it into a canvas
+ *
+ * @param      {jQuery}    jqContainer  container of an SVG element to transform into canvas
+ * @param      {Function}  [fncallback]    callback function invoked with the canvas element
+ *
+ * @returns {HTMLElement}  Canvas element
+ */
+function svgToCanvas(jqContainer, fncallback) {
+
+	jqContainer.find('.temp_canvas').remove();
+
+	var elsvg = jqContainer.find('svg');
+
+	var clone = elsvg.clone();
+
+	elsvg.hide();
+	elsvg.detach();
+
+	var tooltip = jqContainer.find('.c3-tooltip-container').detach();
+
+	clone.find('g').removeAttr('clip-path');
+	clone.find('g.c3-regions').remove();
+
+	clone.find('path').not('.keepstyle').attr('fill', 'none');
+
+	clone.find('.tick line, path.domain').not('.keepstyle').attr('stroke', 'black');
+
+	clone.find('.c3-axis').not('.keepstyle').find('.tick').not('.keepstyle').find('text').css({
+		'font-size': '10px',
+		'font-weight': '400'
+	});
+
+	clone.find('.c3-chart-arc').not('.keepstyle').find('text').css({
+		'font-size': '13px',
+		'font-weight': '400'
+	});
+
+	clone.find('.c3-legend-item').not('.keepstyle').find('text').css({
+		'font-size': '12px',
+		'font-weight': '400'
+	});
+
+	var content = new XMLSerializer().serializeToString(clone[0]);
+
+	var canvas = document.createElement("canvas");
+	canvas.className = 'temp_canvas';
+	jqContainer[0].appendChild(canvas);
+
+	jqContainer.append(tooltip);
+	jqContainer.append(elsvg);
+	canvg(canvas, content, {
+		ignoreMouse: true,
+		ignoreAnimation: true,
+		log: true
+	});
+
+	if (fncallback) {
+		fncallback(canvas);
+	}
+	return canvas;
+}
+
+/**
  * Takes a jQuery container, finds its contained SVG, transforms it into an image
  *
  * @param      {jQuery}    jqContainer  container of an SVG element to transform into image
@@ -11237,108 +11300,22 @@ function svgToImg(jqContainer, quality, fncallback) {
 		quality = 0.8;
 	}
 
-	var the_svg = jqContainer.find('svg');
-
-	/*
- This should be done by yourself if you are converting a C3.js graph
- jqContainer.find('g').removeAttr('clip-path');
- jqContainer.find('g.c3-event-rects').remove();
- jqContainer.find('g.c3-grid').remove();
- jqContainer.find('g.c3-regions').remove();
- jqContainer.find('g.c3-axis-y2').remove();
- jqContainer.find('path.domain').attr('stroke-width', 0.5).css('stroke-width', '0.2px');
- */
-
-	if (the_svg.length === 0) {
-		if (fncallback) {
-			fncallback();
-		}
-		return;
-	}
-
-	jqContainer.find('svg').find('text').css('font', '10px sans-serif');
-
-	jqContainer.find('path').attr('fill', 'none');
-
-	// this applies to C3.js grapjs
-	jqContainer.find('.tick line, path.domain').attr('stroke', 'black');
-
-	var svgData = new XMLSerializer().serializeToString(the_svg[0]);
-
-	the_svg.hide();
-
-	var canvas = document.createElement("canvas");
-	jqContainer[0].appendChild(canvas);
-
-	canvg(canvas, svgData, {
-		ignoreMouse: true,
-		ignoreAnimation: true,
-		log: true
-	});
-
 	jqContainer.find('.laimg').remove();
+
+	var canvas = svgToCanvas(jqContainer);
 
 	var laimg = new Image();
 	laimg.className = 'laimg';
-
-	laimg.onload = function () {};
 	jqContainer[0].appendChild(laimg);
+
 	laimg.src = canvas.toDataURL("image/png", quality);
 
-	jqContainer[0].removeChild(canvas);
+	jqContainer.find('.temp_canvas').remove();
 
 	if (fncallback) {
 		fncallback(laimg);
 	}
 	return laimg;
-}
-
-/**
- * Takes a jQuery container, finds its contained SVG, transforms it into a canvas
- *
- * @param      {jQuery}    jqContainer  container of an SVG element to transform into canvas
- * @param      {Function}  [fncallback]    callback function invoked with the canvas element
- *
- * @returns {HTMLCanvasElement}  Canvas element
- */
-function svgToCanvas(jqContainer, fncallback) {
-
-	var the_svg = jqContainer.find('svg');
-
-	if (the_svg.length === 0) {
-		if (fncallback) {
-			fncallback();
-		}
-		return;
-	}
-
-	jqContainer.find('svg').find('text').css('font', '10px sans-serif');
-
-	jqContainer.find('path').attr('fill', 'none');
-
-	// this applies to C3.js grapjs
-	jqContainer.find('.tick line, path.domain').attr('stroke', 'black');
-
-	jqContainer.find('.temp_canvas').remove();
-
-	var tooltip = jqContainer.find('.c3-tooltip-container').detach();
-
-	var content = jqContainer.html().trim();
-
-	var canvas = document.createElement("canvas");
-	canvas.className = '.temp_canvas';
-	jqContainer[0].appendChild(canvas);
-
-	the_svg.hide();
-	jqContainer.append(tooltip);
-	canvg(canvas, content, {
-		log: true
-	});
-
-	if (fncallback) {
-		fncallback(canvas);
-	}
-	return canvas;
 }
 
 /**

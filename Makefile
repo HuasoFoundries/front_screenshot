@@ -3,7 +3,7 @@ VERSION = $(shell cat package.json | sed -n 's/.*"version": "\([^"]*\)",/\1/p')
 SHELL = /usr/bin/env bash
 
 default: build
-.PHONY: test build rollup rollup_min clean 
+.PHONY: test build rollup rollup_min clean build_full
 
 
 
@@ -18,8 +18,9 @@ test:
 	$$(npm bin)/karma start
 	MINIFIED=true $$(npm bin)/karma start
 
+build_full: clean rollup_canvg rollup_html2canvas build
 	
-build: clean rollup_canvg rollup_html2canvas rollup rollup_min
+build: rollup rollup_min
 	
 
 

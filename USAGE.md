@@ -16,6 +16,17 @@ Wrapper around html2canvas to accept either a DOMNode or a jQuery selector
 
 Returns **[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)** Canvas element
 ___
+## svgToCanvas
+
+Takes a jQuery container, finds its contained SVG, transforms it into a canvas
+
+**Parameters**
+
+-   `jqContainer` **[jQuery](https://api.jquery.com/jQuery/)** container of an SVG element to transform into canvas
+-   `fncallback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)?** callback function invoked with the canvas element
+
+Returns **[HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element)** Canvas element
+___
 ## svgToImg
 
 Takes a jQuery container, finds its contained SVG, transforms it into an image
@@ -27,17 +38,6 @@ Takes a jQuery container, finds its contained SVG, transforms it into an image
 -   `fncallback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)?** callback function invoked with the canvas element
 
 Returns **[HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element)** Image element
-___
-## svgToCanvas
-
-Takes a jQuery container, finds its contained SVG, transforms it into a canvas
-
-**Parameters**
-
--   `jqContainer` **[jQuery](https://api.jquery.com/jQuery/)** container of an SVG element to transform into canvas
--   `fncallback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)?** callback function invoked with the canvas element
-
-Returns **[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)** Canvas element
 ___
 ## hiddenClone
 
