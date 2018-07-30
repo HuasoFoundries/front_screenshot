@@ -7481,7 +7481,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 $__System.register('a', ['16', '29'], function (_export, _context) {
 	"use strict";
 
-	var html2canvas, canvg, infoScreenShot, ig_screenshot;
+	var html2canvas, canvg, infoScreenShot, selectorToImg, selectorToSVG, ig_screenshot;
 
 
 	/**
@@ -7631,13 +7631,29 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 				});
 			});
 
+			_export('selectorToImg', selectorToImg = function selectorToImg(jqContainer, selector) {
+				jqContainer.find(selector).each(function () {
+					svgToImg(jQuery(this));
+				});
+			});
+
+			_export('selectorToSVG', selectorToSVG = function selectorToSVG(jqContainer, selector) {
+				jqContainer.find(selector).each(function () {
+					$(this).find('.laimg').remove();
+					$(this).find('.temp_canvas').remove();
+					$(this).find('svg').show();
+				});
+			});
+
 			ig_screenshot = {
 				html2canvas: html2canvas,
 				infoScreenShot: infoScreenShot,
 				canvg: canvg,
 				hiddenClone: hiddenClone,
 				svgToImg: svgToImg,
-				svgToCanvas: svgToCanvas
+				svgToCanvas: svgToCanvas,
+				selectorToImg: selectorToImg,
+				selectorToSVG: selectorToSVG
 			};
 
 			_export('html2canvas', html2canvas);
@@ -7651,6 +7667,10 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 			_export('svgToImg', svgToImg);
 
 			_export('svgToCanvas', svgToCanvas);
+
+			_export('selectorToImg', selectorToImg);
+
+			_export('selectorToSVG', selectorToSVG);
 
 			_export('default', ig_screenshot);
 		}

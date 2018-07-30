@@ -149,19 +149,52 @@ var infoScreenShot = function (jqContainer) {
 
 };
 
+/**
+ * Transforms all contents of `selector` nodes found in `jqContainer`
+ * from SVG to images with classname `.laimg`. Original SVG element is hidden
+ *
+ * @param {string}  jqContainer  jQuery selector that contains N nodes with the specified selector
+ * @param {string}  selector a CSS selector like `.className` or `#id`
+ */
+var selectorToImg = function (jqContainer, selector) {
+	jqContainer.find(selector).each(function () {
+		svgToImg(jQuery(this));
+	});
+};
+
+/**
+ * Removes all childs from  `selector` nodes found in `jqContainer`
+ * removing elements with classnames `.laimg` or `.temp_canvas` and showing the original SVG
+ *
+ * @param {string}  jqContainer  jQuery selector that contains N nodes with the specified selector
+ * @param {string}  selector a CSS selector like `.className` or `#id`
+ */
+var selectorToSVG = function (jqContainer, selector) {
+	jqContainer.find(selector).each(function () {
+		$(this).find('.laimg').remove();
+		$(this).find('.temp_canvas').remove();
+		$(this).find('svg').show();
+	});
+};
+
 export {
 	html2canvas,
 	infoScreenShot,
 	canvg,
 	hiddenClone,
 	svgToImg,
-	svgToCanvas
+	svgToCanvas,
+	selectorToImg,
+	selectorToSVG
 };
+
 export default {
 	html2canvas: html2canvas,
 	infoScreenShot: infoScreenShot,
 	canvg: canvg,
 	hiddenClone: hiddenClone,
 	svgToImg: svgToImg,
-	svgToCanvas: svgToCanvas
+	svgToCanvas: svgToCanvas,
+	selectorToImg: selectorToImg,
+	selectorToSVG: selectorToSVG
 };
