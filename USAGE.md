@@ -5,14 +5,56 @@ ___
 This module exports front_screenshot, which includes the methods detailed below,
 plus bundled builds of [HTML2Canvas](https://html2canvas.hertzen.com/) and [Canvg](https://github.com/canvg/canvg)
 ___
+## setDefaultOptions
+
+Sets the default options.
+
+**Parameters**
+
+-   `options` **[FSOptions](#fsoptions)** The options
+
+Returns **[FSOptions](#fsoptions)** options with default properties set
+___
+## FSOptions
+
+The options that can be passed to every method. Not all of them are needed nor used on every function
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+**Properties**
+
+-   `quality` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?** level of quality (higher is better) of the image to generate
+-   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Cash/jQuery selector on which to operate e.g. 'svg', '.canvg'
+-   `adjust_styles` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** if true, sets the styles for typical c3 graphics
+-   `useCORS` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** tell html2canvas to try to use CORS on external URLs
+-   `allowTaint` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** either to allow or not tainted objects
+-   `logging` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** if true, log the results of html2canvas or canvg
+-   `clone` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** if true, clone the node either to adjust styles or to capture with html2canvas
+-   `ignoreMouse` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** if true, canvg will ignore mouse events
+-   `ignoreAnimation` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** if true, canvg will ignore svg animations
+-   `hideSVG` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** if true, hide the svg selector after canvg has converted it to image or canvas
+___
+## adjustStyles
+
+Adjust common C3 styles to avoid distorted images.
+This function won't modify elements with class `keepstyle` not its children
+
+**Parameters**
+
+-   `the_svg` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** The SVG element on which to apply the
+                                modifications
+-   `opts`  
+
+Returns **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** a clone of the original svg element with modified styles
+___
 ## html2canvas
 
-Wrapper around html2canvas to accept either a DOMNode or a jQuery selector
+Wrapper around html2canvas to accept either a DOMNode or a Cash/jQuery selector
 
 **Parameters**
 
 -   `element` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [jQuery](https://api.jquery.com/jQuery/))** The element
--   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The options
+-   `options` **[FSOptions](#fsoptions)** The options
 
 Returns **[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)** Canvas element
 ___
@@ -22,10 +64,10 @@ Takes a jQuery container, finds its contained SVG, transforms it into a canvas
 
 **Parameters**
 
--   `jqContainer` **[jQuery](https://api.jquery.com/jQuery/)** container of an SVG element to transform into canvas
--   `fncallback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)?** callback function invoked with the canvas element
+-   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** container of an SVG element to transform into canvas
+-   `options` **[FSOptions](#fsoptions)** options to pass to canvg
 
-Returns **[HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element)** Canvas element
+Returns **[Promise](http://bluebirdjs.com/docs/api-reference.html)&lt;[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)>** a promise that unfolds to a Canvas element
 ___
 ## svgToImg
 
@@ -33,42 +75,21 @@ Takes a jQuery container, finds its contained SVG, transforms it into an image
 
 **Parameters**
 
--   `jqContainer` **[jQuery](https://api.jquery.com/jQuery/)** container of an SVG element to transform into image
--   `quality` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?** compression level of the image. By default 0.5
--   `fncallback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)?** callback function invoked with the canvas element
+-   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** container of an SVG element to transform into image
+-   `options` **[FSOptions](#fsoptions)?** options
 
-Returns **[HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element)** Image element
+Returns **[Promise](http://bluebirdjs.com/docs/api-reference.html)&lt;[HTMLImageElement](https://developer.mozilla.org/docs/Web/API/HTMLImageElement)>** a promise than resolves to an Image element
 ___
 ## hiddenClone
 
-Creates a hidden clone of a jQuery Selector and appends it to the screen
+Creates a hidden clone of a Cash/jQuery selector and appends it to the screen
 (allows to capture sections that are hidden due to scrolling behavior)
 
 **Parameters**
 
--   `jqContainer` **[jQuery](https://api.jquery.com/jQuery/)** The jQuery selector of the original container
+-   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** The Cash/jQuery selector of the original container
 
 Returns **HTMLElemnt** the DOM node of the clone
-___
-## selectorToImg
-
-Transforms all contents of `selector` nodes found in `jqContainer`
-from SVG to images with classname `.laimg`. Original SVG element is hidden
-
-**Parameters**
-
--   `jqContainer` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** jQuery selector that contains N nodes with the specified selector
--   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`
-___
-## selectorToSVG
-
-Removes all childs from  `selector` nodes found in `jqContainer`
-removing elements with classnames `.laimg` or `.temp_canvas` and showing the original SVG
-
-**Parameters**
-
--   `jqContainer` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** jQuery selector that contains N nodes with the specified selector
--   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`
 ___
 ## infoScreenShot
 
@@ -77,7 +98,37 @@ Given a jQuery container, takes a screenshot of it and returns it as an HTMLCanv
 
 **Parameters**
 
--   `jqContainer` **[jQuery](https://api.jquery.com/jQuery/)** jQuery selector of the element to transform into canvas
--   `clone` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** if true, then capture contents hidden due to overlay properties
+-   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector of the element to transform into canvas
+-   `options` **FNOptions?** options to pass to canvg and html2canvas
 
 Returns **[Promise](http://bluebirdjs.com/docs/api-reference.html)&lt;[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)>** a promise that unfolds to a [HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)
+___
+## selectorToImg
+
+Transforms all contents of `selector` nodes found in `jqContainer`
+from SVG to images with classname `.temporary_element`. Original SVG element is hidden
+
+**Parameters**
+
+-   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector that contains N nodes with the specified selector
+-   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`
+___
+## selectorToCanvas
+
+Transforms all contents of `selector` nodes found in `jqContainer`
+from SVG to canvases with classname `.temporary_element`. Original SVG element is hidden
+
+**Parameters**
+
+-   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector that contains N nodes with the specified selector
+-   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`
+___
+## selectorToSVG
+
+Removes all childs from  `selector` nodes found in `jqContainer`
+removing elements with classname `.temporary_element` and showing the original SVG
+
+**Parameters**
+
+-   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector that contains N nodes with the specified selector
+-   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`

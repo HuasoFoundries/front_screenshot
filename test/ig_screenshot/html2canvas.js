@@ -18,7 +18,7 @@
 
 			var dataurl = canvas.toDataURL("image/png", 0);
 			var expected =
-				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAOCAYAAAAbvf3sAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAk0lEQVQoz6XRMQrCUAzG8V/Vyc0DuDm6uzvrAbp6L/cu4gUUWvAYXevkGYyDb3rwaMVASAh8+f4hiJaIidn6NlMjYpYNDmnTtiTJBGo8Ui3bpLokBmJD9FOQjrhR9XgSuzGkGk3qmxJWlZBWGPBCYJ6WraneGX4EcSLOGe+d2JduqHHN3C8FrL8eNx4/CxbofsDqPgU+TM3EcgqEAAAAAElFTkSuQmCC';
+				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAOCAYAAAAbvf3sAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAk0lEQVQoz6XRMQrCUAzG8V/Vyc0DuDm6uzvrAbp6L/cu4gUUWvAYXevkGYyDb3rwaMVASAh8+f4hiJaIidn6NlMjYpYNDmnTtiTJBGo8Ui3bpLokBmJD9FOQjrhR9XgSuzGkGk3qmxJWlZBWGPBCYJ6WraneGX4EcSLOGe+d2JduqHHN3C8FrL8eNx4/CxbofsDqPgU+TM3EcgqEAAAAAElFTkSuQmCC'; // eslint-disable-line max-len
 
 			assert.equal(dataurl.substring(0, 98), expected.substring(0, 98), 'captured dataurl matches expected');
 			done();
@@ -26,4 +26,4 @@
 		});
 	});
 
-})(QUnit);
+}(QUnit));

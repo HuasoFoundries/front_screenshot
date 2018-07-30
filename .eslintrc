@@ -19,9 +19,10 @@
         "globalmap": false,
         "expect": false,
         "self": false,
+        "screenShooter":true,
+        "drawgraph":false,
         "DEBUG": true
     },
-
 
     "parserOptions":
     {

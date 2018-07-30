@@ -3,7 +3,7 @@ VERSION = $(shell cat package.json | sed -n 's/.*"version": "\([^"]*\)",/\1/p')
 SHELL = /usr/bin/env bash
 
 default: build
-.PHONY: test build rollup rollup_min clean build_full
+.PHONY: test build rollup rollup_min clean build_full docs
 
 
 
@@ -28,7 +28,7 @@ rollup:
 	$$(npm bin)/rollup -c
 
 run:
-	$$(npm bin)/serve .
+	$$(npm bin)/serve docs
 
 docs:
 	node generate_docs.js	

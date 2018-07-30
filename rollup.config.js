@@ -14,7 +14,7 @@ var input = "src/ig_screenshot.js",
 
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
-			'__VERSION__': '1.0.0-beta.1',
+			'__VERSION__': html2canvas_pkg.version,
 			'__DEV__': false,
 			'const': 'var',
 			'let': 'var',
@@ -29,7 +29,7 @@ var input = "src/ig_screenshot.js",
 		commonjs({
 			namedExports: {
 				'./node_modules/punycode/punycode.js': ['version', 'ucs2', 'decode', 'encode', 'toASCII', 'toUnicode']
-			}
+			},
 		}),
 		/*babel(babelrc({
 			config: babelConfig
@@ -45,7 +45,7 @@ var input = "src/ig_screenshot.js",
 		}),
 
 		resolve({
-			preferBuiltins: false
+			preferBuiltins: false,
 		}),
 		ascii()
 	],
@@ -71,7 +71,7 @@ if (process.env.MINIFY) {
 		exports: 'named',
 		name: "screenShooter",
 		sourcemap: true
-	}];
+	}]
 } else if (process.env.CANVG) {
 	input = "node_modules/canvg/canvg.js";
 	output = [{
