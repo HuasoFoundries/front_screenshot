@@ -20,12 +20,13 @@ test:
 
 build_full: clean rollup_canvg rollup_html2canvas build
 	
-build: rollup rollup_min
+build: rollup rollup_min 
 	
 
 
 rollup:
 	$$(npm bin)/rollup -c
+	cp dist/ig_screenshot.js docs/ig_screenshot.js
 
 run:
 	$$(npm bin)/serve docs
