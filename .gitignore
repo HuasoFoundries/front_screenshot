@@ -27,4 +27,3 @@ sftp*
 
 fabfile.*
 src/html2canvas
-jspm_packages

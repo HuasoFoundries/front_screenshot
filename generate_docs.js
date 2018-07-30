@@ -22,7 +22,8 @@ const paths = {
     Promise: 'http://bluebirdjs.com/docs/api-reference.html',
     HTML2Canvas: "https://html2canvas.hertzen.com/",
     Canvg: "https://github.com/canvg/canvg",
-    jQuery: "https://api.jquery.com/jQuery/"
+    jQuery: "https://api.jquery.com/jQuery/",
+    Cash: "https://github.com/kenwheeler/cash"
 
 };
 // Build Documentation
@@ -44,7 +45,7 @@ documentation.build(['src/ig_screenshot.js'], {
     output = output.replace(/\n(#+)\s/g, "___\n$1 ");
     return fs.writeFileAsync(`${__dirname}/USAGE.md`, output);
 }).catch(function (err) {
-    console.warn('error when parsing file ' + fileObj.filename);
+    console.warn('error when parsing file');
     console.error(err);
     return;
 });

@@ -1,0 +1,1 @@
+../dist/ig_screenshot.js

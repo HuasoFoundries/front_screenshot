@@ -28,7 +28,7 @@ rollup:
 	$$(npm bin)/rollup -c
 
 run:
-	$$(npm bin)/serve .
+	$$(npm bin)/serve docs
 
 docs:
 	node generate_docs.js	

@@ -2,7 +2,7 @@
 ___
 ## front_screenshot
 
-This module exports front_screenshot, which includes the methods detailed below,
+This module exports front_screenshot, which includes the methods detailed below, 
 plus bundled builds of [HTML2Canvas](https://html2canvas.hertzen.com/) and [Canvg](https://github.com/canvg/canvg)
 ___
 ## html2canvas
@@ -16,17 +16,6 @@ Wrapper around html2canvas to accept either a DOMNode or a jQuery selector
 
 Returns **[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)** Canvas element
 ___
-## svgToCanvas
-
-Takes a jQuery container, finds its contained SVG, transforms it into a canvas
-
-**Parameters**
-
--   `jqContainer` **[jQuery](https://api.jquery.com/jQuery/)** container of an SVG element to transform into canvas
--   `fncallback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)?** callback function invoked with the canvas element
-
-Returns **[HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element)** Canvas element
-___
 ## svgToImg
 
 Takes a jQuery container, finds its contained SVG, transforms it into an image
@@ -39,9 +28,20 @@ Takes a jQuery container, finds its contained SVG, transforms it into an image
 
 Returns **[HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element)** Image element
 ___
+## svgToCanvas
+
+Takes a jQuery container, finds its contained SVG, transforms it into a canvas
+
+**Parameters**
+
+-   `jqContainer` **[jQuery](https://api.jquery.com/jQuery/)** container of an SVG element to transform into canvas
+-   `fncallback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)?** callback function invoked with the canvas element
+
+Returns **[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)** Canvas element
+___
 ## hiddenClone
 
-Creates a hidden clone of a jQuery Selector and appends it to the screen
+Creates a hidden clone of a jQuery Selector and appends it to the screen 
 (allows to capture sections that are hidden due to scrolling behavior)
 
 **Parameters**
@@ -49,26 +49,6 @@ Creates a hidden clone of a jQuery Selector and appends it to the screen
 -   `jqContainer` **[jQuery](https://api.jquery.com/jQuery/)** The jQuery selector of the original container
 
 Returns **HTMLElemnt** the DOM node of the clone
-___
-## selectorToImg
-
-Transforms all contents of `selector` nodes found in `jqContainer`
-from SVG to images with classname `.laimg`. Original SVG element is hidden
-
-**Parameters**
-
--   `jqContainer` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** jQuery selector that contains N nodes with the specified selector
--   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`
-___
-## selectorToSVG
-
-Removes all childs from  `selector` nodes found in `jqContainer`
-removing elements with classnames `.laimg` or `.temp_canvas` and showing the original SVG
-
-**Parameters**
-
--   `jqContainer` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** jQuery selector that contains N nodes with the specified selector
--   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`
 ___
 ## infoScreenShot
 
