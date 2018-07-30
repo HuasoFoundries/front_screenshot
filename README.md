@@ -23,6 +23,8 @@ I also bundled [Cash.js](https://github.com/kenwheeler/cash), a minimal jQuery a
 
 ## Example
 
+See the online example at: https://huasofoundries.github.io/front_screenshot/
+
 Clone this repo, run `make install`, then `make run` from its root and navigate to `http://localhost:5000`.
 
 ```sh
