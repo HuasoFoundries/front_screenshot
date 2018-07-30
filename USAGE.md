@@ -100,7 +100,7 @@ Given a jQuery container, takes a screenshot of it and returns it as an HTMLCanv
 **Parameters**
 
 -   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector of the element to transform into canvas
--   `options` **FNOptions?** options to pass to canvg and html2canvas
+-   `options` **[FSOptions](#fsoptions)?** options to pass to canvg and html2canvas
 
 Returns **[Promise](http://bluebirdjs.com/docs/api-reference.html)&lt;[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)>** a promise that unfolds to a [HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)
 ___

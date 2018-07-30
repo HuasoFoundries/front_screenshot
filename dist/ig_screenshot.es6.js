@@ -12861,7 +12861,7 @@ function hiddenClone(jqContainer) {
  * (it can capture the container contents even if they are hidden due to overlay hidden, auto or scroll CSS properties)
  *
  * @param      {Cash|jQuery}  jqContainer  Cash/jQuery selector of the element to transform into canvas
- * @param      {FNOptions} [options] options to pass to canvg and html2canvas
+ * @param      {FSOptions} [options] options to pass to canvg and html2canvas
  * @return     {Promise<HTMLCanvasElement>}  a promise that unfolds to a {@link HTMLCanvasElement}
  */
 var infoScreenShot = function infoScreenShot(jqContainer, options) {
