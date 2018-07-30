@@ -7509,6 +7509,13 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 		jqContainer.find('g.c3-axis-y2').remove();
 		jqContainer.find('path.domain').attr('stroke-width', 0.5).css('stroke-width', '0.2px');
 
+		jqContainer.find('svg').find('text').css('font', '10px sans-serif');
+
+		jqContainer.find('path').attr('fill', 'none');
+
+		// this applies to C3.js grapjs
+		jqContainer.find('.tick line, path.domain').attr('stroke', 'black');
+
 		var svgData = new XMLSerializer().serializeToString(elsvg[0]);
 
 		elsvg.hide();
