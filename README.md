@@ -25,7 +25,7 @@ I also bundled [Cash.js](https://github.com/kenwheeler/cash), a minimal jQuery a
 
 See the online example at: https://huasofoundries.github.io/front_screenshot/
 
-Clone this repo, run `make install`, then `make run` from its root and navigate to `http://localhost:5000`.
+Or, you can also clone this repo, run `make install`, then `make run` from its root and navigate to `http://localhost:5000`.
 
 ```sh
 git clone https://github.com/HuasoFoundries/front_screenshot.git
