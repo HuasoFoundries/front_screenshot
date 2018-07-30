@@ -70,12 +70,18 @@ function svgToCanvas(jqContainer, fncallback) {
 		.not('.keepstyle')
 		.find('.tick')
 		.find('text')
-		.css('font-size', '10px');
+		.css({
+			'font-size': '10px',
+			'font-weight': '400'
+		});
 
 	clone.find('.c3-legend-item')
 		.not('.keepstyle')
 		.find('text')
-		.css('font-size', '10px');
+		.css({
+			'font-size': '10px',
+			'font-weight': '400'
+		});
 
 	var content = new XMLSerializer().serializeToString(clone[0]);
 
