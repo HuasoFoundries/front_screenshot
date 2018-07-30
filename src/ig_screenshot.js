@@ -82,12 +82,14 @@ function setDefaultOptions(options) {
 }
 
 /**
- * Adjust common C3 styles to avoid distorted images.
- * This function won't modify elements with class `keepstyle` not its children
+ * Adjust common C3 styles to avoid distorted images. This function won't modify
+ * elements with class `keepstyle` not its children
  *
- * @param  {Cash|jQuery}   the_svg  The SVG element on which to apply the
- *                             modifications
- * @return {Cash|jQuery}  a clone of the original svg element with modified styles
+ * @param  {Cash|jQuery}  the_svg  The SVG element on which to apply the
+ *                                 modifications
+ * @param  {FSOptions}       opts   The options, in particular, it will check if `clone` is true
+ * @return {Cash|jQuery}  a clone of the original svg element with modified
+ *                        styles
  */
 function adjustStyles(the_svg, opts) {
 
@@ -285,7 +287,7 @@ function svgToImg(jqContainer, options) {
  * (allows to capture sections that are hidden due to scrolling behavior)
  *
  * @param      {Cash|jQuery}  jqContainer  The Cash/jQuery selector of the original container
- * @return     {HTMLElemnt} the DOM node of the clone
+ * @return     {HTMLElement} the DOM node of the clone
  */
 function hiddenClone(jqContainer) {
 	var clone = jqContainer[0].cloneNode(true);

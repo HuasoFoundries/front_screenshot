@@ -36,16 +36,17 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 ___
 ## adjustStyles
 
-Adjust common C3 styles to avoid distorted images.
-This function won't modify elements with class `keepstyle` not its children
+Adjust common C3 styles to avoid distorted images. This function won't modify
+elements with class `keepstyle` not its children
 
 **Parameters**
 
 -   `the_svg` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** The SVG element on which to apply the
-                                modifications
--   `opts`  
+                                    modifications
+-   `opts` **[FSOptions](#fsoptions)** The options, in particular, it will check if `clone` is true
 
-Returns **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** a clone of the original svg element with modified styles
+Returns **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** a clone of the original svg element with modified
+                       styles
 ___
 ## html2canvas
 
@@ -89,7 +90,7 @@ Creates a hidden clone of a Cash/jQuery selector and appends it to the screen
 
 -   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** The Cash/jQuery selector of the original container
 
-Returns **HTMLElemnt** the DOM node of the clone
+Returns **[HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element)** the DOM node of the clone
 ___
 ## infoScreenShot
 
