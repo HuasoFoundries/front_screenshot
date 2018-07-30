@@ -11,57 +11,18 @@ import canvg from 'canvg';
  */
 function svgToImg(jqContainer, fncallback) {
 
-	var elsvg = jqContainer.find('svg');
-
-	if (elsvg.length === 0) {
-		if (fncallback) {
-			fncallback();
-		}
-		return;
-	}
-	jqContainer.find('g').removeAttr('clip-path');
-	jqContainer.find('g.c3-event-rects').remove();
-	jqContainer.find('g.c3-grid').remove();
-	jqContainer.find('g.c3-regions').remove();
-	jqContainer.find('g.c3-axis-y2').remove();
-	jqContainer.find('path.domain').attr('stroke-width', 0.5).css('stroke-width', '0.2px');
-
-	jqContainer
-		.find('svg')
-		.find('text')
-		.css('font', '10px sans-serif');
-
-	jqContainer
-		.find('path')
-		.attr('fill', 'none');
-
-	// this applies to C3.js grapjs
-	jqContainer
-		.find('.tick line, path.domain')
-		.attr('stroke', 'black');
-
-	var svgData = new XMLSerializer().serializeToString(elsvg[0]);
-
-	elsvg.hide();
-
-	var canvas = document.createElement("canvas");
-	canvas.setAttribute('id', 'elcanvas');
-	jqContainer[0].appendChild(canvas);
-
-	canvg('elcanvas', svgData, {
-		ignoreMouse: true,
-		ignoreAnimation: true,
-		log: true
-	});
-
 	jqContainer.find('.laimg').remove();
+
+	var canvas = svgToCanvas(jqContainer);
 
 	var laimg = new Image();
 	laimg.className = 'laimg';
 	jqContainer[0].appendChild(laimg);
+
 	laimg.src = canvas.toDataURL();
 
-	jqContainer.find('#elcanvas').remove();
+	jqContainer.find('.temp_canvas').remove();
+
 	if (fncallback) {
 		fncallback(laimg);
 	}
@@ -78,32 +39,57 @@ function svgToImg(jqContainer, fncallback) {
  */
 function svgToCanvas(jqContainer, fncallback) {
 
+	jqContainer.find('.temp_canvas').remove();
+
 	var elsvg = jqContainer.find('svg');
 
-	jqContainer
-		.find('svg')
-		.css('font', '10px sans-serif');
+	var clone = elsvg.clone();
 
-	jqContainer
-		.find('path')
-		.attr('fill', 'none');
-
-	jqContainer
-		.find('.tick line, path.domain')
-		.attr('stroke', 'black');
-
-	jqContainer.find('canvas').remove();
+	elsvg.hide();
+	elsvg.detach();
 
 	var tooltip = jqContainer.find('.c3-tooltip-container').detach();
 
-	var content = jqContainer.html().trim();
+	clone.find('g').removeAttr('clip-path');
+	clone.find('g.c3-grid').remove();
+	clone.find('g.c3-regions').remove();
+	clone.find('g.c3-axis-y2').remove();
+
+	clone
+		.find('path')
+		.not('.keepstyle')
+		.attr('fill', 'none');
+
+	clone
+		.find('.tick line, path.domain')
+		.not('.keepstyle')
+		.attr('stroke', 'black');
+
+	clone
+		.find('.c3-axis')
+		.not('.keepstyle')
+		.find('.tick')
+		.find('text')
+		.css('font-size', '10px');
+
+	clone.find('.c3-legend-item')
+		.not('.keepstyle')
+		.find('text')
+		.css('font-size', '10px');
+
+	var content = new XMLSerializer().serializeToString(clone[0]);
 
 	var canvas = document.createElement("canvas");
+	canvas.className = 'temp_canvas';
 	jqContainer[0].appendChild(canvas);
 
-	elsvg.hide();
 	jqContainer.append(tooltip);
-	canvg(canvas, content);
+	jqContainer.append(elsvg);
+	canvg(canvas, content, {
+		ignoreMouse: true,
+		ignoreAnimation: true,
+		log: true
+	});
 
 	if (fncallback) {
 		fncallback(canvas);
