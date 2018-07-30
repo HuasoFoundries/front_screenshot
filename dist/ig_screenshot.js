@@ -11208,9 +11208,9 @@ var canvg = createCommonjsModule$1(function (module) {
 });
 
 /**
- * This module exports front_screenshot, which includes the methods detailed below, 
+ * This module exports front_screenshot, which includes the methods detailed below,
  * plus bundled builds of {@link HTML2Canvas} and {@link Canvg}
- * @module front_screenshot 
+ * @module front_screenshot
  */
 
 /**
@@ -11234,7 +11234,7 @@ function html2canvas(element, options) {
  * @param      {jQuery}    jqContainer  container of an SVG element to transform into image
  * @param      {Number} [quality] compression level of the image. By default 0.5
  * @param      {Function}  [fncallback]    callback function invoked with the canvas element
- * 
+ *
  * @returns {HTMLElement}  Image element
  */
 function svgToImg(jqContainer, quality, fncallback) {
@@ -11304,7 +11304,7 @@ function svgToImg(jqContainer, quality, fncallback) {
  *
  * @param      {jQuery}    jqContainer  container of an SVG element to transform into canvas
  * @param      {Function}  [fncallback]    callback function invoked with the canvas element
- * 
+ *
  * @returns {HTMLCanvasElement}  Canvas element
  */
 function svgToCanvas(jqContainer, fncallback) {
@@ -11348,7 +11348,7 @@ function svgToCanvas(jqContainer, fncallback) {
 }
 
 /**
- * Creates a hidden clone of a jQuery Selector and appends it to the screen 
+ * Creates a hidden clone of a jQuery Selector and appends it to the screen
  * (allows to capture sections that are hidden due to scrolling behavior)
  *
  * @param      {jQuery}  jqContainer  The jQuery selector of the original container
@@ -11371,6 +11371,34 @@ function hiddenClone(jqContainer) {
 	document.body.appendChild(clone);
 	return clone;
 }
+
+/**
+ * Transforms all contents of `selector` nodes found in `jqContainer`
+ * from SVG to images with classname `.laimg`. Original SVG element is hidden
+ *
+ * @param {string}  jqContainer  jQuery selector that contains N nodes with the specified selector
+ * @param {string}  selector a CSS selector like `.className` or `#id`
+ */
+var selectorToImg = function selectorToImg(jqContainer, selector) {
+	jqContainer.find(selector).each(function () {
+		svgToImg(jQuery(this));
+	});
+};
+
+/**
+ * Removes all childs from  `selector` nodes found in `jqContainer`
+ * removing elements with classnames `.laimg` or `.temp_canvas` and showing the original SVG
+ *
+ * @param {string}  jqContainer  jQuery selector that contains N nodes with the specified selector
+ * @param {string}  selector a CSS selector like `.className` or `#id`
+ */
+var selectorToSVG = function selectorToSVG(jqContainer, selector) {
+	jqContainer.find(selector).each(function () {
+		$(this).find('.laimg').remove();
+		$(this).find('.temp_canvas').remove();
+		$(this).find('svg').show();
+	});
+};
 
 /**
  * Given a jQuery container, takes a screenshot of it and returns it as an HTMLCanvasElement
@@ -11411,7 +11439,9 @@ var ig_screenshot = {
 	canvg: canvg,
 	hiddenClone: hiddenClone,
 	svgToImg: svgToImg,
-	svgToCanvas: svgToCanvas
+	svgToCanvas: svgToCanvas,
+	selectorToImg: selectorToImg,
+	selectorToSVG: selectorToSVG
 };
 
 exports.html2canvas = html2canvas;
@@ -11420,6 +11450,8 @@ exports.canvg = canvg;
 exports.hiddenClone = hiddenClone;
 exports.svgToImg = svgToImg;
 exports.svgToCanvas = svgToCanvas;
+exports.selectorToImg = selectorToImg;
+exports.selectorToSVG = selectorToSVG;
 exports['default'] = ig_screenshot;
 
 Object.defineProperty(exports, '__esModule', { value: true });

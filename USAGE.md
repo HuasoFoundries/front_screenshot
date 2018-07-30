@@ -2,7 +2,7 @@
 ___
 ## front_screenshot
 
-This module exports front_screenshot, which includes the methods detailed below, 
+This module exports front_screenshot, which includes the methods detailed below,
 plus bundled builds of [HTML2Canvas](https://html2canvas.hertzen.com/) and [Canvg](https://github.com/canvg/canvg)
 ___
 ## html2canvas
@@ -41,7 +41,7 @@ Returns **[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCan
 ___
 ## hiddenClone
 
-Creates a hidden clone of a jQuery Selector and appends it to the screen 
+Creates a hidden clone of a jQuery Selector and appends it to the screen
 (allows to capture sections that are hidden due to scrolling behavior)
 
 **Parameters**
@@ -49,6 +49,26 @@ Creates a hidden clone of a jQuery Selector and appends it to the screen
 -   `jqContainer` **[jQuery](https://api.jquery.com/jQuery/)** The jQuery selector of the original container
 
 Returns **HTMLElemnt** the DOM node of the clone
+___
+## selectorToImg
+
+Transforms all contents of `selector` nodes found in `jqContainer`
+from SVG to images with classname `.laimg`. Original SVG element is hidden
+
+**Parameters**
+
+-   `jqContainer` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** jQuery selector that contains N nodes with the specified selector
+-   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`
+___
+## selectorToSVG
+
+Removes all childs from  `selector` nodes found in `jqContainer`
+removing elements with classnames `.laimg` or `.temp_canvas` and showing the original SVG
+
+**Parameters**
+
+-   `jqContainer` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** jQuery selector that contains N nodes with the specified selector
+-   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`
 ___
 ## infoScreenShot
 

@@ -23,32 +23,35 @@
     },
 
 
-    "ecmaFeatures":
+    "parserOptions":
     {
-        "arrowFunctions": true,
-        "binaryLiterals": true,
-        "blockBindings": true,
-        "classes": true,
-        "defaultParams": true,
-        "destructuring": true,
-        "forOf": true,
-        "generators": true,
-        "modules": true,
-        "objectLiteralComputedProperties": true,
-        "objectLiteralDuplicateProperties": true,
-        "objectLiteralShorthandMethods": true,
-        "objectLiteralShorthandProperties": true,
-        "octalLiterals": true,
-        "regexUFlag": true,
-        "regexYFlag": true,
-        "spread": true,
-        "superInFunctions": true,
-        "templateStrings": true,
-        "unicodeCodePointEscapes": true,
-        "globalReturn": true,
-        "jsx": true
+        "ecmaVersion": 2017,
+        "ecmaFeatures":
+        {
+            "arrowFunctions": true,
+            "binaryLiterals": true,
+            "blockBindings": true,
+            "classes": true,
+            "defaultParams": true,
+            "destructuring": true,
+            "forOf": true,
+            "generators": true,
+            "modules": true,
+            "objectLiteralComputedProperties": true,
+            "objectLiteralDuplicateProperties": true,
+            "objectLiteralShorthandMethods": true,
+            "objectLiteralShorthandProperties": true,
+            "octalLiterals": true,
+            "regexUFlag": true,
+            "regexYFlag": true,
+            "spread": true,
+            "superInFunctions": true,
+            "templateStrings": true,
+            "unicodeCodePointEscapes": true,
+            "globalReturn": true,
+            "jsx": true
+        }
     },
-
     "rules":
     {
 
@@ -97,14 +100,14 @@
         "curly": 2, // specify curly brace conventions for all control statements
         "default-case": 2, // require default case in switch statements (off by default)
         "dot-notation": 2, // encourages use of dot notation whenever possible
-        "eqeqeq": 2, // require the use of === and !==
+        "eqeqeq": 0, // require the use of === and !==
         "guard-for-in": 0, // make sure for-in loops have an if statement (off by default)
         "no-alert": 0, // disallow the use of alert, confirm, and prompt
         "no-caller": 2, // disallow use of arguments.caller or arguments.callee
         "no-div-regex": 2, // disallow division operators explicitly at beginning of regular expression (off by default)
         "no-else-return": 0, // disallow else after a return in an if (off by default)
         //"no-empty-label": 2, // disallow use of labels for anything other then loops and switches
-        "no-eq-null": 2, // disallow comparisons to null without a type-checking operator (off by default)
+        "no-eq-null": 0, // disallow comparisons to null without a type-checking operator (off by default)
         "no-eval": 2, // disallow use of eval()
         "no-extend-native": 2, // disallow adding to native types
         "no-extra-bind": 2, // disallow unnecessary function binding
@@ -124,7 +127,7 @@
         "no-octal": 2, // disallow use of octal literals
         "no-octal-escape": 2, // disallow use of octal escape sequences in string literals, such as var foo = "Copyright \251";
         "no-param-reassign": 0, // disallow reassignment of function parameters (off by default)
-        "no-process-env": 2, // disallow use of process.env (off by default)
+        "no-process-env": 0, // disallow use of process.env (off by default)
         "no-proto": 2, // disallow usage of __proto__ property
         "no-redeclare": 2, // disallow declaring the same variable more then once
         "no-return-assign": 2, // disallow use of assignment in return statement
@@ -225,7 +228,11 @@
             "after": true
         }], // enforce spacing before and after semicolons
         "sort-vars": 0, // sort variables within the same declaration block (off by default)
-        "keyword-spacing": [1, "always"], // require a space after certain keywords (off by default)
+        "keyword-spacing": [2,
+        {
+            "before": true,
+            "after": true
+        }], // require a space after certain keywords (off by default)
         "space-before-blocks": [1, "always"], // require or disallow space before blocks (off by default)
         "space-before-function-paren": [1,
         {
