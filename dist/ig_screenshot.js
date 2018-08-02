@@ -12688,17 +12688,20 @@ function adjustStyles(the_svg, opts) {
 
 	clone.find('.c3-axis').not('.keepstyle').find('.tick').not('.keepstyle').find('text').css({
 		'font-size': '10px',
-		'font-weight': '400'
+		'font-weight': '400',
+		'font-family': 'sans-serif'
 	});
 
 	clone.find('.c3-chart-arc').not('.keepstyle').find('text').css({
 		'font-size': '13px',
-		'font-weight': '400'
+		'font-weight': '400',
+		'font-family': 'sans-serif'
 	});
 
 	clone.find('.c3-legend-item').not('.keepstyle').find('text').css({
 		'font-size': '12px',
-		'font-weight': '400'
+		'font-weight': '400',
+		'font-family': 'sans-serif'
 	});
 
 	return clone;
