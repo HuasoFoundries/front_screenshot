@@ -1,6 +1,6 @@
 {
   "name": "front_screenshot",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "start": "make run",
@@ -34,19 +34,17 @@
   "main": "dist/ig_screenshot.min.js",
   "module": "dist/ig_screenshot.es6.js",
   "jsnext:main": "dist/ig_screenshot.es6.js",
-  "dependencies": {
-    "jspm": "0.17.0-beta.45",
-    "karma": "~1.7",
-    "karma-phantomjs-launcher": "^1",
-    "karma-qunit": "^1",
-    "karma-mocha-reporter": "^2.2.5",
-    "phantomjs-prebuilt": "^2",
-    "qunitjs": "^1"
-  },
   "devDependencies": {
     "babel-eslint": "^6",
     "eslint": "^3",
-    "lodash": "^4"
+    "jspm": "^0.17.0-beta.48",
+    "karma": "^2.0.5",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-phantomjs-launcher": "^1",
+    "karma-qunit": "^1",
+    "lodash": "^4.17.10",
+    "phantomjs-prebuilt": "^2.1.16",
+    "qunitjs": "^1"
   },
   "jspm": {
     "registry": "jspm",

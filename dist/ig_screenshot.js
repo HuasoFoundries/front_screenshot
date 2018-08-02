@@ -1,4 +1,4 @@
-!function(e){function t(e){Object.defineProperty(this,e,{enumerable:!0,get:function(){return this[v][e]}})}function r(e){if("undefined"!=typeof System&&System.isModule?System.isModule(e):"[object Module]"===Object.prototype.toString.call(e))return e;var t={default:e,__useDefault:e};if(e&&e.__esModule)for(var r in e)Object.hasOwnProperty.call(e,r)&&(t[r]=e[r]);return new o(t)}function o(e){Object.defineProperty(this,v,{value:e}),Object.keys(e).forEach(t,this)}function n(e){return"@node/"===e.substr(0,6)?c(e,r(m(e.substr(6))),{}):p[e]}function u(e){var t=n(e);if(!t)throw new Error('Module "'+e+'" expected, but not contained in build.');if(t.module)return t.module;var r=t.linkRecord;return i(t,r),a(t,r,[]),t.module}function i(e,t){if(!t.depLoads){t.declare&&d(e,t),t.depLoads=[];for(var r=0;r<t.deps.length;r++){var o=n(t.deps[r]);t.depLoads.push(o),o.linkRecord&&i(o,o.linkRecord);var u=t.setters&&t.setters[r];u&&(u(o.module||o.linkRecord.moduleObj),o.importerSetters.push(u))}return e}}function d(t,r){var o=r.moduleObj,n=t.importerSetters,u=!1,i=r.declare.call(e,function(e,t){if(!u){if("object"==typeof e)for(var r in e)"__useDefault"!==r&&(o[r]=e[r]);else o[e]=t;u=!0;for(var i=0;i<n.length;i++)n[i](o);return u=!1,t}},{id:t.key});"function"!=typeof i?(r.setters=i.setters,r.execute=i.execute):(r.setters=[],r.execute=i)}function l(e,t,r){return p[e]={key:e,module:void 0,importerSetters:[],linkRecord:{deps:t,depLoads:void 0,declare:r,setters:void 0,execute:void 0,moduleObj:{}}}}function f(e,t,r,o){var n={};return p[e]={key:e,module:void 0,importerSetters:[],linkRecord:{deps:t,depLoads:void 0,declare:void 0,execute:o,executingRequire:r,moduleObj:{default:n,__useDefault:n},setters:void 0}}}function s(e,t,r){return function(o){for(var n=0;n<e.length;n++)if(e[n]===o){var u,i=t[n],d=i.linkRecord;return u=d?-1===r.indexOf(i)?a(i,d,r):d.moduleObj:i.module,"__useDefault"in u?u.__useDefault:u}}}function a(t,r,n){if(n.push(t),t.module)return t.module;var u;if(r.setters){for(var i=0;i<r.deps.length;i++){var d=r.depLoads[i],l=d.linkRecord;l&&-1===n.indexOf(d)&&(u=a(d,l,l.setters?n:[]))}r.execute.call(y)}else{var f={id:t.key},c=r.moduleObj;Object.defineProperty(f,"exports",{configurable:!0,set:function(e){c.default=c.__useDefault=e},get:function(){return c.__useDefault}});var p=s(r.deps,r.depLoads,n);if(!r.executingRequire)for(var i=0;i<r.deps.length;i++)p(r.deps[i]);var v=r.execute.call(e,p,c.__useDefault,f);void 0!==v&&(c.default=c.__useDefault=v),f.exports!==c.__useDefault&&(c.default=c.__useDefault=f.exports);var m=c.default;if(m&&m.__esModule)for(var b in m)Object.hasOwnProperty.call(m,b)&&(c[b]=m[b])}var f=t.module=new o(r.moduleObj);if(!r.setters)for(var i=0;i<t.importerSetters.length;i++)t.importerSetters[i](f);return f}function c(e,t){return p[e]={key:e,module:t,importerSetters:[],linkRecord:void 0}}var p={},v="undefined"!=typeof Symbol?Symbol():"@@baseObject";o.prototype=Object.create(null),"undefined"!=typeof Symbol&&Symbol.toStringTag&&(o.prototype[Symbol.toStringTag]="Module");var m="undefined"!=typeof System&&System._nodeRequire||"undefined"!=typeof require&&"undefined"!=typeof require.resolve&&"undefined"!=typeof process&&process.platform&&require,y={};return Object.freeze&&Object.freeze(y),function(e,t,n,i){return function(d){d(function(d){var s={_nodeRequire:m,register:l,registerDynamic:f,registry:{get:function(e){return p[e].module},set:c},newModule:function(e){return new o(e)}};c("@empty",new o({}));for(var a=0;a<t.length;a++)c(t[a],r(arguments[a],{}));i(s);var v=u(e[0]);if(e.length>1)for(var a=1;a<e.length;a++)u(e[a]);return n?v.__useDefault:(v instanceof o&&Object.defineProperty(v,"__esModule",{value:!0}),v)})}}}("undefined"!=typeof self?self:"undefined"!=typeof global?global:this)
+!function(e){function t(e){Object.defineProperty(this,e,{enumerable:!0,get:function(){return this[v][e]}})}function r(e){if("undefined"!=typeof System&&System.isModule?System.isModule(e):"[object Module]"===Object.prototype.toString.call(e))return e;var t={default:e,__useDefault:e};if(e&&e.__esModule)for(var r in e)Object.hasOwnProperty.call(e,r)&&(t[r]=e[r]);return new o(t)}function o(e){Object.defineProperty(this,v,{value:e}),Object.keys(e).forEach(t,this)}function n(e){return"@node/"===e.substr(0,6)?c(e,r(m(e.substr(6))),{}):p[e]}function u(e){var t=n(e);if(!t)throw new Error('Module "'+e+'" expected, but not contained in build.');if(t.module)return t.module;var r=t.linkRecord;return i(t,r),a(t,r,[]),t.module}function i(e,t){if(!t.depLoads){t.declare&&d(e,t),t.depLoads=[];for(var r=0;r<t.deps.length;r++){var o=n(t.deps[r]);t.depLoads.push(o),o.linkRecord&&i(o,o.linkRecord);var u=t.setters&&t.setters[r];u&&(u(o.module||o.linkRecord.moduleObj),o.importerSetters.push(u))}return e}}function d(t,r){var o=r.moduleObj,n=t.importerSetters,u=!1,i=r.declare.call(e,function(e,t){if(!u){if("object"==typeof e)for(var r in e)"__useDefault"!==r&&(o[r]=e[r]);else o[e]=t;u=!0;for(var i=0;i<n.length;i++)n[i](o);return u=!1,t}},{id:t.key});"function"!=typeof i?(r.setters=i.setters,r.execute=i.execute):(r.setters=[],r.execute=i)}function l(e,t,r){return p[e]={key:e,module:void 0,importerSetters:[],linkRecord:{deps:t,depLoads:void 0,declare:r,setters:void 0,execute:void 0,moduleObj:{}}}}function f(e,t,r,o){var n={};return p[e]={key:e,module:void 0,importerSetters:[],linkRecord:{deps:t,depLoads:void 0,declare:void 0,execute:o,executingRequire:r,moduleObj:{default:n,__useDefault:n},setters:void 0}}}function s(e,t,r){return function(o){for(var n=0;n<e.length;n++)if(e[n]===o){var u,i=t[n],d=i.linkRecord;return u=d?-1===r.indexOf(i)?a(i,d,r):d.moduleObj:i.module,"__useDefault"in u?u.__useDefault:u}}}function a(t,r,n){if(n.push(t),t.module)return t.module;var u;if(r.setters){for(var i=0;i<r.deps.length;i++){var d=r.depLoads[i],l=d.linkRecord;l&&-1===n.indexOf(d)&&(u=a(d,l,l.setters?n:[]))}r.execute.call(y)}else{var f={id:t.key},c=r.moduleObj;Object.defineProperty(f,"exports",{configurable:!0,set:function(e){c.default=c.__useDefault=e},get:function(){return c.__useDefault}});var p=s(r.deps,r.depLoads,n);if(!r.executingRequire)for(var i=0;i<r.deps.length;i++)p(r.deps[i]);var v=r.execute.call(e,p,c.__useDefault,f);void 0!==v?c.default=c.__useDefault=v:f.exports!==c.__useDefault&&(c.default=c.__useDefault=f.exports);var m=c.__useDefault;if(m&&m.__esModule)for(var b in m)Object.hasOwnProperty.call(m,b)&&(c[b]=m[b])}var f=t.module=new o(r.moduleObj);if(!r.setters)for(var i=0;i<t.importerSetters.length;i++)t.importerSetters[i](f);return f}function c(e,t){return p[e]={key:e,module:t,importerSetters:[],linkRecord:void 0}}var p={},v="undefined"!=typeof Symbol?Symbol():"@@baseObject";o.prototype=Object.create(null),"undefined"!=typeof Symbol&&Symbol.toStringTag&&(o.prototype[Symbol.toStringTag]="Module");var m="undefined"!=typeof System&&System._nodeRequire||"undefined"!=typeof require&&"undefined"!=typeof require.resolve&&"undefined"!=typeof process&&process.platform&&require,y={};return Object.freeze&&Object.freeze(y),function(e,t,n,i){return function(d){d(function(d){var s={_nodeRequire:m,register:l,registerDynamic:f,registry:{get:function(e){return p[e].module},set:c},newModule:function(e){return new o(e)}};c("@empty",new o({}));for(var a=0;a<t.length;a++)c(t[a],r(arguments[a],{}));i(s);var v=u(e[0]);if(e.length>1)for(var a=1;a<e.length;a++)u(e[a]);return n?v.__useDefault:(v instanceof o&&Object.defineProperty(v,"__esModule",{value:!0}),v)})}}}("undefined"!=typeof self?self:"undefined"!=typeof global?global:this)
 
 (["a"], [], false, function($__System) {
 var require = this.require, exports = this.exports, module = this.module;
@@ -7485,95 +7485,62 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 
 
 	/**
-  * Takes a jQuery container, finds its contained SVG, transforms it into an image
-  *
-  * @param      {jQuery}    jqContainer  container of an SVG element to transform into image
-  * @param      {Function}  [fncallback]    callback function invoked with the canvas element
-  * 
-  * @returns {HTMLElement}  Image element
-  */
-	function svgToImg(jqContainer, fncallback) {
-
-		var elsvg = jqContainer.find('svg');
-
-		if (elsvg.length === 0) {
-			if (fncallback) {
-				fncallback();
-			}
-			return;
-		}
-		jqContainer.find('g').removeAttr('clip-path');
-		jqContainer.find('g.c3-event-rects').remove();
-		jqContainer.find('g.c3-grid').remove();
-		jqContainer.find('g.c3-regions').remove();
-		jqContainer.find('g.c3-axis-y2').remove();
-		jqContainer.find('path.domain').attr('stroke-width', 0.5).css('stroke-width', '0.2px');
-
-		jqContainer.find('svg').find('text').css('font', '10px sans-serif');
-
-		jqContainer.find('path').attr('fill', 'none');
-
-		// this applies to C3.js grapjs
-		jqContainer.find('.tick line, path.domain').attr('stroke', 'black');
-
-		var svgData = new XMLSerializer().serializeToString(elsvg[0]);
-
-		elsvg.hide();
-
-		var canvas = document.createElement("canvas");
-		canvas.setAttribute('id', 'elcanvas');
-		jqContainer[0].appendChild(canvas);
-
-		canvg('elcanvas', svgData, {
-			ignoreMouse: true,
-			ignoreAnimation: true,
-			log: true
-		});
-
-		jqContainer.find('.laimg').remove();
-
-		var laimg = new Image();
-		laimg.className = 'laimg';
-		jqContainer[0].appendChild(laimg);
-		laimg.src = canvas.toDataURL();
-
-		jqContainer.find('#elcanvas').remove();
-		if (fncallback) {
-			fncallback(laimg);
-		}
-		return laimg;
-	}
-
-	/**
   * Takes a jQuery container, finds its contained SVG, transforms it into a canvas
   *
   * @param      {jQuery}    jqContainer  container of an SVG element to transform into canvas
   * @param      {Function}  [fncallback]    callback function invoked with the canvas element
-  * 
+  *
   * @returns {HTMLElement}  Canvas element
   */
 	function svgToCanvas(jqContainer, fncallback) {
 
+		jqContainer.find('.temp_canvas').remove();
+
 		var elsvg = jqContainer.find('svg');
 
-		jqContainer.find('svg').css('font', '10px sans-serif');
+		var clone = elsvg.clone();
 
-		jqContainer.find('path').attr('fill', 'none');
-
-		jqContainer.find('.tick line, path.domain').attr('stroke', 'black');
-
-		jqContainer.find('canvas').remove();
+		elsvg.hide();
+		elsvg.detach();
 
 		var tooltip = jqContainer.find('.c3-tooltip-container').detach();
 
-		var content = jqContainer.html().trim();
+		clone.find('g').removeAttr('clip-path');
+		clone.find('g.c3-grid').remove();
+		clone.find('g.c3-regions').remove();
+		clone.find('g.c3-axis-y2').remove();
+
+		clone.find('path').not('.keepstyle').attr('fill', 'none');
+
+		clone.find('.tick line, path.domain').not('.keepstyle').attr('stroke', 'black');
+
+		clone.find('.c3-axis').not('.keepstyle').find('.tick').find('text').css({
+			'font-size': '10px',
+			'font-weight': '400',
+			'font-family': 'sans-serif'
+		});
+
+		clone.find('.c3-legend-item').not('.keepstyle').find('text').css({
+			'font-size': '10px',
+			'font-weight': '400',
+			'font-family': 'sans-serif'
+		});
+
+		var content = new XMLSerializer().serializeToString(clone[0]);
 
 		var canvas = document.createElement("canvas");
+		canvas.className = 'temp_canvas';
 		jqContainer[0].appendChild(canvas);
 
-		elsvg.hide();
+		clone.remove();
+
 		jqContainer.append(tooltip);
-		canvg(canvas, content);
+		jqContainer.append(elsvg);
+		canvg(canvas, content, {
+			ignoreMouse: true,
+			ignoreAnimation: true,
+			log: true
+		});
 
 		if (fncallback) {
 			fncallback(canvas);
@@ -7582,7 +7549,35 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 	}
 
 	/**
-  * Creates a hidden clone of a jQuery Selector and appends it to the screen 
+  * Takes a jQuery container, finds its contained SVG, transforms it into an image
+  *
+  * @param      {jQuery}    jqContainer  container of an SVG element to transform into image
+  * @param      {Function}  [fncallback]    callback function invoked with the canvas element
+  *
+  * @returns {HTMLElement}  Image element
+  */
+	function svgToImg(jqContainer, fncallback) {
+
+		jqContainer.find('.laimg').remove();
+
+		var canvas = svgToCanvas(jqContainer);
+
+		var laimg = new Image();
+		laimg.className = 'laimg';
+		jqContainer[0].appendChild(laimg);
+
+		laimg.src = canvas.toDataURL();
+
+		jqContainer.find('.temp_canvas').remove();
+
+		if (fncallback) {
+			fncallback(laimg);
+		}
+		return laimg;
+	}
+
+	/**
+  * Creates a hidden clone of a jQuery Selector and appends it to the screen
   * (allows to capture sections that are hidden due to scrolling behavior)
   *
   * @param      {jQuery}  jqContainer  The jQuery selector of the original container
@@ -7615,8 +7610,16 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 	return {
 		setters: [function (_) {
 			html2canvas = _.default;
+			var _exportObj = {};
+			_exportObj.html2canvas = _.default;
+
+			_export(_exportObj);
 		}, function (_2) {
 			canvg = _2.default;
+			var _exportObj2 = {};
+			_exportObj2.canvg = _2.default;
+
+			_export(_exportObj2);
 		}],
 		execute: function () {
 			_export('infoScreenShot', infoScreenShot = function infoScreenShot(jqContainer) {
@@ -7663,11 +7666,9 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 				selectorToSVG: selectorToSVG
 			};
 
-			_export('html2canvas', html2canvas);
+			_export('default', ig_screenshot);
 
 			_export('infoScreenShot', infoScreenShot);
-
-			_export('canvg', canvg);
 
 			_export('hiddenClone', hiddenClone);
 
@@ -7678,8 +7679,6 @@ $__System.register('a', ['16', '29'], function (_export, _context) {
 			_export('selectorToImg', selectorToImg);
 
 			_export('selectorToSVG', selectorToSVG);
-
-			_export('default', ig_screenshot);
 		}
 	};
 });

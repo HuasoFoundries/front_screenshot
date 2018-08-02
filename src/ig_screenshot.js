@@ -2,39 +2,11 @@ import html2canvas from 'html2canvas';
 import canvg from 'canvg';
 
 /**
- * Takes a jQuery container, finds its contained SVG, transforms it into an image
- *
- * @param      {jQuery}    jqContainer  container of an SVG element to transform into image
- * @param      {Function}  [fncallback]    callback function invoked with the canvas element
- * 
- * @returns {HTMLElement}  Image element
- */
-function svgToImg(jqContainer, fncallback) {
-
-	jqContainer.find('.laimg').remove();
-
-	var canvas = svgToCanvas(jqContainer);
-
-	var laimg = new Image();
-	laimg.className = 'laimg';
-	jqContainer[0].appendChild(laimg);
-
-	laimg.src = canvas.toDataURL();
-
-	jqContainer.find('.temp_canvas').remove();
-
-	if (fncallback) {
-		fncallback(laimg);
-	}
-	return laimg;
-}
-
-/**
  * Takes a jQuery container, finds its contained SVG, transforms it into a canvas
  *
  * @param      {jQuery}    jqContainer  container of an SVG element to transform into canvas
  * @param      {Function}  [fncallback]    callback function invoked with the canvas element
- * 
+ *
  * @returns {HTMLElement}  Canvas element
  */
 function svgToCanvas(jqContainer, fncallback) {
@@ -72,7 +44,8 @@ function svgToCanvas(jqContainer, fncallback) {
 		.find('text')
 		.css({
 			'font-size': '10px',
-			'font-weight': '400'
+			'font-weight': '400',
+			'font-family': 'sans-serif'
 		});
 
 	clone.find('.c3-legend-item')
@@ -80,7 +53,8 @@ function svgToCanvas(jqContainer, fncallback) {
 		.find('text')
 		.css({
 			'font-size': '10px',
-			'font-weight': '400'
+			'font-weight': '400',
+			'font-family': 'sans-serif'
 		});
 
 	var content = new XMLSerializer().serializeToString(clone[0]);
@@ -88,6 +62,8 @@ function svgToCanvas(jqContainer, fncallback) {
 	var canvas = document.createElement("canvas");
 	canvas.className = 'temp_canvas';
 	jqContainer[0].appendChild(canvas);
+
+	clone.remove();
 
 	jqContainer.append(tooltip);
 	jqContainer.append(elsvg);
@@ -104,7 +80,35 @@ function svgToCanvas(jqContainer, fncallback) {
 }
 
 /**
- * Creates a hidden clone of a jQuery Selector and appends it to the screen 
+ * Takes a jQuery container, finds its contained SVG, transforms it into an image
+ *
+ * @param      {jQuery}    jqContainer  container of an SVG element to transform into image
+ * @param      {Function}  [fncallback]    callback function invoked with the canvas element
+ *
+ * @returns {HTMLElement}  Image element
+ */
+function svgToImg(jqContainer, fncallback) {
+
+	jqContainer.find('.laimg').remove();
+
+	var canvas = svgToCanvas(jqContainer);
+
+	var laimg = new Image();
+	laimg.className = 'laimg';
+	jqContainer[0].appendChild(laimg);
+
+	laimg.src = canvas.toDataURL();
+
+	jqContainer.find('.temp_canvas').remove();
+
+	if (fncallback) {
+		fncallback(laimg);
+	}
+	return laimg;
+}
+
+/**
+ * Creates a hidden clone of a jQuery Selector and appends it to the screen
  * (allows to capture sections that are hidden due to scrolling behavior)
  *
  * @param      {jQuery}  jqContainer  The jQuery selector of the original container
@@ -126,7 +130,7 @@ function hiddenClone(jqContainer) {
 	// Append clone to body and return the clone
 	document.body.appendChild(clone);
 	return clone;
-};
+}
 
 /**
  * Takes a jQuery container, takes a screenshot of it and returns a dataurl of the image
