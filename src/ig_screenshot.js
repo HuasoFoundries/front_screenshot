@@ -226,13 +226,14 @@ function svgToCanvas(jqContainer, options) {
 	if (tooltip && tooltip.length) {
 		jqContainer.append(tooltip);
 	}
+	if (opts.hideSVG) {
+		the_svg.data('display', the_svg.css('display')).css('display', 'none');
+	}
 
 	return new Promise((resolve, reject) => {
 
 		opts.renderCallback = (dom) => {
-			if (opts.hideSVG) {
-				the_svg.hide();
-			}
+
 			resolve(canvas);
 		};
 		canvg(canvas, svgData, opts);
@@ -341,6 +342,11 @@ var infoScreenShot = function (jqContainer, options) {
 		if (opts.clone) {
 			document.body.removeChild(container);
 		}
+		jqContainer.find(opts.svgContainer).each(function () {
+			$(this).find('.temporary_element').remove();
+			var the_svg = $(this).find('svg');
+			the_svg.css('display', the_svg.data('display') || 'block');
+		});
 		return canvas;
 
 	}).catch((err) => {

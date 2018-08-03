@@ -12785,13 +12785,14 @@ function svgToCanvas(jqContainer, options) {
 	if (tooltip && tooltip.length) {
 		jqContainer.append(tooltip);
 	}
+	if (opts.hideSVG) {
+		the_svg.data('display', the_svg.css('display')).css('display', 'none');
+	}
 
 	return new Promise(function (resolve, reject) {
 
 		opts.renderCallback = function (dom) {
-			if (opts.hideSVG) {
-				the_svg.hide();
-			}
+
 			resolve(canvas);
 		};
 		canvg(canvas, svgData, opts);
@@ -12896,6 +12897,11 @@ var infoScreenShot = function infoScreenShot(jqContainer, options) {
 		if (opts.clone) {
 			document.body.removeChild(container);
 		}
+		jqContainer.find(opts.svgContainer).each(function () {
+			cash(this).find('.temporary_element').remove();
+			var the_svg = cash(this).find('svg');
+			the_svg.css('display', the_svg.data('display') || 'block');
+		});
 		return canvas;
 	}).catch(function (err) {
 		console.log('Error on html2canvas', err);
