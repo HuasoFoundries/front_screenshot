@@ -41,7 +41,7 @@ elements with class `keepstyle` not its children
 
 **Parameters**
 
--   `the_svg` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** The SVG element on which to apply the
+-   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/) \| [HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element))** The SVG element on which to apply the
                                     modifications
 -   `opts` **[FSOptions](#fsoptions)** The options, in particular, it will check if `clone` is true
 
@@ -54,7 +54,7 @@ Wrapper around html2canvas to accept either a DOMNode or a Cash/jQuery selector
 
 **Parameters**
 
--   `element` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [jQuery](https://api.jquery.com/jQuery/))** The element
+-   `jqContainer` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** The element
 -   `options` **[FSOptions](#fsoptions)** The options
 
 Returns **[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)** Canvas element
@@ -65,7 +65,7 @@ Takes a jQuery container, finds its contained SVG, transforms it into a canvas
 
 **Parameters**
 
--   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** container of an SVG element to transform into canvas
+-   `jqContainer` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** container of an SVG element to transform into canvas
 -   `options` **[FSOptions](#fsoptions)** options to pass to canvg
 
 Returns **[Promise](http://bluebirdjs.com/docs/api-reference.html)&lt;[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)>** a promise that unfolds to a Canvas element
@@ -76,7 +76,7 @@ Takes a jQuery container, finds its contained SVG, transforms it into an image
 
 **Parameters**
 
--   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** container of an SVG element to transform into image
+-   `jqContainer` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** container of an SVG element to transform into image
 -   `options` **[FSOptions](#fsoptions)?** options
 
 Returns **[Promise](http://bluebirdjs.com/docs/api-reference.html)&lt;[HTMLImageElement](https://developer.mozilla.org/docs/Web/API/HTMLImageElement)>** a promise than resolves to an Image element
@@ -88,7 +88,7 @@ Creates a hidden clone of a Cash/jQuery selector and appends it to the screen
 
 **Parameters**
 
--   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** The Cash/jQuery selector of the original container
+-   `jqContainer` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** The Cash/jQuery selector of the original container
 
 Returns **[HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element)** the DOM node of the clone
 ___
@@ -99,7 +99,7 @@ Given a jQuery container, takes a screenshot of it and returns it as an HTMLCanv
 
 **Parameters**
 
--   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector of the element to transform into canvas
+-   `jqContainer` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector of the element to transform into canvas
 -   `options` **[FSOptions](#fsoptions)?** options to pass to canvg and html2canvas
 
 Returns **[Promise](http://bluebirdjs.com/docs/api-reference.html)&lt;[HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)>** a promise that unfolds to a [HTMLCanvasElement](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement)
@@ -111,7 +111,7 @@ from SVG to images with classname `.temporary_element`. Original SVG element is 
 
 **Parameters**
 
--   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector that contains N nodes with the specified selector
+-   `jqContainer` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector that contains N nodes with the specified selector
 -   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`
 ___
 ## selectorToCanvas
@@ -121,7 +121,7 @@ from SVG to canvases with classname `.temporary_element`. Original SVG element i
 
 **Parameters**
 
--   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector that contains N nodes with the specified selector
+-   `jqContainer` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector that contains N nodes with the specified selector
 -   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`
 ___
 ## selectorToSVG
@@ -131,5 +131,5 @@ removing elements with classname `.temporary_element` and showing the original S
 
 **Parameters**
 
--   `jqContainer` **([Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector that contains N nodes with the specified selector
+-   `jqContainer` **([HTMLElement](https://developer.mozilla.org/docs/Web/HTML/Element) \| [Cash](https://github.com/kenwheeler/cash) \| [jQuery](https://api.jquery.com/jQuery/))** Cash/jQuery selector that contains N nodes with the specified selector
 -   `selector` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a CSS selector like `.className` or `#id`

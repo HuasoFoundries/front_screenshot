@@ -85,19 +85,19 @@ function setDefaultOptions(options) {
  * Adjust common C3 styles to avoid distorted images. This function won't modify
  * elements with class `keepstyle` not its children
  *
- * @param  {Cash|jQuery}  the_svg  The SVG element on which to apply the
+ * @param  {Cash|jQuery|HTMLElement}  jqContainer  The SVG element on which to apply the
  *                                 modifications
  * @param  {FSOptions}       opts   The options, in particular, it will check if `clone` is true
  * @return {Cash|jQuery}  a clone of the original svg element with modified
  *                        styles
  */
-function adjustStyles(the_svg, opts) {
+function adjustStyles(jqContainer, opts) {
 
-	if (the_svg instanceof HTMLElement) {
-		the_svg = $(the_svg);
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = $(jqContainer);
 	}
 
-	var clone = opts.clone ? the_svg.clone() : the_svg;
+	var clone = opts.clone ? jqContainer.clone() : jqContainer;
 
 	clone.find('g').removeAttr('clip-path');
 	clone.find('g.c3-regions').remove();
@@ -150,21 +150,24 @@ function adjustStyles(the_svg, opts) {
 /**
  * Wrapper around html2canvas to accept either a DOMNode or a Cash/jQuery selector
  *
- * @param  {HTMLElement|jQuery}  element  The element
+ * @param  {HTMLElement|Cash|jQuery}  jqContainer  The element
  * @param  {FSOptions}  options  The options
  *
  * @returns {HTMLCanvasElement}  Canvas element
  */
-function html2canvas(element, options) {
+function html2canvas(jqContainer, options) {
 
 	var opts = setDefaultOptions(options);
 
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = $(jqContainer);
+	}
+
 	if (opts.adjust_styles === true) {
-		adjustStyles(element, opts);
+		adjustStyles(jqContainer, opts);
 	}
-	if (!(element instanceof HTMLElement)) {
-		element = element[0];
-	}
+
+	var element = jqContainer[0];
 
 	return new Promise(function (resolve, reject) {
 		window.setTimeout(function () {
@@ -181,7 +184,7 @@ function html2canvas(element, options) {
 /**
  * Takes a jQuery container, finds its contained SVG, transforms it into a canvas
  *
- * @param      {Cash|jQuery}    jqContainer  container of an SVG element to transform into canvas
+ * @param      {HTMLElement|Cash|jQuery}    jqContainer  container of an SVG element to transform into canvas
  * @param {FSOptions} options - options to pass to canvg
  *
  * @returns {Promise<HTMLCanvasElement>}  a promise that unfolds to a Canvas element
@@ -247,7 +250,7 @@ function svgToCanvas(jqContainer, options) {
 /**
  * Takes a jQuery container, finds its contained SVG, transforms it into an image
  *
- * @param      {Cash|jQuery}    jqContainer  container of an SVG element to transform into image
+ * @param      {HTMLElement|Cash|jQuery}    jqContainer  container of an SVG element to transform into image
  * @param      {FSOptions} [options] options
  *
  * @returns {Promise<HTMLImageElement>} a promise than resolves to an Image element
@@ -296,7 +299,7 @@ function svgToImg(jqContainer, options) {
  * Creates a hidden clone of a Cash/jQuery selector and appends it to the screen
  * (allows to capture sections that are hidden due to scrolling behavior)
  *
- * @param      {Cash|jQuery}  jqContainer  The Cash/jQuery selector of the original container
+ * @param      {HTMLElement|Cash|jQuery}  jqContainer  The Cash/jQuery selector of the original container
  * @return     {HTMLElement} the DOM node of the clone
  */
 function hiddenClone(jqContainer) {
@@ -326,7 +329,7 @@ function hiddenClone(jqContainer) {
  * Given a jQuery container, takes a screenshot of it and returns it as an HTMLCanvasElement
  * (it can capture the container contents even if they are hidden due to overlay hidden, auto or scroll CSS properties)
  *
- * @param      {Cash|jQuery}  jqContainer  Cash/jQuery selector of the element to transform into canvas
+ * @param      {HTMLElement|Cash|jQuery}  jqContainer  Cash/jQuery selector of the element to transform into canvas
  * @param      {FSOptions} [options] options to pass to canvg and html2canvas
  * @return     {Promise<HTMLCanvasElement>}  a promise that unfolds to a {@link HTMLCanvasElement}
  */
@@ -375,7 +378,7 @@ var infoScreenShot = function (jqContainer, options) {
  * Transforms all contents of `selector` nodes found in `jqContainer`
  * from SVG to images with classname `.temporary_element`. Original SVG element is hidden
  *
- * @param {Cash|jQuery}  jqContainer  Cash/jQuery selector that contains N nodes with the specified selector
+ * @param {HTMLElement|Cash|jQuery}  jqContainer  Cash/jQuery selector that contains N nodes with the specified selector
  * @param {string}  selector a CSS selector like `.className` or `#id`
  */
 var selectorToImg = function (jqContainer, selector) {
@@ -392,7 +395,7 @@ var selectorToImg = function (jqContainer, selector) {
  * Transforms all contents of `selector` nodes found in `jqContainer`
  * from SVG to canvases with classname `.temporary_element`. Original SVG element is hidden
  *
- * @param {Cash|jQuery}  jqContainer  Cash/jQuery selector that contains N nodes with the specified selector
+ * @param {HTMLElement|Cash|jQuery}  jqContainer  Cash/jQuery selector that contains N nodes with the specified selector
  * @param {string}  selector a CSS selector like `.className` or `#id`
  */
 var selectorToCanvas = function (jqContainer, selector) {
@@ -409,7 +412,7 @@ var selectorToCanvas = function (jqContainer, selector) {
  * Removes all childs from  `selector` nodes found in `jqContainer`
  * removing elements with classname `.temporary_element` and showing the original SVG
  *
- * @param {Cash|jQuery}  jqContainer  Cash/jQuery selector that contains N nodes with the specified selector
+ * @param {HTMLElement|Cash|jQuery}  jqContainer  Cash/jQuery selector that contains N nodes with the specified selector
  * @param {string}  selector a CSS selector like `.className` or `#id`
  */
 var selectorToSVG = function (jqContainer, selector) {
