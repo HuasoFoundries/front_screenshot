@@ -12747,6 +12747,9 @@ function html2canvas(element, options) {
  */
 function svgToCanvas(jqContainer, options) {
 
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = cash(jqContainer);
+	}
 	var the_svg,
 	    opts = setDefaultOptions(options);
 
@@ -12808,6 +12811,9 @@ function svgToCanvas(jqContainer, options) {
  */
 function svgToImg(jqContainer, options) {
 
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = cash(jqContainer);
+	}
 	// kept for retrocompatibility
 	if (typeof options === 'number') {
 		var quality = options;
@@ -12849,6 +12855,11 @@ function svgToImg(jqContainer, options) {
  * @return     {HTMLElement} the DOM node of the clone
  */
 function hiddenClone(jqContainer) {
+
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = cash(jqContainer);
+	}
+
 	var clone = jqContainer[0].cloneNode(true);
 
 	// Position element relatively within the
@@ -12878,6 +12889,10 @@ var infoScreenShot = function infoScreenShot(jqContainer, options) {
 
 	var container,
 	    opts = setDefaultOptions(options);
+
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = cash(jqContainer);
+	}
 
 	jqContainer.find(opts.svgContainer).each(function () {
 		svgToImg(cash(this), options);
@@ -12917,6 +12932,9 @@ var infoScreenShot = function infoScreenShot(jqContainer, options) {
  * @param {string}  selector a CSS selector like `.className` or `#id`
  */
 var selectorToImg = function selectorToImg(jqContainer, selector) {
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = cash(jqContainer);
+	}
 	var elements = selector ? jqContainer.find(selector) : jqContainer;
 	elements.each(function () {
 		svgToImg(cash(this));
@@ -12931,6 +12949,9 @@ var selectorToImg = function selectorToImg(jqContainer, selector) {
  * @param {string}  selector a CSS selector like `.className` or `#id`
  */
 var selectorToSVG = function selectorToSVG(jqContainer, selector) {
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = cash(jqContainer);
+	}
 	var elements = selector ? jqContainer.find(selector) : jqContainer;
 	elements.each(function () {
 		cash(this).find('.temporary_element').remove();

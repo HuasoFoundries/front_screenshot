@@ -188,6 +188,9 @@ function html2canvas(element, options) {
  */
 function svgToCanvas(jqContainer, options) {
 
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = $(jqContainer);
+	}
 	var the_svg,
 		opts = setDefaultOptions(options);
 
@@ -251,6 +254,9 @@ function svgToCanvas(jqContainer, options) {
  */
 function svgToImg(jqContainer, options) {
 
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = $(jqContainer);
+	}
 	// kept for retrocompatibility
 	if (typeof options === 'number') {
 		var quality = options;
@@ -294,6 +300,11 @@ function svgToImg(jqContainer, options) {
  * @return     {HTMLElement} the DOM node of the clone
  */
 function hiddenClone(jqContainer) {
+
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = $(jqContainer);
+	}
+
 	var clone = jqContainer[0].cloneNode(true);
 
 	// Position element relatively within the
@@ -323,6 +334,10 @@ var infoScreenShot = function (jqContainer, options) {
 
 	var container,
 		opts = setDefaultOptions(options);
+
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = $(jqContainer);
+	}
 
 	jqContainer.find(opts.svgContainer).each(function () {
 		svgToImg($(this), options);
@@ -364,6 +379,9 @@ var infoScreenShot = function (jqContainer, options) {
  * @param {string}  selector a CSS selector like `.className` or `#id`
  */
 var selectorToImg = function (jqContainer, selector) {
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = $(jqContainer);
+	}
 	var elements = selector ? jqContainer.find(selector) : jqContainer;
 	elements.each(function () {
 		svgToImg($(this));
@@ -378,6 +396,9 @@ var selectorToImg = function (jqContainer, selector) {
  * @param {string}  selector a CSS selector like `.className` or `#id`
  */
 var selectorToCanvas = function (jqContainer, selector) {
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = $(jqContainer);
+	}
 	var elements = selector ? jqContainer.find(selector) : jqContainer;
 	elements.each(function () {
 		svgToCanvas($(this));
@@ -392,6 +413,9 @@ var selectorToCanvas = function (jqContainer, selector) {
  * @param {string}  selector a CSS selector like `.className` or `#id`
  */
 var selectorToSVG = function (jqContainer, selector) {
+	if (jqContainer instanceof HTMLElement) {
+		jqContainer = $(jqContainer);
+	}
 	var elements = selector ? jqContainer.find(selector) : jqContainer;
 	elements.each(function () {
 		$(this).find('.temporary_element').remove();
