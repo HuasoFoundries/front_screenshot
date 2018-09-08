@@ -1,6 +1,6 @@
 {
   "name": "front_screenshot",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "Mini library, with no dependencies, to output PNGs from maps and reports (or anything in the DOM)",
   "scripts": {
     "start": "make run",
@@ -53,7 +53,7 @@
     "documentation": "^5.3.5",
     "eslint": "^3.19.0",
     "html2canvas": "^1.0.0-alpha.10",
-    "karma": "^2.0.5",
+    "karma": "^3.0.0",
     "karma-mocha-reporter": "^2.2.5",
     "karma-phantomjs-launcher": "^1",
     "karma-qunit": "^1",
