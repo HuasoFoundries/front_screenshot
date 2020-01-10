@@ -62,7 +62,7 @@
     "punycode": "^2.1.0",
     "qunitjs": "^1",
     "rollup": "^0.50.1",
-    "rollup-plugin-alias": "^1.4.0",
+    "rollup-plugin-alias": "^2.2.0",
     "rollup-plugin-ascii": "0.0.3",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.1",
