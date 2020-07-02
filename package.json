@@ -50,7 +50,7 @@
     "bluebird": "^3.5.1",
     "canvg": "git+https://git@github.com/canvg/canvg.git",
     "css-line-break": "^1.0.1",
-    "documentation": "^5.3.5",
+    "documentation": "^13.0.2",
     "eslint": "^3.19.0",
     "html2canvas": "^1.0.0-alpha.10",
     "karma": "^3.0.0",
