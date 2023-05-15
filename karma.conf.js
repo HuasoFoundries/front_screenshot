@@ -36,7 +36,7 @@ module.exports = function (config) {
 		logLevel: 'INFO',
 		autoWatch: false,
 		singleRun: true,
-		browsers: ['PhantomJS'],
+		browsers: ['Chrome'],
 		proxies: {
 			'/dist/': '/base/dist/',
 			'/jspm_packages/': '/base/jspm_packages/',

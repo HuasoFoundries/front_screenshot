@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/HuasoFoundries/front_screenshot#readme",
   "engines": {
-    "node": "6.11.2"
+    "node": ">=12"
   },
   "main": "dist/ig_screenshot.min.js",
   "module": "dist/ig_screenshot.es6.js",
@@ -54,6 +54,8 @@
     "eslint": "^3.19.0",
     "html2canvas": "^1.0.0-alpha.10",
     "karma": "^3.0.0",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-firefox-launcher": "^2.1.2",
     "karma-mocha-reporter": "^2.2.5",
     "karma-phantomjs-launcher": "^1",
     "karma-qunit": "^1",
